@@ -1,124 +1,41 @@
 import './style.css'
 
-const imageSources = {
-  hero: 'https://basehabitation.com/wp-content/uploads/2024/04/Summer-Shot.jpg',
-  winter: 'https://basehabitation.com/wp-content/uploads/2024/04/Winter-Shot.jpg',
-  base1: 'https://basehabitation.com/wp-content/uploads/2024/03/Base-I-Elevation-Front-Dark-1024x672.png',
-  base1Back: 'https://basehabitation.com/wp-content/uploads/2024/02/BASE1_Black_BACK-1024x672.png',
-  base1Plus: 'https://basehabitation.com/wp-content/uploads/2024/02/BASE1_White_FRONT-1-1024x672.png',
-  base1PlusBack: 'https://basehabitation.com/wp-content/uploads/2024/02/BACK_B_Pale_V3-1024x672.png',
-  base1Beige: 'https://basehabitation.com/wp-content/uploads/2024/02/BASE1_White_FRONT-576x378.png',
-  base1BeigeBack: 'https://basehabitation.com/wp-content/uploads/2024/02/BACK_A_Pale_V3-576x378.png',
-  base1PlusBlack: 'https://basehabitation.com/wp-content/uploads/2024/02/BASE1_Black_FRONT-1-576x378.png',
-  base1PlusBlackBack: 'https://basehabitation.com/wp-content/uploads/2024/02/BASE1_Black_BACK-1-576x378.png',
-  interior: 'https://basehabitation.com/wp-content/uploads/2024/04/BASE_salon01-version2-576x360.jpg',
-  interiorAlt: 'https://basehabitation.com/wp-content/uploads/2024/04/A-space-to-recharge-lifes-batteries-B-576x360.jpg',
-  kitchen: 'https://basehabitation.com/wp-content/uploads/2024/04/Kitchen-Full-576x360.jpg',
-  kitchenStripped: 'https://basehabitation.com/wp-content/uploads/2024/04/Kitchen-Stripped-Down-576x360.jpg',
-  bedroom: 'https://basehabitation.com/wp-content/uploads/2024/04/Bedroom-Plus-576x360.jpg',
-  bedroomLoft: 'https://basehabitation.com/wp-content/uploads/2024/02/f2601831c4758c99aef7db34305708f1-576x360.jpg',
-  deck: 'https://basehabitation.com/wp-content/uploads/2024/04/BASE_deck01-version2-576x325.jpg',
-  deckPlus: 'https://basehabitation.com/wp-content/uploads/2024/04/Deck-Plus-576x325.jpg',
-  material: 'https://basehabitation.com/wp-content/uploads/2024/04/20240315_Base_Material_Section_D-768x768.jpg',
-  assembly: 'https://basehabitation.com/wp-content/uploads/2024/08/Quick-Assembly-Transparent-Process_sm-768x768.jpg',
-  adaptable: 'https://basehabitation.com/wp-content/uploads/2024/04/Adapts-with-you-over-time-768x768.png',
+const assets = {
+  logo: 'https://1sttexasrealtors.com/wp-content/uploads/1stTexasRealtors-logo.png',
+  facebook: 'https://1sttexasrealtors.com/wp-content/uploads/facebook.png',
+  maps: 'https://1sttexasrealtors.com/wp-content/uploads/gplus.png',
+  linkedin: 'https://1sttexasrealtors.com/wp-content/uploads/linkedin.png',
+  hero: 'https://1sttexasrealtors.com/wp-content/uploads/1st-tx-realtors-couple-slider.png',
+  team: 'https://1sttexasrealtors.com/wp-content/uploads/1st-Texas-Realtors-Team2.png',
+  office: 'https://1sttexasrealtors.com/wp-content/uploads/Clear-Lake-Texas-e1736781694121.jpg',
+  badge1: 'https://1sttexasrealtors.com/wp-content/uploads/2014/12/Texas-Monthly-5-Star-Real-Estate-Agent.png',
+  badge2: 'https://1sttexasrealtors.com/wp-content/uploads/2014/12/Realtor-Association.gif',
+  badge3: 'https://1sttexasrealtors.com/wp-content/uploads/2014/12/Multiple-Listing-Service-Realtors.gif',
+  badge4: 'https://1sttexasrealtors.com/wp-content/uploads/2014/12/Equal-Housing-Opportunity-Realtors.gif',
 }
 
-const state = {
-  model: 'base1',
-  modelImage: 'front',
-  modelColor: 'black',
-  surroundings: 'summer',
-  interiorImage: 'interior',
-  interestOpen: false,
-  menuOpen: false,
-}
-
+const serviceAreas = ['Baytown', 'Clear Lake City', 'Clear Lake Shores', 'Deer Park', 'Dickinson', 'El Lago', 'Friendswood', 'Galveston', 'Kemah', 'La Porte', 'League City', 'Nassau Bay', 'Pasadena', 'Pearland', 'San Leon', 'Seabrook', 'Shoreacres', 'Taylor Lake Village', 'Texas City', 'Tiki Island', 'Webster']
+const slug = (value) => value.toLowerCase().replaceAll(' ', '-')
+const areaLinks = (suffix = '') => serviceAreas.map(area => `<a href="/${suffix ? `${slug(area)}-tx-homes-for-rent` : `realtors-in-${slug(area)}`}/">${area}</a>`).join(' <span>|</span> ')
+const state = { slide: 0, menuOpen: false }
 const app = document.querySelector('#app')
 
 function render() {
   app.innerHTML = `
-    <header class="site-header ${state.menuOpen ? 'menu-is-open' : ''}">
-      <a class="brand" href="#top" aria-label="BASE home">
-        <span class="brand-mark">B</span>
-        <span class="brand-name">BASE</span>
-      </a>
-      <nav class="top-nav" aria-label="Main navigation">
-        <button class="interest-toggle" aria-expanded="${state.interestOpen}" aria-controls="interest-panel" data-action="interest">I'm interested <span>${state.interestOpen ? '×' : '↗'}</span></button>
-        <span class="nav-divider">/</span>
-        <button class="menu-toggle" aria-expanded="${state.menuOpen}" aria-controls="menu-panel">${state.menuOpen ? 'Close' : 'Menu'} <span class="menu-icon">${state.menuOpen ? '×' : '☰'}</span></button>
-      </nav>
-      ${state.menuOpen ? `<div class="menu-panel" id="menu-panel"><a href="#models" data-action="close-panels">Models</a><a href="#why-base" data-action="close-panels">Why BASE</a><a href="#life" data-action="close-panels">Life at BASE</a><a href="#contact" data-action="close-panels">Contact</a><p>Find your base. Leave the everyday behind.</p></div>` : ''}
-      ${state.interestOpen ? `<div class="interest-panel" id="interest-panel" role="dialog" aria-label="Contact BASE"><button class="panel-close" aria-label="Close contact panel" data-action="interest">×</button><p class="eyebrow">Start your escape</p><h2>Let’s find your BASE.</h2><p>Tell us where you want to go and we’ll help you choose the right model for your adventure.</p><a class="button button-dark" href="#contact" data-action="close-panels">Get in touch <span>↗</span></a></div>` : ''}
+    <header class="site-header">
+      <div class="header-inner">
+        <a href="#top" class="logo-link"><img src="${assets.logo}" alt="realtors in clear lake league city friendswood homes for sale"></a>
+        <div class="header-tools"><div class="social-links"><a href="https://www.facebook.com/1stTexasRealtors/"><img src="${assets.facebook}" alt="Facebook"></a><a href="https://www.google.com/maps/place/1st+Texas+Realtors/@29.5450206,-95.1083397,17z"><img src="${assets.maps}" alt="Google Plus"></a><a href="https://www.linkedin.com/in/david-karstedt-1st-texas-realtors-677b5217/"><img src="${assets.linkedin}" alt="LinkedIn"></a></div><div class="account-links"><a href="https://1sttexasrealtors.idxbroker.com/idx/userlogin">Login</a> | <a href="https://1sttexasrealtors.idxbroker.com/idx/usersignup">Register</a></div><a class="phone" href="tel:(281) 241-3121">(281) 241-3121</a></div>
+      </div>
+      <nav class="main-nav ${state.menuOpen ? 'open' : ''}" aria-label="Primary navigation"><button class="nav-toggle" aria-expanded="${state.menuOpen}" data-action="menu">Toggle navigation</button><div class="nav-items"><div class="nav-group"><a href="#about">About</a><div class="dropdown"><a href="/about/">About Us</a><a href="/realtor-reviews/">Testimonials</a><a href="/agents/">Meet Our Agents</a><a href="/privacy-policy/">Privacy Policy</a></div></div><div class="nav-group"><a href="#buy">Buy</a><div class="dropdown"><a href="/home-buyers/">Buyer Service</a><a href="/realtor-reviews/">Testimonials</a><a href="/agents/">Meet Our Agents</a><a href="https://1sttexasrealtors.idxbroker.com/idx/featured">Featured Listings</a><a href="/new-home-construction/">New Homes</a><a href="/relocation-service/">Relocation Service</a></div></div><div class="nav-group"><a href="#sell">Sell</a><div class="dropdown"><a href="/seller-services/">Home Selling</a><a href="/realtor-reviews/">Testimonials</a><a href="/agents/">Meet Our Agents</a><a href="/home-staging/">Home Staging</a></div></div><a href="/homes-for-rent/">Rent</a><a href="/commercial-property-realtors/">Commercial</a><a href="/contact/">Contact</a></div></nav>
     </header>
-
     <main id="top">
-      <section class="hero">
-        <div class="hero-image image-reveal" style="--image: url('${imageSources.hero}')"></div>
-        <div class="hero-copy"><p class="eyebrow">BASE habitation</p><h1>Dream big,<br><em>live simple.</em></h1><a class="scroll-cue" href="#intro">Scroll to explore <span>↓</span></a></div>
-      </section>
-
-      <section class="intro section-pad" id="intro">
-        <div class="section-label">What we do</div>
-        <div class="intro-copy"><h2>Modular cabins for simple, <em>sustainable living.</em></h2><p>We produce high-performance, compact homes that let you escape the everyday to a space that is good for you and good for the planet.</p></div>
-      </section>
-
-      <section class="surroundings section-pad" id="models">
-        <div class="split-heading"><div><p class="eyebrow">Find your base</p><h2>Your base camp,<br>no matter your <em>mountain.</em></h2></div><p>Built to go virtually anywhere, our models are the starting and end point for all your adventures.</p></div>
-        <div class="surrounding-view"><div class="surrounding-image image-reveal" style="--image: url('${imageSources[state.surroundings === 'summer' ? 'hero' : 'winter']}')"></div><div class="surrounding-caption"><span>BASE in the wild</span><span>Quebec, Canada</span></div></div>
-        <div class="control-row"><div class="dot-controls" aria-label="Environment images"><button class="dot ${state.surroundings === 'summer' ? 'active' : ''}" aria-label="Show summer view" aria-pressed="${state.surroundings === 'summer'}" data-action="surroundings" data-value="summer"></button><button class="dot ${state.surroundings === 'winter' ? 'active' : ''}" aria-label="Show winter view" aria-pressed="${state.surroundings === 'winter'}" data-action="surroundings" data-value="winter"></button><span>${state.surroundings === 'summer' ? '1' : '2'} / 2</span></div><div class="text-buttons" aria-label="Choose model"><button class="${state.model === 'base1Plus' ? 'active' : ''}" aria-pressed="${state.model === 'base1Plus'}" data-action="model" data-value="base1Plus">BASE 1+ <span>↗</span></button><button class="${state.model === 'base1' ? 'active' : ''}" aria-pressed="${state.model === 'base1'}" data-action="model" data-value="base1">BASE 1 <span>↗</span></button></div></div>
-      </section>
-
-      <section class="model-showcase section-pad">
-        <div class="model-card"><div class="model-visual dark-visual"><img src="${state.model === 'base1' ? (state.modelColor === 'black' ? (state.modelImage === 'front' ? imageSources.base1 : imageSources.base1Back) : (state.modelImage === 'front' ? imageSources.base1Beige : imageSources.base1BeigeBack)) : (state.modelColor === 'black' ? (state.modelImage === 'front' ? imageSources.base1PlusBlack : imageSources.base1PlusBlackBack) : (state.modelImage === 'front' ? imageSources.base1Plus : imageSources.base1PlusBack))}" alt="${state.model === 'base1' ? 'BASE 1 cabin' : 'BASE 1 plus cabin'}" /><button class="expand-btn" aria-label="Enlarge image" data-action="expand-model">↗</button></div><div class="model-controls"><div class="dot-controls" aria-label="Model images"><button class="dot ${state.modelImage === 'front' ? 'active' : ''}" aria-label="Show front view" aria-pressed="${state.modelImage === 'front'}" data-action="modelImage" data-value="front"></button><button class="dot ${state.modelImage === 'back' ? 'active' : ''}" aria-label="Show back view" aria-pressed="${state.modelImage === 'back'}" data-action="modelImage" data-value="back"></button><span>${state.modelImage === 'front' ? '1' : '2'} / 2</span></div><div class="model-text"><p class="eyebrow">Models</p><h3>${state.model === 'base1' ? 'Base 1' : 'Base 1+'}</h3><div class="swatches"><button class="swatch black ${state.modelColor === 'black' ? 'selected' : ''}" data-action="color" data-value="black" aria-label="Black finish" aria-pressed="${state.modelColor === 'black'}"></button><button class="swatch beige ${state.modelColor === 'beige' ? 'selected' : ''}" data-action="color" data-value="beige" aria-label="Beige finish" aria-pressed="${state.modelColor === 'beige'}"></button></div><button class="plan-button" data-action="expand-plan">See plan <span>↗</span></button><div class="model-stats"><strong>${state.model === 'base1' ? '1 Sleeping Loft' : '1–2 Bedrooms + 1 Sleeping Loft'}</strong><span>— ${state.model === 'base1' ? '960' : '1200'} sq ft</span></div><a class="price-link" href="#contact">See pricing <span>↗</span></a><p class="model-description">${state.model === 'base1' ? 'Our signature model has the basics covered. Compact yet generous, efficient yet flexible, it maximizes its space for your comfort.' : 'Our upgraded model offers an extra bedroom off the end of the cabin. You’ll find everything else just as it is in the BASE 1.'} The total area includes a 200 sq ft sleeping loft.</p></div></div></div>
-      </section>
-
-      <section class="statement section-pad"><h2>Two base models.<br><em>Unlimited adventures.</em></h2><a class="button button-dark" href="#contact">Join the waitlist <span>↗</span></a></section>
-
-      <section class="life section-pad" id="life"><div class="life-copy"><p class="eyebrow">Inside your BASE</p><h2>A space to recharge <em>life’s batteries.</em></h2><p>A quiet, considered interior with everything you need and nothing you don’t. Bring your people, your books, and your sense of wonder.</p></div><div class="life-image image-reveal" style="--image: url('${imageSources[state.interiorImage]}')"></div><div class="control-row"><div class="dot-controls" aria-label="Interior images"><button class="dot ${state.interiorImage === 'interior' ? 'active' : ''}" aria-label="Show interior image one" aria-pressed="${state.interiorImage === 'interior'}" data-action="interiorImage" data-value="interior"></button><button class="dot ${state.interiorImage === 'interiorAlt' ? 'active' : ''}" aria-label="Show interior image two" aria-pressed="${state.interiorImage === 'interiorAlt'}" data-action="interiorImage" data-value="interiorAlt"></button><span>${state.interiorImage === 'interior' ? '1' : '2'} / 2</span></div><div class="text-buttons" aria-label="Interior model"><button class="${state.model === 'base1' ? 'active' : ''}" aria-pressed="${state.model === 'base1'}" data-action="model" data-value="base1">BASE 1 <span>↗</span></button><button class="${state.model === 'base1Plus' ? 'active' : ''}" aria-pressed="${state.model === 'base1Plus'}" data-action="model" data-value="base1Plus">BASE 1+ <span>↗</span></button></div></div></section>
-
-      <section class="why section-pad" id="why-base"><div class="section-label">Why BASE</div><div class="why-copy"><h2>Built better and delivered faster for an <em>all-in-one escape.</em></h2><p>Our homes are prefabricated quickly and efficiently with innovative materials for a robust shell and a minimalist design.</p></div><div class="feature-grid"><article><img src="${imageSources.assembly}" alt="Cabin assembly detail"><p class="feature-number">01</p><h3>Quick assembly, transparent process</h3><p>From our factory to your land, our process is clear and your timeline is respected.</p></article><article><img src="${imageSources.material}" alt="Natural cabin material detail"><p class="feature-number">02</p><h3>Climate-resilient, natural materials</h3><p>Thoughtful materials help create a healthy, durable home that belongs in its environment.</p></article><article><img src="${imageSources.adaptable}" alt="Cabin adaptable design"><p class="feature-number">03</p><h3>A home that adapts with you over time</h3><p>Start simple, then make room for the life you want to build.</p></article></div></section>
-
-      <section class="gallery section-pad"><div class="gallery-header"><p class="eyebrow">Your space, your story</p><h2>Make room for <em>more.</em></h2></div><div class="gallery-grid"><img class="gallery-wide" src="${imageSources.kitchen}" alt="BASE kitchen"><img src="${imageSources.bedroom}" alt="BASE bedroom"><img src="${imageSources.deck}" alt="BASE deck"></div></section>
-
-      <section class="contact section-pad" id="contact"><div><p class="eyebrow">Let’s chat</p><h2>Interested in a Base home? <em>Let’s chat.</em></h2><p>Leave your details and we’ll be in touch with more information about our models, pricing, and the journey home.</p></div><form data-action="contact-form"><label>Name<input name="name" required type="text" placeholder="Your name"></label><label>Email<input name="email" required type="email" placeholder="you@email.com"></label><label>What are you looking for?<select name="interest"><option>I'm exploring BASE</option><option>I'm ready to build</option><option>I'm looking for pricing</option></select></label><button class="button button-light" type="submit">Send inquiry <span>↗</span></button><p class="form-message" aria-live="polite"></p></form></section>
+      <section class="hero-slider" aria-label="1st Texas Realtors highlights"><div class="hero-background slide-${state.slide}"></div><div class="hero-overlay"><div class="hero-copy"><h2>${['Family Owned since 2004', 'Top 3% Realtors in Clear Lake', 'Great Reviews & Testimonials'][state.slide]}</h2><a href="${state.slide === 2 ? '/realtor-reviews/' : '/about/'}">${state.slide === 2 ? 'View our testimonials' : 'Learn more about us'}</a></div><img src="${assets.hero}" alt="realtors in clear lake league city friendswood homes for sale"></div><button class="hero-arrow previous" aria-label="Previous" data-action="previous">‹</button><button class="hero-arrow next" aria-label="Next" data-action="next">›</button><div class="hero-dots">${[0, 1, 2].map(index => `<button aria-label="Slide ${index + 1}" class="${state.slide === index ? 'active' : ''}" data-action="slide" data-value="${index}"></button>`).join('')}</div></section>
+      <section class="page-shell content-grid"><article class="main-content" id="about"><h1>Welcome to 1st Texas Realtors in Clear Lake!</h1><p><strong>Family owned since 2004,</strong> we provide expert Realtors in Clear Lake, dedicated customer service and real-time listings of homes for sale and rent.</p><p><strong>David Karstedt and wife Simone</strong> work as a team at 1st Texas Realtors, receive overwhelmingly positive reviews highlighting their exceptional responsiveness, deep knowledge and strong negotiation skills. This dynamic duo is known for personalized, patient service making the complex home buying and selling process smooth and enjoyable for their clients. They are praised for exceeding expectations and trusted advisors earning loyalty through high-quality service. Please see more <a href="/realtor-reviews/">Testimonials</a>.</p><h2><a href="/agents/">Contact a Realtor.</a></h2><p>Our team of talented Realtors provide you with the <strong>critical elements of success; local experience, dedicated customer service and real-time property listings</strong>. Every year since 2010, we have been recognized by Texas Monthly Magazine as Top 3% Realtors in Clear Lake – NASA.</p><h2 id="buy"><a href="/home-buyers/">Buying a Home.</a></h2><p>Find the home first, use our <a href="https://1sttexasrealtors.idxbroker.com/idx/search/basic">Home Search</a> to view real-time listings of homes for sale and rent that are available today! You can <a href="https://1sttexasrealtors.idxbroker.com/idx/usersignup">Register</a> to save custom home searches with automatic email alerts for new listings of homes for sale in Clear Lake that match your search.</p><h3>View homes for sale:</h3><p class="area-links">${areaLinks()}</p><h2 id="sell"><a href="/seller-services/">Selling a Home.</a></h2><p>Read about our Home Selling services starting with a free Market Analysis to determine the best price to sell your home. We provide comprehensive Realtor services when selling single family residential homes, town homes and high-rise condominiums.</p><h2><a href="/homes-for-rent/">Homes for Rent.</a></h2><p>As long-time residents of Clear Lake NASA, we have helped many families find the best home in the best neighborhood with the best commutes and schools. We negotiate with the owner for the best deal. Click below to view all rental home listings and call us to schedule a visit.</p><h3>View Homes for rent:</h3><p class="area-links">${areaLinks('rent')}</p><h2><a href="/homes-for-rent/">Leasing | Property Management.</a></h2><p>We provide expert property management and home leasing services including maintenance, repairs and home leasing service. All prospective tenants are interviewed with a completed background check, references verified and complete the lease with a deposit.</p><img class="team-image" src="${assets.team}" alt="realtors in clear lake league city friendswood homes for sale"><p>For immediate service, please call <strong>(281) 241-3121</strong>.</p><img class="office-image" src="${assets.office}" alt="clear lake tx realtors"><p class="legal-links"><a href="/wp-content/uploads/TREC-CN-1-4-1_1.pdf">Texas Real Estate Commission Consumer Protection Notice</a><a href="/wp-content/uploads/David-Karstedt-IABS.pdf">Texas Real Estate Commission Information About Brokerage Services</a></p></article><aside class="sidebar"><div class="widget"><a class="widget-button" href="https://1sttexasrealtors.idxbroker.com/idx/usersignup/">REGISTER</a><em>Free Membership! Build custom searches and receive email alerts when newly listed homes for sale are added to your search. To get the home, you must be first!</em></div><div class="widget"><a class="widget-button" href="https://1sttexasrealtors.idxbroker.com/idx/search/basic">HOME SEARCH</a><em>Use our free MLS Home Search to browse homes for sale.</em></div><div class="widget"><a class="widget-button" href="/contact/">CONTACT US</a><em>Send us an email with any questions you have about Realtors and services.</em></div></aside></section>
     </main>
-
-    <footer class="footer"><a class="brand" href="#top"><span class="brand-mark">B</span><span class="brand-name">BASE</span></a><p>Let the wild in. Find your Base.</p><div><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a><a href="#contact">Contact</a><a href="#top">Back to top ↑</a></div><small>© 2026 BASE Habitation · Privacy · English / Français</small></footer>
-  `
+    <footer class="site-footer"><div class="page-shell"><p class="copyright">© 2026 1st Texas Realtors.</p><ul class="badges"><li><img src="${assets.badge1}" alt="realtors in clear lake league city friendswood homes for sale"></li><li><img src="${assets.badge2}" alt="realtors association clear lake friendswood league city"></li><li><img src="${assets.badge3}" alt="multiple listing service realtors clear lake friendswood league city"></li><li><img src="${assets.badge4}" alt="equal housing opportunity realtors clear lake friendswood league city"></li></ul><nav class="footer-nav"><a href="#top">HOME</a><a href="/home-buyers/">HOME BUYING</a><a href="/seller-services/">SELL</a><a href="/commercial-property-realtors/">COMMERCIAL</a>${serviceAreas.slice(0, 9).map(area => `<a href="/realtors-in-${slug(area)}/">${area.toUpperCase()}</a>`).join('')}</nav></div></footer>`
 }
 
 render()
+document.addEventListener('click', event => { const trigger = event.target.closest('[data-action]'); if (!trigger) return; if (trigger.dataset.action === 'menu') state.menuOpen = !state.menuOpen; if (trigger.dataset.action === 'next') state.slide = (state.slide + 1) % 3; if (trigger.dataset.action === 'previous') state.slide = (state.slide + 2) % 3; if (trigger.dataset.action === 'slide') state.slide = Number(trigger.dataset.value); render() })
 
-document.addEventListener('click', (event) => {
-  const trigger = event.target.closest('[data-action]')
-  if (!trigger) return
-  const action = trigger.dataset.action
-  if (action === 'interest') state.interestOpen = !state.interestOpen
-  if (action === 'menu') { state.menuOpen = !state.menuOpen; state.interestOpen = false }
-  if (action === 'close-panels') { state.menuOpen = false; state.interestOpen = false }
-  if (action === 'surroundings') state.surroundings = trigger.dataset.value
-  if (action === 'model') state.model = trigger.dataset.value
-  if (action === 'modelImage') state.modelImage = trigger.dataset.value
-  if (action === 'color') state.modelColor = trigger.dataset.value
-  if (action === 'interiorImage') state.interiorImage = trigger.dataset.value
-  if (action === 'expand-model') { document.querySelector('.model-visual img')?.requestFullscreen?.(); return }
-  if (action === 'expand-plan') { window.alert('Plans will be available with your BASE consultation.'); return }
-  render()
-})
-
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    state.menuOpen = false
-    state.interestOpen = false
-    render()
-  }
-})
-
-document.addEventListener('submit', (event) => {
-  if (!event.target.matches('[data-action="contact-form"]')) return
-  event.preventDefault()
-  const message = event.target.querySelector('.form-message')
-  message.textContent = 'Thanks — we’ll be in touch soon.'
-  event.target.reset()
-})
