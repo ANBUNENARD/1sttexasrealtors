@@ -21,7 +21,7 @@ Recommended settings:
 - Build command: `bun run build` or `npm run build`
 - Install command: `bun install` or `npm install`
 
-For Vercel, use the Next.js framework. Do not set an output directory, `dist`, or a rewrite to `index.html`; Next.js manages its own deployment output.
+For Vercel, use the Next.js framework and set the output directory to `.next`. Do not use `dist` or a rewrite to `index.html`.
 
 The production source of truth is the Next.js app under `src/app/`. The legacy Vite-style files (`index.html`, `src/main.js`, and `src/style.css`) are retained as historical reference only and are not used by Vercel.
 
