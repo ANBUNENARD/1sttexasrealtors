@@ -18,10 +18,11 @@ Import the GitHub repository into Vercel. Vercel detects Next.js automatically.
 Recommended settings:
 
 - Framework preset: Next.js
-- Build command: `bun run build` or `npm run build`
-- Install command: `bun install` or `npm install`
+- Build command: leave empty for Vercel's automatic Next.js build, or use `npm run build`
+- Output directory: leave empty; Vercel handles Next.js output automatically
+- Install command: `npm install` or `bun install`
 
-For Vercel, use the Next.js framework and set the output directory to `.next`. Do not use `dist` or a rewrite to `index.html`.
+For Vercel, use the Next.js framework. Do not set `dist`, `.next`, or a rewrite to `index.html` as the output directory. Vercel handles the Next.js deployment output automatically.
 
 The production source of truth is the Next.js app under `src/app/`. The legacy Vite-style files (`index.html`, `src/main.js`, and `src/style.css`) are retained as historical reference only and are not used by Vercel.
 
