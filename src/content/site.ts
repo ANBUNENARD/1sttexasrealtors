@@ -4,6 +4,8 @@ export type Agent = {
   role: string
   image: string
   bio: string
+  phone?: string
+  email?: string
 }
 
 export type ServicePage = {
@@ -30,15 +32,15 @@ export const salePath = (area: string) => `/realtors-in-${areaSlug(area)}/`
 export const rentPath = (area: string) => `/${areaSlug(area)}-tx-homes-for-rent/`
 
 export const agents: Agent[] = [
-  { name: 'Mark Bocado', slug: 'mark-bocado', role: 'Realtor', image: '/assets/reference/agents/Mark-Bocado.jpg', bio: 'A knowledgeable and responsive Realtor focused on helping clients move confidently through the Clear Lake NASA market.' },
-  { name: 'Matt Bradley', slug: 'matt-bradley', role: 'Realtor', image: '/assets/reference/agents/Matt-Bradley.jpg', bio: 'Matt brings thoughtful guidance, local knowledge, and dedicated service to every real estate conversation.' },
-  { name: 'Nancy Estes', slug: 'nancy-estes', role: 'Realtor', image: '/assets/reference/agents/Nancy-Estes.jpg', bio: 'Nancy provides patient, personal support for buyers and sellers from the first conversation through closing.' },
-  { name: 'Jay Herder', slug: 'jay-herder', role: 'Realtor', image: '/assets/reference/agents/Jay-Herder.png', bio: 'Jay helps clients understand their options and make informed decisions with a service-first approach.' },
-  { name: 'David Karstedt', slug: 'david-karstedt', role: 'Broker / Owner', image: '/assets/reference/agents/David-Karstedt.jpg', bio: 'David Karstedt leads 1st Texas Realtors with his wife Simone. Together they combine local market expertise, strong negotiation skills, and a caring approach.' },
-  { name: 'Simone Karstedt', slug: 'simone-karstedt', role: 'Realtor / Owner', image: '/assets/reference/1st-tx-realtors-couple-slider.png', bio: 'Simone works alongside David to provide responsive service, neighborhood knowledge, and a smooth experience from search to closing.' },
-  { name: 'William Machupa Jr.', slug: 'william-machupa-jr', role: 'Realtor', image: '/assets/reference/agents/William-Machupa.jpg', bio: 'William delivers clear communication and practical support for clients navigating their next move.' },
-  { name: 'Rhan Pruitt', slug: 'rhan-pruitt', role: 'Realtor', image: '/assets/reference/agents/Rhan-Pruitt.jpg', bio: 'Rhan pairs local insight with dedicated service to help clients reach their real estate goals.' },
-  { name: 'Daniel Rickert', slug: 'daniel-rickert', role: 'Realtor', image: '/assets/reference/agents/Daniel-Rickert.jpg', bio: 'Daniel is committed to a professional, caring experience throughout the buying and selling process.' },
+  { name: 'Mark Bocado', slug: 'mark-bocado', role: 'Realtor', image: '/assets/reference/agents/Mark-Bocado.jpg', bio: 'A knowledgeable and responsive Realtor focused on helping clients move confidently through the Clear Lake NASA market.', phone: '281-836-0074', email: 'mark@1txrealtors.com' },
+  { name: 'Matt Bradley', slug: 'matt-bradley', role: 'Realtor', image: '/assets/reference/agents/Matt-Bradley.jpg', bio: 'Matt brings thoughtful guidance, local knowledge, and dedicated service to every real estate conversation.', phone: '832-654-9820', email: 'matt@1txrealtors.com' },
+  { name: 'Nancy Estes', slug: 'nancy-estes', role: 'Realtor', image: '/assets/reference/agents/Nancy-Estes.jpg', bio: 'Nancy provides patient, personal support for buyers and sellers from the first conversation through closing.', phone: '832-493-9398', email: 'nancy@1txrealtors.com' },
+  { name: 'Jay Herder', slug: 'jay-herder', role: 'Realtor', image: '/assets/reference/agents/Jay-Herder.png', bio: 'Jay helps clients understand their options and make informed decisions with a service-first approach.', phone: '832-790-7195', email: 'jay@1txrealtors.com' },
+  { name: 'David Karstedt', slug: 'david-karstedt', role: 'Broker / Owner', image: '/assets/reference/agents/David-Karstedt.jpg', bio: 'David Karstedt leads 1st Texas Realtors with his wife Simone. Together they combine local market expertise, strong negotiation skills, and a caring approach.', phone: '713-885-2228', email: 'david@1txrealtors.com' },
+  { name: 'Simone Karstedt', slug: 'simone-karstedt', role: 'Realtor / Owner', image: '/assets/reference/1st-tx-realtors-couple-slider.png', bio: 'Simone works alongside David to provide responsive service, neighborhood knowledge, and a smooth experience from search to closing.', phone: '832-758-7408', email: 'simone@1txrealtors.com' },
+  { name: 'William Machupa Jr.', slug: 'william-machupa-jr', role: 'Realtor', image: '/assets/reference/agents/William-Machupa.jpg', bio: 'William delivers clear communication and practical support for clients navigating their next move.', phone: '832-969-4338', email: 'william@1txrealtors.com' },
+  { name: 'Rhan Pruitt', slug: 'rhan-pruitt', role: 'Realtor', image: '/assets/reference/agents/Rhan-Pruitt.jpg', bio: 'Rhan pairs local insight with dedicated service to help clients reach their real estate goals.', phone: '713-882-3683', email: 'rhan@1txrealtors.com' },
+  { name: 'Daniel Rickert', slug: 'daniel-rickert', role: 'Realtor', image: '/assets/reference/agents/Daniel-Rickert.jpg', bio: 'Daniel is committed to a professional, caring experience throughout the buying and selling process.', phone: '858-717-4347', email: 'daniel@1txrealtors.com' },
 ]
 
 export const testimonials = [
