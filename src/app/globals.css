@@ -132,30 +132,22 @@ html { scroll-padding-top: 90px; }
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: radial-gradient(ellipse 50% 40% at 72% 25%, rgba(255,90,60,.22) 0%, transparent 65%);
 }
-/* ghost watermark layer — logo blended INTO the scenery */
+/* ghost watermark layer — logo blended INTO the scenery, middle-top */
 .video-hero-logo-ghost {
-  position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%);
-  z-index: 1; width: min(560px, 72vw); opacity: .16;
-  filter: drop-shadow(0 0 30px rgba(7,26,47,.6));
+  position: absolute; left: 50%; top: 21%; transform: translate(-50%, -50%);
+  z-index: 1; width: min(560px, 72vw); opacity: .2;
+  filter: drop-shadow(0 0 30px rgba(7,26,47,.5));
   mix-blend-mode: screen;
-  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 45%, transparent 78%);
-  mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 45%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 62% 62% at 50% 50%, black 48%, transparent 80%);
+  mask-image: radial-gradient(ellipse 62% 62% at 50% 50%, black 48%, transparent 80%);
   pointer-events: none; user-select: none;
   animation: logoFloat 8s ease-in-out infinite;
 }
-.video-hero-logo-ghost img { width: 100%; height: auto; }
+.video-hero-logo-ghost img { width: 100%; height: auto; border: 0; }
 @keyframes logoFloat {
   0%, 100% { transform: translate(-50%, -50%) scale(1); }
   50% { transform: translate(-50%, -50%) scale(1.04); }
 }
-/* glass chip layer — small centered logo pinned below the header */
-.video-hero-chip {
-  position: absolute; left: 50%; top: 96px; transform: translateX(-50%);
-  z-index: 3; display: flex; align-items: center; padding: 8px 14px;
-  border-radius: 14px; border: 1px solid rgba(255,255,255,.15);
-  background: rgba(7,26,47,.35); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-}
-.video-hero-chip img { width: 140px; height: auto; display: block; }
 /* centered editorial lockup */
 .video-hero-content {
   position: absolute; inset: 0; z-index: 2;
@@ -605,8 +597,7 @@ blockquote cite {
   .nav-links.open { display: flex; }
   .about-menu { display: none; }
   .video-hero { height: 100svh; min-height: 560px; }
-  .video-hero-logo-ghost { width: min(320px, 78vw); top: 18%; }
-  .video-hero-chip { display: none; }
+  .video-hero-logo-ghost { width: min(320px, 78vw); top: 17%; }
   .video-hero-content { padding: 120px 20px 100px; justify-content: center; }
   .display-hero { font-size: clamp(38px, 10vw, 52px); }
   .video-hero-sub { font-size: 16px; }
