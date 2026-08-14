@@ -502,6 +502,14 @@ blockquote cite {
 .profile-image { max-width: 480px; }
 .area-note { margin-top: 55px; padding-top: 25px; border-top: 1px solid var(--line); }
 .contact-detail { display: block; margin: 12px 0; color: var(--navy); font-size: 22px; font-weight: 700; }
+.agent-contact-list { display: grid; gap: 0; margin-top: 34px; border-top: 1px solid var(--line); }
+.agent-contact {
+  display: grid; grid-template-columns: 1fr auto auto; gap: 10px 18px; align-items: baseline;
+  padding: 14px 4px; border-bottom: 1px solid var(--line);
+}
+.agent-contact strong { color: var(--navy); font-size: 15px; }
+.agent-contact a { color: var(--red); font-size: 14px; font-weight: 700; }
+.agent-contact a:hover { color: var(--red-warm); }
 .contact-form { display: grid; gap: 18px; padding: 30px; border-radius: 22px; background: #edf3f6; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .contact-form label { display: grid; gap: 7px; color: var(--navy); font-size: 13px; font-weight: 700; }
