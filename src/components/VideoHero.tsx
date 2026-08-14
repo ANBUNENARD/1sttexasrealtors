@@ -40,7 +40,6 @@ export function VideoHero() {
     <div className="video-hero-overlay" aria-hidden="true" />
     <div className="video-hero-glow" aria-hidden="true" />
     <div className="video-hero-logo-ghost" aria-hidden="true"><Image src="/assets/reference/1stTexasRealtors-logo.png" alt="" width={560} height={269} priority /></div>
-    <div className="video-hero-chip"><Image src="/assets/reference/1stTexasRealtors-logo.png" alt="1st Texas Realtors" width={140} height={67} /></div>
     <div className="video-hero-content">
       <p className="mono-label video-hero-eyebrow">Family owned since 2004 · Clear Lake NASA</p>
       <h1 className="display-hero">Real estate guidance<br />that feels <em>personal.</em></h1>
