@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { WordReveal } from '@/components/WordReveal'
 
 const slides = [
@@ -23,8 +23,19 @@ export function VideoHero({ started = true }: { started?: boolean }) {
   const [mode, setMode] = useState<'video' | 'slideshow'>('video')
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
 
-  // rotate house clips — each plays for its own duration, then dissolves to the next
+  // carousel: every slide stays mounted; only the active one plays (smooth crossfade, no remount tick)
+  useEffect(() => {
+    if (mode !== 'video' || !started) return
+    videoRefs.current.forEach((video, i) => {
+      if (!video) return
+      if (i === active) video.play().catch(() => {})
+      else video.pause()
+    })
+  }, [active, mode, started])
+
+  // rotate: each clip plays for its own duration, then the next dissolves in
   useEffect(() => {
     if (mode !== 'video' || paused || !started) return
     const current = VIDEOS[active]
@@ -41,17 +52,21 @@ export function VideoHero({ started = true }: { started?: boolean }) {
 
   const onVideoError = () => setMode('slideshow')
 
-  const current = VIDEOS[active]
-
   return <section className="video-hero" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} aria-label="1st Texas Realtors">
     <div className="video-hero-media" aria-hidden="true">
       {mode === 'video' ? (
-        <div className="video-hero-slide is-active" key={current.src}>
-          <Image className="hero-poster" src={current.poster} alt="" fill sizes="100vw" priority={active === 0} />
-          <video autoPlay muted loop playsInline preload="auto" poster={current.poster} className="hero-video" onError={onVideoError}>
-            <source src={current.src} type="video/mp4" />
-          </video>
-        </div>
+        VIDEOS.map((v, i) => (
+          <div key={v.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
+            <Image className="hero-poster" src={v.poster} alt="" fill sizes="100vw" priority={i === 0} />
+            <video
+              ref={el => { videoRefs.current[i] = el }}
+              muted loop playsInline preload={i === 0 ? 'auto' : 'metadata'} poster={v.poster}
+              className="hero-video" onError={onVideoError} aria-hidden="true"
+            >
+              <source src={v.src} type="video/mp4" />
+            </video>
+          </div>
+        ))
       ) : (
         slides.map((s, i) => (
           <div key={s.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
