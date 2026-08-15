@@ -25,7 +25,7 @@ export function VideoHero({ started = true }: { started?: boolean }) {
   const [paused, setPaused] = useState(false)
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
 
-  // carousel: every slide stays mounted; only the active one plays (smooth crossfade, no remount tick)
+  // all clips are preloaded (auto) so switching is instant; only the active one plays
   useEffect(() => {
     if (mode !== 'video' || !started) return
     videoRefs.current.forEach((video, i) => {
@@ -58,9 +58,10 @@ export function VideoHero({ started = true }: { started?: boolean }) {
         VIDEOS.map((v, i) => (
           <div key={v.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
             <Image className="hero-poster" src={v.poster} alt="" fill sizes="100vw" priority={i === 0} />
+            {/* all clips preloaded & playing continuously → crossfades are instant, no delay */}
             <video
               ref={el => { videoRefs.current[i] = el }}
-              muted loop playsInline preload={i === 0 ? 'auto' : 'metadata'} poster={v.poster}
+              muted loop playsInline preload="auto" poster={v.poster}
               className="hero-video" onError={onVideoError} aria-hidden="true"
             >
               <source src={v.src} type="video/mp4" />
