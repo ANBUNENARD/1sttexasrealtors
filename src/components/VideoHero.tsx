@@ -23,47 +23,34 @@ export function VideoHero({ started = true }: { started?: boolean }) {
   const [mode, setMode] = useState<'video' | 'slideshow'>('video')
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
-  const [videoOk, setVideoOk] = useState<boolean[]>([false, false, false, false])
 
-  // rotate the active video/GIF every 7s (crossfade handled by CSS opacity)
+  // rotate the active house video every 12s (slow dissolve)
   useEffect(() => {
     if (mode !== 'video' || paused || !started) return
-    const interval = setInterval(() => setActive(a => (a + 1) % VIDEOS.length), 7000)
+    const interval = setInterval(() => setActive(a => (a + 1) % VIDEOS.length), 12000)
     return () => clearInterval(interval)
   }, [mode, paused, started])
 
   // Ken Burns slideshow fallback
   useEffect(() => {
     if (mode !== 'slideshow' || paused || !started) return
-    const interval = setInterval(() => setActive(a => (a + 1) % slides.length), 7000)
+    const interval = setInterval(() => setActive(a => (a + 1) % slides.length), 12000)
     return () => clearInterval(interval)
   }, [mode, paused, started])
 
-  const onVideoError = (i: number) => {
-    setVideoOk(prev => {
-      const next = [...prev]
-      next[i] = false
-      return next
-    })
-    // if no video works at all → slideshow
-    setTimeout(() => {
-      setVideoOk(prev => { if (!prev.some(Boolean)) setMode('slideshow'); return prev })
-    }, 0)
-  }
+  const onVideoError = () => setMode('slideshow')
 
-  const onVideoReady = (i: number) => setVideoOk(prev => { const next = [...prev]; next[i] = true; return next })
+  const current = VIDEOS[active]
 
   return <section className="video-hero" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} aria-label="1st Texas Realtors">
     <div className="video-hero-media" aria-hidden="true">
       {mode === 'video' ? (
-        VIDEOS.map((v, i) => (
-          <div key={v.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
-            <Image className="hero-poster" src={v.poster} alt="" fill sizes="100vw" priority={i === 0} />
-            <video autoPlay muted loop playsInline preload={i === 0 ? 'auto' : 'metadata'} poster={v.poster} className="hero-video" onError={() => onVideoError(i)} onCanPlay={() => onVideoReady(i)}>
-              <source src={v.src} type="video/mp4" />
-            </video>
-          </div>
-        ))
+        <div className="video-hero-slide is-active" key={current.src}>
+          <Image className="hero-poster" src={current.poster} alt="" fill sizes="100vw" priority={active === 0} />
+          <video autoPlay muted loop playsInline preload="auto" poster={current.poster} className="hero-video" onError={onVideoError}>
+            <source src={current.src} type="video/mp4" />
+          </video>
+        </div>
       ) : (
         slides.map((s, i) => (
           <div key={s.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>

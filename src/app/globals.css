@@ -202,16 +202,19 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
 .video-hero-media { position: absolute; inset: 0; z-index: 0; }
 .video-hero-media img, .video-hero-media video { width: 100%; height: 100%; object-fit: cover; }
 .video-hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s var(--ease-out); }
-.video-hero-slide.is-active { opacity: 1; }
+.video-hero-slide.is-active { opacity: 1; animation: videoDissolve 1.6s var(--ease-out) both; }
+@keyframes videoDissolve { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: scale(1); } }
+.hero-poster { object-fit: cover; }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .video-hero-img { object-fit: cover; transform: scale(1.08); animation: kenburns 8s var(--ease-out) both; }
 @keyframes kenburns { from { transform: scale(1.08); } to { transform: scale(1); } }
 /* warm-dark navy + indigo gradient for legibility (Chapitre layered technique, your colors) */
 .video-hero-overlay {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
-    radial-gradient(ellipse 75% 60% at 50% 30%, rgba(30,42,106,.22) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 85% 15%, rgba(255,90,60,.14) 0%, transparent 55%),
-    linear-gradient(180deg, rgba(13,20,64,.55) 0%, rgba(20,28,77,.28) 40%, rgba(20,28,77,.18) 60%, rgba(7,26,47,.78) 100%);
+    radial-gradient(ellipse 80% 65% at 50% 32%, rgba(59,91,219,.20) 0%, rgba(30,42,106,.12) 45%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 85% 15%, rgba(255,90,60,.13) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(13,20,64,.58) 0%, rgba(20,28,77,.30) 40%, rgba(20,28,77,.20) 60%, rgba(7,26,47,.80) 100%);
 }
 /* indigo-blue + warm red spotlight (atmosphere signature) */
 .video-hero-glow {
