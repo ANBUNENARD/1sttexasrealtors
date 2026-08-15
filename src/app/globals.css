@@ -479,6 +479,15 @@ blockquote cite {
 .page-content blockquote cite { color: var(--red); }
 .page-content blockquote::before { color: rgba(239, 64, 53, 0.25); }
 .page-content blockquote:hover { border-color: rgba(239, 64, 53, 0.45); box-shadow: var(--shadow-lift); }
+/* exact client flow: floating photos beside quotes, flowing list */
+.testimonial-flow { display: flex; flex-direction: column; gap: 26px; }
+.testimonial-block { position: relative; }
+.testimonial-block blockquote { overflow: hidden; }
+.testimonial-block .testimonial-photo {
+  float: right; width: min(220px, 40vw); height: auto; margin: 8px 0 14px 24px;
+  border-radius: 12px; border: 1px solid var(--line); box-shadow: var(--shadow-card);
+}
+.testimonial-block blockquote::after { content: ""; display: block; clear: both; }
 /* client photo gallery (from the original site) */
 .client-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 44px; }
 .client-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); transition: .3s ease; }
