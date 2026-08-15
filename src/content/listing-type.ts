@@ -16,4 +16,6 @@ export type Listing = {
   remarks?: string
   photo: string
   status?: string
+  lat?: number
+  lon?: number
 }
