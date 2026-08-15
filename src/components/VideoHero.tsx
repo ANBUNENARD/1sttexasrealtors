@@ -29,9 +29,9 @@ export function VideoHero({ started = true }: { started?: boolean }) {
 
   // video manifest: local file wins, then stock, then slideshow fallback
   const VIDEOS = [
-    { src: '/videos/clear-lake-1.mp4', poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg' },
-    { src: '/videos/clear-lake-2.mp4', poster: '/assets/reference/leaguecityhomesforsale.jpg' },
-    { src: '/videos/clear-lake-3.mp4', poster: '/assets/reference/seabrookhomesforsale02.jpg' },
+    { src: '/videos/clear-lake-homes.mp4', poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg' },
+    { src: 'https://videos.pexels.com/video-files/1093663/1093663-hd_1920_1080_30fps.mp4', poster: '/assets/reference/leaguecityhomesforsale.jpg' },
+    { src: 'https://videos.pexels.com/video-files/3130284/3130284-hd_1920_1080_30fps.mp4', poster: '/assets/reference/seabrookhomesforsale02.jpg' },
   ]
   const current = VIDEOS[videoIdx]
 
@@ -61,8 +61,8 @@ export function VideoHero({ started = true }: { started?: boolean }) {
     </div>
     <div className="video-hero-overlay" aria-hidden="true" />
     <div className="video-hero-glow" aria-hidden="true" />
-    <div className="video-hero-logo-ghost" aria-hidden="true"><Image src="/assets/reference/1stTexasRealtors-logo.png" alt="" width={560} height={269} priority /></div>
-    <div className="video-hero-logo-chip"><Image src="/assets/reference/1stTexasRealtors-logo.png" alt="1st Texas Realtors" width={140} height={67} /></div>
+    <div className="video-hero-logo-ghost" aria-hidden="true"><span className="ghost-wordmark"><b>1st Texas</b><i>Realtors</i></span></div>
+    <div className="video-hero-logo-chip"><span className="chip-wordmark"><b>1st Texas</b><i>Realtors</i></span></div>
     <div className="video-hero-content">
       <p className="mono-label video-hero-eyebrow">Family owned since 2004 · Clear Lake NASA</p>
       <WordReveal as="h1" className="display-hero" play={started} emWord="personal.">Real estate guidance that feels personal.</WordReveal>
