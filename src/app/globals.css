@@ -858,15 +858,18 @@ blockquote cite {
   .intro-logo-chip img { width: min(300px, 76vw); }
   .intro-line { width: 80vw; }
   .intro-wordmark .mono-label { font-size: 11px; }
-  .video-hero { height: 100svh; min-height: 560px; }
-  .video-hero-content { padding: 150px 20px 80px; align-items: flex-start; text-align: left; justify-content: center; }
-  .video-hero-content .hero-search, .video-hero-content .hero-actions { align-self: center; }
+  .video-hero { height: auto; min-height: 100svh; display: flex; flex-direction: column; }
+  .video-hero-content { position: relative; flex: 1; padding: 130px 22px 20px; align-items: center; text-align: center; justify-content: flex-start; }
+  .video-hero-content .hero-search, .video-hero-content .hero-actions { align-self: stretch; }
   .display-hero { font-size: clamp(38px, 10vw, 52px); }
-  .video-hero-sub { font-size: 16px; }
+  .video-hero-sub { font-size: 16px; max-width: 420px; }
   .hero-search { width: 100%; }
   .hero-search input { font-size: 16px; }
-  .video-hero-proof { padding: 20px 20px 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
-  .video-hero-proof .hero-features div { padding-right: 18px; margin-right: 18px; }
+  .video-hero-proof { position: relative; padding: 18px 22px 26px; flex-direction: column; align-items: center; gap: 18px; text-align: center; }
+  .video-hero-proof .hero-features { justify-content: center; gap: 0; }
+  .video-hero-proof .hero-features div { padding: 0 18px; margin: 0; border-right: 1px solid rgba(255,255,255,.14); }
+  .video-hero-proof .hero-features div:last-child { border-right: 0; padding-right: 0; }
+  .video-hero-proof .hero-trust { margin-top: 0; }
   .hero-actions { display: grid; grid-template-columns: 1fr; gap: 12px; width: 100%; }
   .hero-actions .button { justify-content: space-between; width: 100%; }
   .marquee { padding: 13px 0; }
