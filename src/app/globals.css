@@ -790,6 +790,29 @@ blockquote cite {
 .search-sell-card { border: 1px solid var(--line); border-radius: 20px; padding: 32px; background: linear-gradient(180deg, #fff, #f2f7fa); box-shadow: var(--shadow-card); display: grid; gap: 12px; }
 .search-sell-card h2 { margin: 0; color: var(--navy); font-size: clamp(24px, 3vw, 34px); letter-spacing: -0.03em; }
 .search-sell-card p { margin: 0; color: var(--muted); max-width: 640px; }
+/* IDX-style tabs + panels */
+.idx-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); }
+.idx-tab {
+  padding: 13px 20px; border: 0; background: none; cursor: pointer;
+  color: var(--muted); font-size: 15px; font-weight: 700; border-bottom: 3px solid transparent;
+  transition: .2s ease;
+}
+.idx-tab:hover { color: var(--navy); }
+.idx-tab.active { color: var(--navy); border-bottom-color: var(--red); }
+.idx-panel { display: grid; gap: 20px; }
+.idx-sort-row { grid-template-columns: 1fr 2fr; }
+.field-hint { color: var(--muted); font-size: 14px; margin: 0; }
+/* map */
+.search-map { height: 520px; border-radius: 18px; border: 1px solid var(--line); overflow: hidden; z-index: 1; }
+.search-map-loading { height: 520px; border-radius: 18px; border: 1px solid var(--line); display: grid; place-items: center; color: var(--muted); background: #f2f7fa; }
+.idx-marker { width: 26px; height: 26px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: grid; place-items: center; background: var(--red); box-shadow: 0 4px 12px rgba(7,26,47,.35); font-size: 13px; }
+.idx-marker span { transform: rotate(45deg); }
+.idx-popup { display: grid; gap: 6px; min-width: 200px; }
+.idx-popup img { width: 200px; height: 130px; object-fit: cover; border-radius: 10px; }
+.idx-popup-body { display: grid; gap: 2px; }
+.idx-popup-body strong { color: var(--navy); font-size: 16px; }
+.idx-popup-body span { color: var(--ink); font-size: 13px; }
+.idx-popup-body small { color: var(--muted); font-family: var(--font-mono), monospace; font-size: 11px; }
 .subheading { margin: 80px 0 24px; }
 .testimonial-grid-large, .agent-grid-large { grid-template-columns: repeat(3, 1fr); }
 .agent-grid-large .agent-card:nth-child(2), .agent-grid-large .agent-card:nth-child(5), .agent-grid-large .agent-card:nth-child(8) { margin-top: 35px; }
@@ -974,6 +997,8 @@ blockquote cite {
   .service-grid, .testimonial-grid, .cta-grid, .agent-grid-large, .area-grid { grid-template-columns: 1fr; }
   .listing-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .search-filters { grid-template-columns: 1fr 1fr; }
+  .idx-tabs { overflow-x: auto; }
+  .search-map { height: 400px; }
   .client-gallery { grid-template-columns: repeat(2, 1fr); }
   .cta-steps { flex-direction: column; margin: 40px 20px 0; }
   .cta-steps a { border-right: 0; border-bottom: 1px solid var(--line); }
