@@ -34,8 +34,24 @@ function PageFrame({ eyebrow, title, intro, children }: { eyebrow: string; title
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params
   const key = slug.join('/')
-  const areaSale = key.startsWith('realtors-in-') ? serviceAreas.find(area => `realtors-in-${areaSlug(area)}` === key) : undefined
-  const areaRent = serviceAreas.find(area => `${areaSlug(area)}-tx-homes-for-rent` === key)
+  // legacy aliases → canonical keys (original site URL parity)
+  const aliasMap: Record<string, string> = {
+    'realtors-in-clear-lake-shores-2': 'realtors-in-clear-lake-shores',
+    'realtors-in-deer-park-2': 'realtors-in-deer-park',
+    'realtors-in-friendswood-2': 'realtors-in-friendswood',
+    'realtors-in-la-porte-2': 'realtors-in-la-porte',
+    'realtors-in-pearland-2': 'realtors-in-pearland',
+    'realtors-in-san-leon-2': 'realtors-in-san-leon',
+    'realtors-in-shoreacres-2': 'realtors-in-shoreacres',
+    'realtors-in-texas-city-2': 'realtors-in-texas-city',
+    'realtors-in-webster-2': 'realtors-in-webster',
+    'galveston-homes-for-rent': 'galveston-tx-homes-for-rent',
+    'league-city-homes-for-rent': 'league-city-tx-homes-for-rent',
+  }
+  const canonical = aliasMap[key] || key
+  const areaSale = canonical.startsWith('realtors-in-') ? serviceAreas.find(area => `realtors-in-${areaSlug(area)}` === canonical) : undefined
+  const areaRent = serviceAreas.find(area => `${areaSlug(area)}-tx-homes-for-rent` === canonical)
+  if (key === 'agents/nancy-van-estes') { const agent = agents.find(item => item.slug === 'nancy-estes'); if (!agent) notFound(); return <PageFrame eyebrow={agent.role} title={agent.name} intro={agent.bio}><div className="agent-profile"><img className="profile-image" src={agent.image} alt={agent.name} /><div><h2>Professional and caring from first conversation through closing and funding.</h2><p>{agent.bio} Contact {agent.name} through the 1st Texas Realtors team to discuss your next move.</p>{agent.phone && agent.email && <div className="agent-contact-list"><div className="agent-contact"><strong>{agent.name}</strong><a href={`tel:${agent.phone.replaceAll('-', '')}`}>{agent.phone}</a><a href={`mailto:${agent.email}`}>{agent.email}</a></div></div>}<Link className="button button-dark" href="/contact/">Contact the team <span>↗</span></Link></div></div></PageFrame> }
   if (key === 'clear-lake-tx-homes-for-sale') { const listing = areaListings.find(item => item.slug === 'clear-lake-sale'); return <PageFrame eyebrow="Homes for sale" title={listing?.title ?? 'Clear Lake Tx Homes for Sale'} intro={listing?.intro ?? ''}><div className="rich-layout">{listing && listing.images.length > 0 && <div className="listing-gallery">{listing.images.map(src => <img key={src} src={src} alt="Clear Lake TX homes for sale" loading="lazy" />)}</div>}<div className="rich-sections">{listing?.paragraphs.map((text, i) => <article key={i}><p>{text}</p></article>)}</div></div><div className="area-hero-card"><h2>View homes for sale</h2><p>Use our real-time Home Search or contact a Realtor for current listings, market guidance, and a plan tailored to your move.</p><div className="hero-actions"><Link className="button button-dark" href="/home-search/">Search listings <span>↗</span></Link><Link className="button button-red" href="/contact/">Contact a Realtor <span>↗</span></Link></div></div></PageFrame> }
   if (areaSale || areaRent) return <AreaPage area={(areaSale || areaRent)!} rent={Boolean(areaRent)} />
   if (servicePages[key]) { const page = servicePages[key]; return <PageFrame eyebrow={page.eyebrow} title={page.title} intro={page.intro}><div className="rich-layout">{page.image && <img className="feature-image" src={page.image} alt="Clear Lake area real estate" />}<div className="rich-sections">{page.sections.map(section => <article key={section.title}><h2>{section.title}</h2><p>{section.body}</p></article>)}</div></div><div className="page-cta"><p>For immediate assistance, call <strong>{phone}</strong>.</p><Link className="button button-dark" href="/contact/">Talk with a Realtor <span>↗</span></Link></div></PageFrame> }

@@ -202,4 +202,17 @@ export const allStaticPaths = [
   ...idxRoutes,
   ...serviceAreas.flatMap(area => [`realtors-in-${areaSlug(area)}`, `${areaSlug(area)}-tx-homes-for-rent`]),
   'clear-lake-tx-homes-for-sale',
+  // legacy aliases matching the original site's URLs exactly
+  'realtors-in-clear-lake-shores-2',
+  'realtors-in-deer-park-2',
+  'realtors-in-friendswood-2',
+  'realtors-in-la-porte-2',
+  'realtors-in-pearland-2',
+  'realtors-in-san-leon-2',
+  'realtors-in-shoreacres-2',
+  'realtors-in-texas-city-2',
+  'realtors-in-webster-2',
+  'galveston-homes-for-rent',
+  'league-city-homes-for-rent',
+  'agents/nancy-van-estes',
 ]
