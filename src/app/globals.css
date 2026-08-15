@@ -232,11 +232,10 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
    VIDEO HERO — full-screen scenery, centered submerged logo
    ============================================================ */
 .video-hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; isolation: isolate; }
-.video-hero-media { position: absolute; inset: 0; z-index: 0; }
+.video-hero-media { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .video-hero-media img, .video-hero-media video { width: 100%; height: 100%; object-fit: cover; }
-.video-hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s var(--ease-out); }
-.video-hero-slide.is-active { opacity: 1; animation: videoDissolve 1.6s var(--ease-out) both; }
-@keyframes videoDissolve { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: scale(1); } }
+.video-hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s var(--ease-out); pointer-events: none; }
+.video-hero-slide.is-active { opacity: 1; z-index: 1; }
 .hero-poster { object-fit: cover; }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .video-hero-img { object-fit: cover; transform: scale(1.08); animation: kenburns 8s var(--ease-out) both; }
@@ -289,15 +288,11 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
 .video-hero-content > *:nth-child(4) { animation-delay: .6s; }
 .video-hero-content > *:nth-child(5) { animation-delay: .75s; }
 @keyframes heroUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-/* proof row at hero bottom — soft fade, no hard line */
+/* proof row at hero bottom — decorative, never blocks clicks */
 .video-hero-proof {
-  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; pointer-events: none;
   padding: 30px 7vw 34px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
   background: linear-gradient(180deg, transparent, rgba(7,26,47,.78) 55%);
-}
-.video-hero-proof::before {
-  content: ""; position: absolute; top: 0; left: 7vw; right: 7vw; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18) 25%, rgba(255,255,255,.18) 75%, transparent);
 }
 .video-hero-proof .hero-trust { margin-top: 0; }
 .video-hero-proof .hero-features { margin-top: 0; }
@@ -346,10 +341,10 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
 /* Feature stats row */
 .hero-features {
   display: flex; flex-wrap: wrap; gap: 0; margin-top: 64px;
-  border-top: 1px solid #ffffff1f; padding-top: 26px; max-width: 640px;
+  padding-top: 26px; max-width: 640px;
 }
-.hero-features div { display: grid; gap: 5px; padding-right: 44px; margin-right: 44px; border-right: 1px solid #ffffff1f; }
-.hero-features div:last-child { border-right: 0; padding-right: 0; margin-right: 0; }
+.hero-features div { display: grid; gap: 5px; padding-right: 44px; margin-right: 44px; border-right: 1px solid rgba(255,255,255,.14); }
+.hero-features div:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
 .hero-features strong { color: #fff; font-size: 15px; font-weight: 800; letter-spacing: -0.01em; }
 .hero-features small { color: #b9cbd8; font-size: 12px; line-height: 1.4; }
 
