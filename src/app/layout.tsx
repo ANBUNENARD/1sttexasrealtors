@@ -13,5 +13,5 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="en"><body className={`${display.variable} ${mono.variable}`}>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: '1st Texas Realtors', url: process.env.NEXT_PUBLIC_SITE_URL || 'https://1sttexasrealtors.com', telephone: '+1-281-241-3121', email: 'info@1sttexasrealtors.com', areaServed: 'Clear Lake NASA, Texas' }) }} /></body></html>
+  return <html lang="en"><body className={`${display.variable} ${mono.variable}`}><a className="skip-link" href="#main-content">Skip to main content</a>{children}<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({ '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: '1st Texas Realtors', url: process.env.NEXT_PUBLIC_SITE_URL || 'https://1sttexasrealtors.com', telephone: '+1-281-241-3121', email: 'info@1sttexasrealtors.com', areaServed: 'Clear Lake NASA, Texas' }) }} /></body></html>
 }
