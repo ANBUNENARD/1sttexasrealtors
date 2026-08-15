@@ -7,6 +7,8 @@ import { ScrollReveals } from '@/components/Motion'
 import { agents, allStaticPaths, areaSlug, email, phone, rentPath, serviceAreas, servicePages, testimonials } from '@/content/site'
 import { testimonialsExact } from '@/content/testimonials-exact'
 import { areaListings } from '@/content/area-listings'
+import { listingsByArea } from '@/content/listings-index'
+import { ListingCard } from '@/components/ListingCard'
 
 export function generateStaticParams() { return allStaticPaths.map(path => ({ slug: path.split('/') })) }
 
@@ -16,6 +18,7 @@ function AreaPage({ area, rent }: { area: string; rent: boolean }) {
   const title = rent ? `${area} Homes for Rent` : `${area} Realtors & Homes for Sale`
   return <PageFrame eyebrow="Local service area" title={title} intro={listing ? listing.intro : rent ? `Find homes for rent in ${area} with local guidance on neighborhoods, schools, commutes, and leasing.` : `Work with 1st Texas Realtors for homes for sale and expert local service in ${area}.`}>
     {listing && listing.images.length > 0 && <div className="listing-gallery">{listing.images.map(src => <img key={src} src={src} alt={`${listing.title} in ${area}`} loading="lazy" />)}</div>}
+    {!rent && listingsByArea[slug] && listingsByArea[slug].length > 0 && <><h2 className="subheading">Homes for sale in {area}</h2><div className="listing-grid">{listingsByArea[slug].map(item => <ListingCard key={item.mls} listing={item} />)}</div></>}
     <div className="area-hero-card"><h2>{rent ? 'View homes for rent' : 'View homes for sale'}</h2><p>Use our real-time Home Search or contact a Realtor for current listings, market guidance, and a plan tailored to your move.</p><div className="hero-actions"><Link className="button button-dark" href="/home-search/">Search listings <span>↗</span></Link><Link className="button button-red" href="/contact/">Contact a Realtor <span>↗</span></Link></div></div>
     {listing && listing.paragraphs.length > 0 && <div className="rich-sections">{listing.paragraphs.map((text, i) => <article key={i}><p>{text}</p></article>)}</div>}
     <h2 className="subheading">Nearby service areas</h2><div className="area-grid">{serviceAreas.filter(item => item !== area).slice(0, 10).map(item => <Link key={item} href={rentPath(item)}>{item}<span>↗</span></Link>)}</div>
