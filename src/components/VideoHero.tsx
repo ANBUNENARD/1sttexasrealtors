@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { WordReveal } from '@/components/WordReveal'
 
 const slides = [
@@ -23,17 +23,6 @@ export function VideoHero({ started = true }: { started?: boolean }) {
   const [mode, setMode] = useState<'video' | 'slideshow'>('video')
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
-
-  // all clips are preloaded (auto) so switching is instant; only the active one plays
-  useEffect(() => {
-    if (mode !== 'video' || !started) return
-    videoRefs.current.forEach((video, i) => {
-      if (!video) return
-      if (i === active) video.play().catch(() => {})
-      else video.pause()
-    })
-  }, [active, mode, started])
 
   // rotate: each clip plays for its own duration, then the next dissolves in
   useEffect(() => {
@@ -58,10 +47,10 @@ export function VideoHero({ started = true }: { started?: boolean }) {
         VIDEOS.map((v, i) => (
           <div key={v.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
             <Image className="hero-poster" src={v.poster} alt="" fill sizes="100vw" priority={i === 0} />
-            {/* all clips preloaded & playing continuously → crossfades are instant, no delay */}
+            {/* every clip runs continuously (autoplay+loop) → the crossfade is a pure
+                opacity dissolve with zero start/load delay — no ticks, ever */}
             <video
-              ref={el => { videoRefs.current[i] = el }}
-              muted loop playsInline preload="auto" poster={v.poster}
+              autoPlay muted loop playsInline preload="auto" poster={v.poster}
               className="hero-video" onError={onVideoError} aria-hidden="true"
             >
               <source src={v.src} type="video/mp4" />
