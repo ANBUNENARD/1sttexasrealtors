@@ -1,13 +1,12 @@
 'use client'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
 import { ScrollReveals } from '@/components/Motion'
 import { ScrollSpy } from '@/components/ScrollSpy'
 import { LeadModal } from '@/components/LeadModal'
 import { VideoHero } from '@/components/VideoHero'
-import { IntroPreloader } from '@/components/IntroPreloader'
 import { VideoBand } from '@/components/VideoBand'
 import { FeaturedStrip } from '@/components/FeaturedStrip'
 import { ChatFab } from '@/components/ChatFab'
@@ -30,22 +29,10 @@ const faqs = [
 ]
 
 export default function Home() {
-  const [started, setStarted] = useState(true)
+  const [started] = useState(true)
 
-  useEffect(() => {
-    // wait for intro overlay lift before hero entrance
-    try {
-      if (sessionStorage.getItem('1tx-intro-played') !== 'true') {
-        setStarted(false)
-        const t = setTimeout(() => setStarted(true), 2000)
-        return () => clearTimeout(t)
-      }
-    } catch { /* noop */ }
-  }, [])
-
-  return <div className="site-shell"><IntroPreloader onDone={() => setStarted(true)} /><SiteHeader /><main id="main-content">
+  return <div className="site-shell"><SiteHeader /><main id="main-content">
     <VideoHero started={started} />
-    <div className="marquee" aria-label="Service areas"><div className="marquee-track">{[...serviceAreas.slice(0, 9), ...serviceAreas.slice(0, 9)].map((area, i) => <Link key={`${area}-${i}`} href={`/realtors-in-${areaSlug(area)}/`} tabIndex={i < 9 ? undefined : -1}>{area}</Link>)}</div></div>
     <section className="section intro-section reveal" id="welcome"><div className="section-heading"><p className="eyebrow">Welcome to 1st Texas Realtors</p><WordReveal as="h2" className="display-section">Clarity for buying, selling, and everything between.</WordReveal><p><strong>Family owned since 2004,</strong> we provide expert Realtors in Clear Lake, dedicated customer service and real-time listings of homes for sale and rent.</p><p><strong>David Karstedt and wife Simone</strong> work as a team at 1st Texas Realtors, receive overwhelmingly positive reviews highlighting their exceptional responsiveness, deep knowledge and strong negotiation skills. This dynamic duo is known for personalized, patient service making the complex home buying and selling process smooth and enjoyable for their clients. They are praised for exceeding expectations and trusted advisors earning loyalty through high-quality service. Please see more <Link className="text-link" href="/realtor-reviews/">Testimonials <span>↗</span></Link>.</p><p>Our team of talented Realtors provide you with the critical elements of success; local experience, dedicated customer service and real-time property listings. <strong>Every year since 2010, we have been recognized by Texas Monthly Magazine as Top 3% Realtors in Clear Lake – NASA.</strong></p></div><div className="intro-copy"><div className="stats-band"><div className="stat"><strong>50+</strong><small>Years combined experience</small></div><div className="stat"><strong>Top 3%</strong><small>Realtor ranking</small></div><div className="stat"><strong>2004</strong><small>Family owned since</small></div></div><Link className="button button-dark" href="/contact/">Contact a Realtor <span>↗</span></Link></div></section>
     <section className="section section-tint reveal" id="services"><div className="section-heading"><p className="eyebrow">How we help</p><WordReveal as="h2" className="display-section">A better way forward.</WordReveal></div><div className="service-grid">{services.map(([title, body, href, image], index) => <article className="service-card" key={title}><span className="step-badge">{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{body}</p><Link href={href}>Explore service <span className="btn-icon">↗</span></Link><div className="service-card-img" style={{ backgroundImage: `url('${image}')` }} aria-hidden="true" /></article>)}</div></section>
     <section className="section split-section reveal" id="team"><div><p className="eyebrow">Local knowledge</p><WordReveal as="h2" className="display-section">People who know the place.</WordReveal><p>From Clear Lake City and Friendswood to League City, Kemah, Seabrook, and Galveston, we know the neighborhoods, schools, grocery stores, commutes, and local people.</p><Link className="button button-navy" href="/agents/">Meet our Realtors <span className="btn-icon">↗</span></Link></div><img src="/assets/reference/1st-Texas-Realtors-Team2.png" alt="The 1st Texas Realtors team" /></section>
