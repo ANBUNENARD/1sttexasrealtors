@@ -11,12 +11,12 @@ const slides = [
   { src: '/assets/reference/seabrookhomesforsale.jpg',            alt: 'Home for sale in Seabrook TX' },
 ]
 
-// 4 house "GIFs" (local videos) that crossfade into each other
+// 4 house "GIFs" — real home footage, each trimmed to a short looping clip
 const VIDEOS = [
-  { src: '/videos/clear-lake-homes.mp4',   poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg' },
-  { src: '/videos/aerial-neighborhood.mp4', poster: '/assets/reference/leaguecityhomesforsale.jpg' },
-  { src: '/videos/suburban-homes-2.mp4',   poster: '/assets/reference/seabrookhomesforsale.jpg' },
-  { src: '/videos/suburban-homes-3.mp4',   poster: '/assets/reference/friendswoodhomesforsale.jpg' },
+  { src: '/videos/gif-lake-house.mp4',    poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg', dur: 3000 },   // house near a lake — 3s
+  { src: '/videos/gif-aerial-house.mp4',  poster: '/assets/reference/leaguecityhomesforsale.jpg',          dur: 3000 },   // aerial beautiful house — 3s
+  { src: '/videos/gif-garden-house.mp4',  poster: '/assets/reference/friendswoodhomesforsale.jpg',         dur: 5000 },   // garden pans to house — 5s
+  { src: '/videos/gif-river-houses.mp4',  poster: '/assets/reference/seabrookhomesforsale02.jpg',          dur: 4000 },   // aerial houses by river — 4s
 ]
 
 export function VideoHero({ started = true }: { started?: boolean }) {
@@ -24,17 +24,18 @@ export function VideoHero({ started = true }: { started?: boolean }) {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
 
-  // rotate the active house video every 12s (slow dissolve)
+  // rotate house clips — each plays for its own duration, then dissolves to the next
   useEffect(() => {
     if (mode !== 'video' || paused || !started) return
-    const interval = setInterval(() => setActive(a => (a + 1) % VIDEOS.length), 12000)
-    return () => clearInterval(interval)
-  }, [mode, paused, started])
+    const current = VIDEOS[active]
+    const timeout = setTimeout(() => setActive(a => (a + 1) % VIDEOS.length), current.dur)
+    return () => clearTimeout(timeout)
+  }, [mode, paused, started, active])
 
   // Ken Burns slideshow fallback
   useEffect(() => {
     if (mode !== 'slideshow' || paused || !started) return
-    const interval = setInterval(() => setActive(a => (a + 1) % slides.length), 12000)
+    const interval = setInterval(() => setActive(a => (a + 1) % slides.length), 7000)
     return () => clearInterval(interval)
   }, [mode, paused, started])
 
@@ -61,7 +62,6 @@ export function VideoHero({ started = true }: { started?: boolean }) {
     </div>
     <div className="video-hero-overlay" aria-hidden="true" />
     <div className="video-hero-glow" aria-hidden="true" />
-    <div className="video-hero-logo-ghost" aria-hidden="true"><span className="ghost-wordmark"><b>1st Texas</b><i>Realtors</i></span></div>
     <div className="video-hero-content">
       <p className="mono-label video-hero-eyebrow">Family owned since 2004 · Clear Lake NASA</p>
       <WordReveal as="h1" className="display-hero" play={started} emWord="personal.">Real estate guidance that feels personal.</WordReveal>
