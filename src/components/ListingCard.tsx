@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import type { Listing } from '@/content/listings-baytown'
+import type { Listing } from '@/content/listing-type'
 
 export function ListingCard({ listing }: { listing: Listing }) {
   const beds = listing.beds?.replace(' Bedrooms', '') || '—'

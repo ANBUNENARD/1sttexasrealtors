@@ -1,11 +1,6 @@
 // Baytown homes for sale — scraped from 1sttexasrealtors.com (IDX Broker) on 2026-08-15.
 
-export type Listing = {
-  mls: string; address: string; city: string; state: string; zip: string;
-  price: string; beds: string; baths: string; sqft?: string; acres?: string;
-  yearBuilt?: string; subdivision?: string; county?: string; propertyType?: string;
-  remarks?: string; photo: string; status?: string;
-}
+import type { Listing } from "./listing-type"
 
 export const baytownListings: Listing[] = [
   {

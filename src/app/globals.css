@@ -919,6 +919,7 @@ blockquote cite {
   .page-content { padding: 55px 20px 80px; }
   .section-heading h2, .page-hero h1 { font-size: 40px; }
   .service-grid, .testimonial-grid, .cta-grid, .agent-grid-large, .area-grid { grid-template-columns: 1fr; }
+  .listing-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .client-gallery { grid-template-columns: repeat(2, 1fr); }
   .cta-steps { flex-direction: column; margin: 40px 20px 0; }
   .cta-steps a { border-right: 0; border-bottom: 1px solid var(--line); }
@@ -944,6 +945,7 @@ blockquote cite {
   .phone { display: none; }
   .video-hero-proof .hero-features div:nth-child(3) { display: none; }
   .chat-fab { left: 16px; bottom: 16px; width: 48px; height: 48px; }
+  .listing-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
