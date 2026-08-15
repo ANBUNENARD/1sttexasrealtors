@@ -30,10 +30,6 @@ export function SiteHeader() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-  useEffect(() => {
-    document.documentElement.classList.toggle('menu-locked', menuOpen)
-    return () => document.documentElement.classList.remove('menu-locked')
-  }, [menuOpen])
   const closeMenu = () => setMenuOpen(false)
   return <>
     <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
