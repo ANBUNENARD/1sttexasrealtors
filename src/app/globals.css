@@ -234,19 +234,31 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
 .video-hero { position: relative; height: 100svh; min-height: 640px; overflow: hidden; isolation: isolate; }
 .video-hero-media { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .video-hero-media img, .video-hero-media video { width: 100%; height: 100%; object-fit: cover; }
+/* vintage map scenery — slow cinematic pan */
+.hero-map-layer { position: absolute; inset: -12%; z-index: 0; }
+.hero-map-img {
+  width: 100%; height: 100%; object-fit: cover;
+  animation: mapPan 60s var(--ease-out) infinite alternate;
+  will-change: transform;
+}
+@keyframes mapPan {
+  0% { transform: scale(1.08) translate(0%, 0%); }
+  50% { transform: scale(1.16) translate(-2.5%, -2%); }
+  100% { transform: scale(1.1) translate(2%, 1.5%); }
+}
 .video-hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 2.4s ease-in-out; pointer-events: none; will-change: opacity; }
 .video-hero-slide.is-active { opacity: 1; z-index: 1; }
 .hero-poster { object-fit: cover; }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .video-hero-img { object-fit: cover; transform: scale(1.08); animation: kenburns 8s var(--ease-out) both; }
 @keyframes kenburns { from { transform: scale(1.08); } to { transform: scale(1); } }
-/* warm-dark navy + indigo gradient for legibility (Chapitre layered technique, your colors) */
+/* map + indigo gradient for legibility — map stays visible, text readable */
 .video-hero-overlay {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
-    radial-gradient(ellipse 80% 65% at 50% 32%, rgba(59,91,219,.14) 0%, rgba(30,42,106,.08) 45%, transparent 70%),
-    radial-gradient(ellipse 60% 50% at 85% 15%, rgba(255,90,60,.10) 0%, transparent 55%),
-    linear-gradient(180deg, rgba(13,20,64,.45) 0%, rgba(20,28,77,.18) 40%, rgba(20,28,77,.12) 60%, rgba(7,26,47,.62) 100%);
+    radial-gradient(ellipse 80% 65% at 50% 32%, rgba(59,91,219,.12) 0%, rgba(30,42,106,.06) 45%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 85% 15%, rgba(255,90,60,.08) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(13,20,64,.38) 0%, rgba(20,28,77,.12) 40%, rgba(20,28,77,.08) 60%, rgba(7,26,47,.58) 100%);
 }
 /* indigo-blue + warm red spotlight (atmosphere signature) */
 .video-hero-glow {
@@ -550,14 +562,45 @@ blockquote cite {
 .cta-steps a b { margin-left: auto; color: var(--red); font-size: 16px; transition: .25s ease; }
 .cta-steps a:hover b { transform: translate(3px, -3px); }
 
-/* Press row — FEATURED IN */
+/* Press row — FEATURED IN (animated: words stamp in on scroll, map-paper aesthetic) */
 .press-row {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 40px;
-  padding: 26px 7vw; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  position: relative; overflow: hidden;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 44px;
+  padding: 30px 7vw;
+  background: linear-gradient(180deg, #f4f7f9 0%, #eef3f7 100%);
+  border-top: 1px solid #d8e2ea; border-bottom: 1px solid #d8e2ea;
 }
-.press-row .mono-label { color: var(--red); letter-spacing: .18em; }
-.press-item { color: var(--muted); font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; opacity: .45; transition: .25s ease; }
-.press-item:hover { opacity: 1; color: var(--navy); }
+.press-row::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(107, 128, 148, 0.14) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: .5;
+}
+.press-row .press-label {
+  color: var(--red); font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  font-family: var(--font-mono), monospace;
+  opacity: 0; transform: translateY(14px) scale(.94);
+  transition: opacity .6s var(--ease-expo), transform .6s var(--ease-expo);
+}
+.press-item {
+  position: relative; color: #5a6f80; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  opacity: 0; transform: translateY(18px) scale(.92);
+  transition: opacity .6s var(--ease-expo), transform .6s var(--ease-expo);
+}
+.press-item::after {
+  content: "◆"; position: absolute; right: -26px; top: 50%; transform: translateY(-50%);
+  color: rgba(239, 64, 53, .45); font-size: 8px;
+}
+.press-item:last-child::after { content: none; }
+.press-row.is-visible .press-label,
+.press-row.is-visible .press-item { opacity: 1; transform: none; }
+.press-row .press-mapnote {
+  width: 100%; text-align: center; color: #93a6b5;
+  font-size: 10px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+  font-family: var(--font-mono), monospace;
+  opacity: 0; transition: opacity 1s ease .9s;
+}
+.press-row.is-visible .press-mapnote { opacity: .85; }
 
 /* ============================================================
    VIDEO BAND — pre-footer clip-path reveal
@@ -570,12 +613,13 @@ blockquote cite {
   transition: clip-path 1s var(--ease-expo);
 }
 .video-band.is-open { clip-path: inset(0 0 0% 0); }
-.video-band-img { object-fit: cover; z-index: 0; }
+.video-band-map { position: absolute; inset: -10%; z-index: 0; }
+.video-band-map-img { width: 100%; height: 100%; object-fit: cover; animation: mapPan 80s var(--ease-out) infinite alternate; will-change: transform; }
 .video-band-overlay {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 30%, rgba(30,42,106,.2) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(13,20,64,.5) 0%, rgba(20,28,77,.2) 50%, rgba(7,26,47,.8) 100%);
+    radial-gradient(ellipse 70% 60% at 50% 30%, rgba(30,42,106,.25) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(13,20,64,.55) 0%, rgba(20,28,77,.25) 50%, rgba(7,26,47,.85) 100%);
 }
 .video-band-inner { position: relative; z-index: 2; padding: 7vw; color: #fff; max-width: 640px; }
 .video-band-eyebrow { color: #ffb5a7; letter-spacing: .22em; margin-bottom: 16px; }

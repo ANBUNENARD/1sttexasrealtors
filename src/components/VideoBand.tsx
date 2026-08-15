@@ -19,8 +19,8 @@ export function VideoBand() {
   }, [])
 
   return <section className={`video-band${open ? ' is-open' : ''}`} ref={ref as never} aria-label="Your next move">
-    <video className="video-band-video" autoPlay muted loop playsInline preload="metadata" poster="/assets/reference/Clear-Lake-Texas-e1736781694121.jpg"><source src="/videos/gif-lake-house.mp4" type="video/mp4" /></video>
-    <Image className="video-band-img" src="/assets/reference/Clear-Lake-Texas-e1736781694121.jpg" alt="" fill sizes="100vw" priority={false} />
+    {/* vintage Seabrook Quadrangle map as the band scenery */}
+    <div className="video-band-map"><Image src="/assets/reference/seabrook-quadrangle-map.png" alt="" fill sizes="100vw" className="video-band-map-img" /></div>
     <div className="video-band-overlay" aria-hidden="true" />
     <div className="video-band-inner"><p className="mono-label video-band-eyebrow">Clear Lake NASA</p><h2 className="display-section">Your next move starts here.</h2><p>Call us for immediate assistance or explore our service areas and real-time home search.</p><Link className="button button-red" href="/contact/">Contact a Realtor <span>↗</span></Link></div>
   </section>
