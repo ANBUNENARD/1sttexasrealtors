@@ -28,14 +28,14 @@ export function IntroPreloader({ onDone }: { onDone?: () => void }) {
       return () => { timers.forEach(clearTimeout); document.documentElement.classList.remove('intro-locked') }
     }
 
-    // 1. line expands + logo slides in (0.9s) → 2. glow pulse at 1.0s → 3. overlay lifts at ~1.95s
-    timers.push(setTimeout(() => setPhase('lifting'), 1950))
+    // 1. logo block scales up + line expands (0.9s) → 2. glow pulse at 1.0s → 3. overlay lifts at ~1.95s
+    timers.push(setTimeout(() => setPhase('lifting'), 2000))
     timers.push(setTimeout(() => {
       setPhase('done')
       document.documentElement.classList.remove('intro-locked')
       try { sessionStorage.setItem('1tx-intro-played', 'true') } catch { /* noop */ }
       onDone?.()
-    }, 2750))
+    }, 2850))
     return () => { timers.forEach(clearTimeout); document.documentElement.classList.remove('intro-locked') }
   }, [onDone])
 
@@ -43,7 +43,7 @@ export function IntroPreloader({ onDone }: { onDone?: () => void }) {
 
   return <div className={`intro-preloader${phase === 'lifting' ? ' is-lifting' : ''}`} role="presentation" aria-hidden="true">
     <div className="intro-logo-block">
-      <div className="intro-logo-chip"><Image src="/assets/reference/1stTexasRealtors-logo.png" alt="" width={300} height={144} priority /></div>
+      <div className="intro-logo-chip"><Image src="/assets/reference/1stTexasRealtors-logo.png" alt="" width={560} height={269} priority /></div>
       <div className="intro-line" />
       <div className="intro-wordmark"><span className="mono-label">1st Texas Realtors</span><span className="mono-label intro-tag">Family owned since 2004</span></div>
     </div>
