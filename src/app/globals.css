@@ -60,7 +60,7 @@ a { color: inherit; text-decoration: none; }
 :focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 
 /* ============================================================
-   INTRO PRELOADER — logo intro (Chapitre choreography)
+   INTRO PRELOADER — big centered logo (Chapitre choreography)
    ============================================================ */
 .intro-preloader {
   position: fixed; inset: 0; z-index: 100;
@@ -69,26 +69,31 @@ a { color: inherit; text-decoration: none; }
   transition: clip-path .8s var(--ease-expo);
 }
 .intro-preloader.is-lifting { clip-path: inset(0 0 100% 0); }
-.intro-logo-block { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 18px; width: min(480px, 80vw); }
-.intro-logo-chip {
-  border-radius: 14px; padding: 10px 14px; background: #fff;
-  transform: translateY(-16px); opacity: 0;
-  animation: introSlide .85s var(--ease-intro-reveal) .1s both;
+.intro-logo-block {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: grid; justify-items: center; gap: 26px; width: min(720px, 90vw);
+  animation: introBlock .9s var(--ease-intro-reveal) both;
 }
-.intro-logo-chip img { width: min(300px, 70vw); height: auto; display: block; }
+@keyframes introBlock { from { transform: translate(-50%, -50%) scale(.88); opacity: 0; } to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+.intro-logo-chip {
+  border-radius: 18px; padding: 16px 22px; background: #fff;
+  box-shadow: 0 30px 80px rgba(0,0,0,.35);
+  transform: translateY(-18px); opacity: 0;
+  animation: introSlideChip .85s var(--ease-intro-reveal) .15s both;
+}
+.intro-logo-chip img { width: min(520px, 78vw); height: auto; display: block; }
 .intro-line {
-  width: min(72vw, 640px); height: 3px;
+  width: min(72vw, 560px); height: 3px;
   background: linear-gradient(90deg, transparent, var(--red) 50%, transparent);
   transform: scaleX(0); transform-origin: center;
-  animation: introLine .9s var(--ease-intro-line) both;
+  animation: introLine .9s var(--ease-intro-line) .1s both;
 }
-.intro-wordmark { display: grid; gap: 6px; justify-items: center; transform: translateY(16px); opacity: 0; animation: introSlide .85s var(--ease-intro-reveal) .1s both; }
-.intro-wordmark .mono-label { color: rgba(255,255,255,.6); font-size: 13px; letter-spacing: .22em; }
+.intro-wordmark { display: grid; gap: 6px; justify-items: center; transform: translateY(18px); opacity: 0; animation: introSlideWord .85s var(--ease-intro-reveal) .15s both; }
+.intro-wordmark .mono-label { color: rgba(255,255,255,.65); font-size: 14px; letter-spacing: .26em; }
 .intro-wordmark .intro-tag { color: var(--red-warm); }
 @keyframes introLine { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes introSlide { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-.intro-logo-chip { animation-name: introSlideChip; }
-@keyframes introSlideChip { from { transform: translateY(-16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes introSlideChip { from { transform: translateY(-18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes introSlideWord { from { transform: translateY(18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 html.intro-locked, html.intro-locked body { overflow: hidden; }
 
 /* ============================================================
@@ -686,6 +691,10 @@ blockquote cite {
   .site-header { padding: 10px 16px; }
   .menu-btn .mono-label { display: none; }
   .logo { width: 130px; padding: 4px 8px; }
+  .intro-logo-chip { padding: 10px 14px; border-radius: 14px; }
+  .intro-logo-chip img { width: min(300px, 76vw); }
+  .intro-line { width: 80vw; }
+  .intro-wordmark .mono-label { font-size: 11px; }
   .header-actions { gap: 8px; }
   .account-link { display: none; }
   .phone { font-size: 12px; }
