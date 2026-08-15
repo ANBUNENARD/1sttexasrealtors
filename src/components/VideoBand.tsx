@@ -7,18 +7,19 @@ export function VideoBand() {
   const ref = useRef<HTMLElement>(null)
   const [open, setOpen] = useState(false)
 
+  // reveal as soon as ANY part enters the viewport (never leave dead space)
   useEffect(() => {
     const el = ref.current
     if (!el) return
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => { if (entry.isIntersecting) { setOpen(true); observer.disconnect() } })
-    }, { threshold: 0.25 })
+    }, { threshold: 0, rootMargin: '0px 0px -10% 0px' })
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
 
   return <section className={`video-band${open ? ' is-open' : ''}`} ref={ref as never} aria-label="Your next move">
-    <video className="video-band-video" autoPlay muted loop playsInline preload="metadata" poster="/assets/reference/Clear-Lake-Texas-e1736781694121.jpg"><source src="/videos/clear-lake-homes.mp4" type="video/mp4" /></video>
+    <video className="video-band-video" autoPlay muted loop playsInline preload="metadata" poster="/assets/reference/Clear-Lake-Texas-e1736781694121.jpg"><source src="/videos/gif-lake-house.mp4" type="video/mp4" /></video>
     <Image className="video-band-img" src="/assets/reference/Clear-Lake-Texas-e1736781694121.jpg" alt="" fill sizes="100vw" priority={false} />
     <div className="video-band-overlay" aria-hidden="true" />
     <div className="video-band-inner"><p className="mono-label video-band-eyebrow">Clear Lake NASA</p><h2 className="display-section">Your next move starts here.</h2><p>Call us for immediate assistance or explore our service areas and real-time home search.</p><Link className="button button-red" href="/contact/">Contact a Realtor <span>↗</span></Link></div>

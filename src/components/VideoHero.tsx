@@ -22,26 +22,25 @@ const VIDEOS = [
 export function VideoHero({ started = true }: { started?: boolean }) {
   const [mode, setMode] = useState<'video' | 'slideshow'>('video')
   const [active, setActive] = useState(0)
-  const [paused, setPaused] = useState(false)
 
   // rotate: each clip plays for its own duration, then the next dissolves in
   useEffect(() => {
-    if (mode !== 'video' || paused || !started) return
+    if (mode !== 'video' || !started) return
     const current = VIDEOS[active]
     const timeout = setTimeout(() => setActive(a => (a + 1) % VIDEOS.length), current.dur)
     return () => clearTimeout(timeout)
-  }, [mode, paused, started, active])
+  }, [mode, started, active])
 
   // Ken Burns slideshow fallback
   useEffect(() => {
-    if (mode !== 'slideshow' || paused || !started) return
+    if (mode !== 'slideshow' || !started) return
     const interval = setInterval(() => setActive(a => (a + 1) % slides.length), 7000)
     return () => clearInterval(interval)
-  }, [mode, paused, started])
+  }, [mode, started])
 
   const onVideoError = () => setMode('slideshow')
 
-  return <section className="video-hero" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} aria-label="1st Texas Realtors">
+  return <section className="video-hero" aria-label="1st Texas Realtors">
     <div className="video-hero-media" aria-hidden="true">
       {mode === 'video' ? (
         VIDEOS.map((v, i) => (

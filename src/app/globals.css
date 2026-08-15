@@ -563,9 +563,10 @@ blockquote cite {
    VIDEO BAND — pre-footer clip-path reveal
    ============================================================ */
 .video-band {
-  position: relative; min-height: 440px; margin: 0 7vw 80px; border-radius: 24px; overflow: hidden;
+  position: relative; min-height: 420px; margin: 0 7vw 70px; border-radius: 24px; overflow: hidden;
   display: flex; align-items: flex-end; isolation: isolate;
-  clip-path: inset(0 0 100% 0);
+  background: linear-gradient(160deg, #0b2c52 0%, #003768 100%);
+  clip-path: inset(0 0 6% 0);
   transition: clip-path 1s var(--ease-expo);
 }
 .video-band.is-open { clip-path: inset(0 0 0% 0); }
@@ -842,7 +843,7 @@ blockquote cite {
   .cta-steps a { border-right: 0; border-bottom: 1px solid var(--line); }
   .cta-steps a:last-child { border-bottom: 0; }
   .press-row { gap: 10px 24px; padding: 26px 20px; }
-  .video-band { margin: 0 20px 80px; min-height: 480px; }
+  .video-band { margin: 0 20px 60px; min-height: 380px; }
   .agent-grid-large .agent-card:nth-child(2), .agent-grid-large .agent-card:nth-child(5), .agent-grid-large .agent-card:nth-child(8) { margin-top: 0; }
   .page-cta, .footer-bottom { align-items: flex-start; flex-direction: column; }
   .form-row { grid-template-columns: 1fr; }
