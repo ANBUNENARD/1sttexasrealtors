@@ -9,48 +9,61 @@ const slides = [
   { src: '/assets/reference/clearlaketxhomesforsale.jpg',         alt: 'Home for sale in Clear Lake TX' },
   { src: '/assets/reference/leaguecityhomesforsale.jpg',          alt: 'Home for sale in League City TX' },
   { src: '/assets/reference/seabrookhomesforsale.jpg',            alt: 'Home for sale in Seabrook TX' },
-  { src: '/assets/reference/friendswoodhomesforsale.jpg',         alt: 'Home for sale in Friendswood TX' },
-  { src: '/assets/reference/NASAhomesforsale.jpg',                alt: 'Home for sale near NASA Clear Lake' },
-  { src: '/assets/reference/seabrookhomesforsale02.jpg',          alt: 'Waterfront home in Seabrook TX' },
+]
+
+// 4 house "GIFs" (local videos) that crossfade into each other
+const VIDEOS = [
+  { src: '/videos/clear-lake-homes.mp4',   poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg' },
+  { src: '/videos/aerial-neighborhood.mp4', poster: '/assets/reference/leaguecityhomesforsale.jpg' },
+  { src: '/videos/suburban-homes-2.mp4',   poster: '/assets/reference/seabrookhomesforsale.jpg' },
+  { src: '/videos/suburban-homes-3.mp4',   poster: '/assets/reference/friendswoodhomesforsale.jpg' },
 ]
 
 export function VideoHero({ started = true }: { started?: boolean }) {
   const [mode, setMode] = useState<'video' | 'slideshow'>('video')
-  const [videoIdx, setVideoIdx] = useState(0)
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [videoOk, setVideoOk] = useState<boolean[]>([false, false, false, false])
 
-  // Ken Burns slideshow auto-advance (fallback + primary when no video)
+  // rotate the active video/GIF every 7s (crossfade handled by CSS opacity)
+  useEffect(() => {
+    if (mode !== 'video' || paused || !started) return
+    const interval = setInterval(() => setActive(a => (a + 1) % VIDEOS.length), 7000)
+    return () => clearInterval(interval)
+  }, [mode, paused, started])
+
+  // Ken Burns slideshow fallback
   useEffect(() => {
     if (mode !== 'slideshow' || paused || !started) return
     const interval = setInterval(() => setActive(a => (a + 1) % slides.length), 7000)
     return () => clearInterval(interval)
   }, [mode, paused, started])
 
-  // video manifest: local file wins, then stock, then slideshow fallback
-  const VIDEOS = [
-    { src: '/videos/clear-lake-homes.mp4', poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg' },
-    { src: 'https://videos.pexels.com/video-files/1093663/1093663-hd_1920_1080_30fps.mp4', poster: '/assets/reference/leaguecityhomesforsale.jpg' },
-    { src: 'https://videos.pexels.com/video-files/3130284/3130284-hd_1920_1080_30fps.mp4', poster: '/assets/reference/seabrookhomesforsale02.jpg' },
-  ]
-  const current = VIDEOS[videoIdx]
-
-  const onVideoError = () => {
-    if (videoIdx < VIDEOS.length - 1) setVideoIdx(i => i + 1)
-    else setMode('slideshow')
+  const onVideoError = (i: number) => {
+    setVideoOk(prev => {
+      const next = [...prev]
+      next[i] = false
+      return next
+    })
+    // if no video works at all → slideshow
+    setTimeout(() => {
+      setVideoOk(prev => { if (!prev.some(Boolean)) setMode('slideshow'); return prev })
+    }, 0)
   }
 
-  const mediaReady = started
+  const onVideoReady = (i: number) => setVideoOk(prev => { const next = [...prev]; next[i] = true; return next })
 
   return <section className="video-hero" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} aria-label="1st Texas Realtors">
     <div className="video-hero-media" aria-hidden="true">
-      {mode === 'video' && mediaReady ? (
-        <>
-          <Image className="hero-poster" src={current.poster} alt="" fill sizes="100vw" priority />
-          <video autoPlay muted loop playsInline preload="metadata" poster={current.poster} className="hero-video" onError={onVideoError}>
-            <source src={current.src} type="video/mp4" />
-          </video>
-        </>
+      {mode === 'video' ? (
+        VIDEOS.map((v, i) => (
+          <div key={v.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
+            <Image className="hero-poster" src={v.poster} alt="" fill sizes="100vw" priority={i === 0} />
+            <video autoPlay muted loop playsInline preload={i === 0 ? 'auto' : 'metadata'} poster={v.poster} className="hero-video" onError={() => onVideoError(i)} onCanPlay={() => onVideoReady(i)}>
+              <source src={v.src} type="video/mp4" />
+            </video>
+          </div>
+        ))
       ) : (
         slides.map((s, i) => (
           <div key={s.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
@@ -62,7 +75,6 @@ export function VideoHero({ started = true }: { started?: boolean }) {
     <div className="video-hero-overlay" aria-hidden="true" />
     <div className="video-hero-glow" aria-hidden="true" />
     <div className="video-hero-logo-ghost" aria-hidden="true"><span className="ghost-wordmark"><b>1st Texas</b><i>Realtors</i></span></div>
-    <div className="video-hero-logo-chip"><span className="chip-wordmark"><b>1st Texas</b><i>Realtors</i></span></div>
     <div className="video-hero-content">
       <p className="mono-label video-hero-eyebrow">Family owned since 2004 · Clear Lake NASA</p>
       <WordReveal as="h1" className="display-hero" play={started} emWord="personal.">Real estate guidance that feels personal.</WordReveal>

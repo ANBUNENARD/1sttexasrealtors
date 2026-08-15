@@ -10,6 +10,9 @@
   --navy: #003768;
   --navy-deep: #071a2f;
   --navy-ink: #0a2440;
+  --indigo: #1e2a6a;
+  --indigo-deep: #141c4d;
+  --indigo-glow: rgba(59, 91, 219, 0.35);
   --red: #ef4035;
   --red-warm: #ff5a3c;
   --red-glow: rgba(255, 90, 60, 0.55);
@@ -64,7 +67,8 @@ a { color: inherit; text-decoration: none; }
    ============================================================ */
 .intro-preloader {
   position: fixed; inset: 0; z-index: 100;
-  background: #071a2f; display: grid; place-items: center;
+  background: linear-gradient(160deg, #0d1440 0%, var(--indigo-deep) 45%, var(--indigo) 100%);
+  display: grid; place-items: center;
   clip-path: inset(0 0 0% 0);
   transition: clip-path .8s var(--ease-expo);
 }
@@ -201,17 +205,20 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
 .video-hero-slide.is-active { opacity: 1; }
 .video-hero-img { object-fit: cover; transform: scale(1.08); animation: kenburns 8s var(--ease-out) both; }
 @keyframes kenburns { from { transform: scale(1.08); } to { transform: scale(1); } }
-/* warm-dark navy gradient for legibility (their warm gradient, your colors) */
+/* warm-dark navy + indigo gradient for legibility (Chapitre layered technique, your colors) */
 .video-hero-overlay {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 30%, rgba(7,26,47,.18) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(7,26,47,.55) 0%, rgba(7,26,47,.25) 35%, rgba(7,26,47,.15) 55%, rgba(7,26,47,.75) 100%);
+    radial-gradient(ellipse 75% 60% at 50% 30%, rgba(30,42,106,.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 15%, rgba(255,90,60,.14) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(13,20,64,.55) 0%, rgba(20,28,77,.28) 40%, rgba(20,28,77,.18) 60%, rgba(7,26,47,.78) 100%);
 }
-/* warm red spotlight (atmosphere signature) */
+/* indigo-blue + warm red spotlight (atmosphere signature) */
 .video-hero-glow {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: radial-gradient(ellipse 50% 40% at 72% 25%, rgba(255,90,60,.22) 0%, transparent 65%);
+  background:
+    radial-gradient(ellipse 50% 40% at 72% 22%, rgba(255,90,60,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 55% at 22% 70%, var(--indigo-glow) 0%, transparent 70%);
 }
 /* ghost watermark layer — wordmark blended INTO the scenery, visible at 30% */
 .video-hero-logo-ghost {
@@ -229,18 +236,6 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
   0%, 100% { transform: translate(-50%, -50%) scale(1); }
   50% { transform: translate(-50%, -50%) scale(1.04); }
 }
-/* glass chip — centered at top, fully legible wordmark */
-.video-hero-logo-chip {
-  position: absolute; left: 50%; top: 88px; transform: translateX(-50%);
-  z-index: 3; display: flex; align-items: center; gap: 10px;
-  padding: 10px 20px; border-radius: 14px;
-  background: rgba(7,26,47,.38); border: 1px solid rgba(255,255,255,.18);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 8px 24px rgba(0,26,51,.3);
-}
-.chip-wordmark { display: flex; align-items: baseline; gap: 10px; }
-.chip-wordmark b { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; color: #fff; text-transform: uppercase; }
-.chip-wordmark i { font-style: normal; font-size: 10px; font-family: var(--font-mono), monospace; letter-spacing: .3em; color: var(--red-warm); text-transform: uppercase; }
 /* centered editorial lockup */
 .video-hero-content {
   position: absolute; inset: 0; z-index: 2;
@@ -498,8 +493,8 @@ blockquote cite {
 .video-band-overlay {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 30%, rgba(7,26,47,.15) 0%, transparent 60%),
-    linear-gradient(180deg, rgba(7,26,47,.45) 0%, rgba(7,26,47,.15) 50%, rgba(7,26,47,.78) 100%);
+    radial-gradient(ellipse 70% 60% at 50% 30%, rgba(30,42,106,.2) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(13,20,64,.5) 0%, rgba(20,28,77,.2) 50%, rgba(7,26,47,.8) 100%);
 }
 .video-band-inner { position: relative; z-index: 2; padding: 7vw; color: #fff; max-width: 640px; }
 .video-band-eyebrow { color: #ffb5a7; letter-spacing: .22em; margin-bottom: 16px; }
@@ -740,9 +735,6 @@ blockquote cite {
   .intro-line { width: 80vw; }
   .intro-wordmark .mono-label { font-size: 11px; }
   .video-hero { height: 100svh; min-height: 560px; }
-  .video-hero-logo-chip { top: 76px; }
-  .chip-wordmark b { font-size: 15px; }
-  .chip-wordmark i { font-size: 8px; letter-spacing: .2em; }
   .video-hero-logo-ghost { width: min(300px, 76vw); top: 30%; opacity: .30; }
   .video-hero-content { padding: 150px 20px 80px; align-items: flex-start; text-align: left; justify-content: center; }
   .video-hero-content .hero-search, .video-hero-content .hero-actions { align-self: center; }
