@@ -3,19 +3,21 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { phone } from '@/content/site'
+import { email, phone } from '@/content/site'
 
-const menuLinks = [
+const menuColumns = [
   { label: 'About us', href: '/about/' },
-  { label: 'About', href: '/about/', sub: true },
-  { label: 'Testimonials', href: '/realtor-reviews/', sub: true },
-  { label: 'Meet our agents', href: '/agents/', sub: true },
-  { label: 'Privacy policy', href: '/privacy-policy/', sub: true },
   { label: 'Buy', href: '/home-buyers/' },
   { label: 'Sell', href: '/seller-services/' },
   { label: 'Rent', href: '/homes-for-rent/' },
   { label: 'Commercial', href: '/commercial-property-realtors/' },
-  { label: 'Home search', href: '/home-search/' },
+]
+
+const menuSecondary = [
+  { label: 'Available Listings', href: '/home-search/' },
+  { label: 'Testimonials', href: '/realtor-reviews/' },
+  { label: 'Meet our agents', href: '/agents/' },
+  { label: 'New Homes', href: '/new-home-construction/' },
   { label: 'Contact', href: '/contact/' },
 ]
 
@@ -50,11 +52,33 @@ export function SiteHeader() {
     </header>
     <div id="full-menu" className={`full-menu${menuOpen ? ' is-open' : ''}`} role="dialog" aria-modal="true" aria-label="Site menu">
       <div className="full-menu-inner">
-        <div className="full-menu-head"><span className="mono-label">1st Texas Realtors</span><button className="menu-close" aria-label="Close menu" onClick={closeMenu}>✕</button></div>
-        <nav className="full-menu-links" onClick={closeMenu}>
-          {menuLinks.map((link, i) => <Link key={`${link.href}-${link.label}`} href={link.href} className={link.sub ? 'is-sub' : ''}><span className="menu-num">{String(i + 1).padStart(2, '0')}</span>{link.label}<b>↗</b></Link>)}
-        </nav>
-        <div className="full-menu-foot"><span className="mono-label">Clear Lake · Friendswood · League City · NASA</span><a className="full-menu-phone" href="tel:+12812413121">{phone}</a></div>
+        <div className="full-menu-head">
+          <button className="menu-close-btn" aria-label="Close menu" onClick={closeMenu}><svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><path d="M1 1h16M1 7h16M1 13h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg><span className="mono-label">Close</span></button>
+          <Link href="/" onClick={closeMenu} className="header-wordmark" aria-label="1st Texas Realtors"><span className="wordmark-main wordmark-menu">1st Texas</span><span className="wordmark-sub wordmark-menu">Realtors</span></Link>
+          <div className="full-menu-actions">
+            <a className="account-link" href="/home-search/">Available listings</a>
+            <a className="account-link register-link" href="/register/">Inquire</a>
+          </div>
+        </div>
+        <div className="full-menu-body">
+          <div className="full-menu-columns">
+            <nav className="full-menu-links" onClick={closeMenu}>
+              {menuColumns.map(link => <Link key={link.href} href={link.href}><span className="menu-num">{String(menuColumns.indexOf(link) + 1).padStart(2, '0')}</span>{link.label}<b>↗</b></Link>)}
+            </nav>
+            <nav className="full-menu-links is-secondary" onClick={closeMenu}>
+              {menuSecondary.map(link => <Link key={link.href} href={link.href}><span className="menu-num">{String(menuColumns.length + menuSecondary.indexOf(link) + 1).padStart(2, '0')}</span>{link.label}<b>↗</b></Link>)}
+            </nav>
+          </div>
+          <div className="menu-promo">
+            <img src="/assets/reference/1st-tx-realtors-couple-slider.png" alt="David and Simone Karstedt of 1st Texas Realtors" />
+            <div className="menu-promo-box"><b>Get a free Market Analysis*</b><a href="/contact/">Claim offer <span>→</span></a></div>
+          </div>
+        </div>
+        <div className="full-menu-foot">
+          <div className="menu-contact"><span className="mono-label">Contact us</span><a href={`mailto:${email}`}>{email}</a><a className="menu-foot-phone" href="tel:+12812413121">{phone}</a></div>
+          <div className="menu-contact"><span className="mono-label">Office</span><span>Monday through Saturday, 9am to 6pm</span><span>Clear Lake NASA, Texas</span></div>
+          <div className="menu-lang"><span className="mono-label">Clear Lake · League City · Friendswood · Seabrook</span></div>
+        </div>
       </div>
     </div>
   </>
