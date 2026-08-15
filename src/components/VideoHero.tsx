@@ -1,15 +1,68 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { WordReveal } from '@/components/WordReveal'
 
+const slides = [
+  { src: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg', alt: 'Clear Lake Texas waterfront homes' },
+  { src: '/assets/reference/clearlaketxhomesforsale.jpg',         alt: 'Home for sale in Clear Lake TX' },
+  { src: '/assets/reference/leaguecityhomesforsale.jpg',          alt: 'Home for sale in League City TX' },
+  { src: '/assets/reference/seabrookhomesforsale.jpg',            alt: 'Home for sale in Seabrook TX' },
+]
+
+// 4 house "GIFs" — real home footage, each trimmed to a short looping clip
+const VIDEOS = [
+  { src: '/videos/gif-lake-house.mp4',    poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg', dur: 3000 },   // house near a lake — 3s
+  { src: '/videos/gif-aerial-house.mp4',  poster: '/assets/reference/leaguecityhomesforsale.jpg',          dur: 3000 },   // aerial beautiful house — 3s
+  { src: '/videos/gif-garden-house.mp4',  poster: '/assets/reference/friendswoodhomesforsale.jpg',         dur: 5000 },   // garden pans to house — 5s
+  { src: '/videos/gif-river-houses.mp4',  poster: '/assets/reference/seabrookhomesforsale02.jpg',          dur: 4000 },   // aerial houses by river — 4s
+]
+
 export function VideoHero({ started = true }: { started?: boolean }) {
+  const [mode, setMode] = useState<'video' | 'slideshow'>('video')
+  const [active, setActive] = useState(0)
+
+  // rotate: each clip plays for its own duration, then the next dissolves in
+  useEffect(() => {
+    if (mode !== 'video' || !started) return
+    const current = VIDEOS[active]
+    const timeout = setTimeout(() => setActive(a => (a + 1) % VIDEOS.length), current.dur)
+    return () => clearTimeout(timeout)
+  }, [mode, started, active])
+
+  // Ken Burns slideshow fallback
+  useEffect(() => {
+    if (mode !== 'slideshow' || !started) return
+    const interval = setInterval(() => setActive(a => (a + 1) % slides.length), 7000)
+    return () => clearInterval(interval)
+  }, [mode, started])
+
+  const onVideoError = () => setMode('slideshow')
+
   return <section className="video-hero" aria-label="1st Texas Realtors">
     <div className="video-hero-media" aria-hidden="true">
-      {/* vintage Seabrook Quadrangle map — slow cinematic pan */}
-      <div className="hero-map-layer">
-        <Image src="/assets/reference/seabrook-quadrangle-map.png" alt="" fill sizes="100vw" priority className="hero-map-img" />
-      </div>
+      {mode === 'video' ? (
+        VIDEOS.map((v, i) => (
+          <div key={v.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
+            <Image className="hero-poster" src={v.poster} alt="" fill sizes="100vw" priority={i === 0} />
+            {/* every clip runs continuously (autoplay+loop) → the crossfade is a pure
+                opacity dissolve with zero start/load delay — no ticks, ever */}
+            <video
+              autoPlay muted loop playsInline preload="auto" poster={v.poster}
+              className="hero-video" onError={onVideoError} aria-hidden="true"
+            >
+              <source src={v.src} type="video/mp4" />
+            </video>
+          </div>
+        ))
+      ) : (
+        slides.map((s, i) => (
+          <div key={s.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
+            <Image src={s.src} alt={s.alt} fill sizes="100vw" quality={80} priority={i === 0} loading={i === 0 ? undefined : 'lazy'} className="video-hero-img" />
+          </div>
+        ))
+      )}
     </div>
     <div className="video-hero-overlay" aria-hidden="true" />
     <div className="video-hero-glow" aria-hidden="true" />
