@@ -201,4 +201,5 @@ export const allStaticPaths = [
   ...agents.map(agent => `agents/${agent.slug}`),
   ...idxRoutes,
   ...serviceAreas.flatMap(area => [`realtors-in-${areaSlug(area)}`, `${areaSlug(area)}-tx-homes-for-rent`]),
+  'clear-lake-tx-homes-for-sale',
 ]
