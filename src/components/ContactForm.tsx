@@ -20,12 +20,16 @@ export function ContactForm({ type = 'contact' }: { type?: string }) {
     }
   }
 
-  return <form className="contact-form" onSubmit={submit}>
-    <div className="form-row"><label>Name<input required name="name" autoComplete="name" /></label><label>Email<input required type="email" name="email" autoComplete="email" /></label></div>
+  return <form className="contact-form" onSubmit={submit} aria-label="Contact form">
+    <div className="form-row">
+      <label>Your name <span className="sr-only">(required)</span><input required name="name" autoComplete="name" placeholder="e.g. Jane Smith" /></label>
+      <label>Your email <span className="sr-only">(required)</span><input required type="email" name="email" autoComplete="email" placeholder="e.g. jane@email.com" /></label>
+    </div>
     <label>How can we help?<select name="interest" defaultValue="general"><option value="general">General question</option><option value="buying">Buying a home</option><option value="selling">Selling a home</option><option value="renting">Renting or property management</option><option value="commercial">Commercial property</option></select></label>
-    <label>Message<textarea required name="message" rows={5} /></label>
+    <label>Your message <span className="sr-only">(required)</span><textarea required name="message" rows={5} placeholder="Tell us what you are looking for — a realtor will reply soon." /></label>
+    <p className="field-hint">Need help right now? Call us at (281) 241-3121 — we are happy to talk.</p>
     <button className="button button-dark" disabled={status === 'sending'} type="submit">{status === 'sending' ? 'Sending…' : 'Send inquiry'} <span>↗</span></button>
-    {status === 'success' && <p className="form-status success">Thanks—your message is on its way to the 1st Texas Realtors team.</p>}
-    {status === 'error' && <p className="form-status error">We could not send your message. Please call (281) 241-3121.</p>}
+    {status === 'success' && <p className="form-status success" role="status">Thanks! Your message is on its way to the 1st Texas Realtors team. We usually reply the same day.</p>}
+    {status === 'error' && <p className="form-status error" role="alert">We could not send your message. Please try again, or call (281) 241-3121.</p>}
   </form>
 }

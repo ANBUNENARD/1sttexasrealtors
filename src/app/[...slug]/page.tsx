@@ -28,7 +28,7 @@ function AreaPage({ area, rent }: { area: string; rent: boolean }) {
 }
 
 function PageFrame({ eyebrow, title, intro, children }: { eyebrow: string; title: string; intro: string; children: React.ReactNode }) {
-  return <div className="site-shell"><SiteHeader /><main className="page-main"><section className="page-hero"><p className="eyebrow">{eyebrow}</p><h1>{title}</h1><p>{intro}</p></section><section className="page-content reveal">{children}</section></main><SiteFooter /><ScrollReveals /></div>
+  return <div className="site-shell"><SiteHeader /><main className="page-main" id="main-content"><section className="page-hero"><p className="eyebrow">{eyebrow}</p><h1>{title}</h1><p>{intro}</p></section><section className="page-content reveal">{children}</section></main><SiteFooter /><ScrollReveals /></div>
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {
