@@ -7,6 +7,7 @@ export function Motion({children,className=''}:{children:React.ReactNode;classNa
 export function ScrollReveals(){
   useEffect(()=>{
     const items=document.querySelectorAll('.reveal')
+    if(!('IntersectionObserver' in window)){items.forEach(el=>el.classList.add('visible'));return}
     const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
       if(entry.isIntersecting){
         const el=entry.target as HTMLElement
@@ -16,7 +17,7 @@ export function ScrollReveals(){
         kids.forEach((kid,i)=>{kid.style.transitionDelay=`${i*60}ms`})
         observer.unobserve(el)
       }
-    }),{threshold:.12})
+    }),{threshold:0,rootMargin:'0px 0px -5% 0px'})
     items.forEach(item=>observer.observe(item))
     return()=>observer.disconnect()
   },[])
