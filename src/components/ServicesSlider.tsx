@@ -3,12 +3,14 @@ import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 // NWS-style services slider: 3 cards per view (1 on mobile), arrows + dots,
-// auto-advances every 5 seconds, pauses on hover, loops infinitely.
+// auto-advances every 3 seconds with a loading-progress animation on the
+// active dot, pauses on hover, loops infinitely.
 export type ServiceItem = { title: string; body: string; href: string; image: string; badge: string }
 
 export function ServicesSlider({ services }: { services: ServiceItem[] }) {
   const [page, setPage] = useState(0)
   const [perView, setPerView] = useState(3)
+  const [progressKey, setProgressKey] = useState(0)
   const timer = useRef<ReturnType<typeof setInterval> | null>(null)
   const hover = useRef(false)
 
@@ -22,14 +24,14 @@ export function ServicesSlider({ services }: { services: ServiceItem[] }) {
   const pages = Math.max(1, Math.ceil(services.length / perView))
   const safePage = page >= pages ? pages - 1 : page
 
-  // auto-advance every 5 seconds
+  // auto-advance every 3 seconds (restarting the loading progress each change)
   useEffect(() => {
-    const tick = () => { if (!hover.current) setPage(p => (p + 1) % pages) }
-    timer.current = setInterval(tick, 5000)
+    const tick = () => { if (!hover.current) { setPage(p => (p + 1) % pages); setProgressKey(k => k + 1) } }
+    timer.current = setInterval(tick, 3000)
     return () => { if (timer.current) clearInterval(timer.current) }
   }, [pages, perView])
 
-  const go = useCallback((p: number) => setPage(((p % pages) + pages) % pages), [pages])
+  const go = useCallback((p: number) => { setPage(((p % pages) + pages) % pages); setProgressKey(k => k + 1) }, [pages])
 
   return <div className="svc-slider" role="region" aria-label="Our services carousel">
     <div className="svc-slider-viewport" onMouseEnter={() => { hover.current = true }} onMouseLeave={() => { hover.current = false }}>
@@ -44,7 +46,9 @@ export function ServicesSlider({ services }: { services: ServiceItem[] }) {
     <div className="svc-slider-controls">
       <button className="svc-slider-arrow" onClick={() => go(safePage - 1)} aria-label="Previous services">←</button>
       <div className="svc-slider-dots" role="tablist" aria-label="Service pages">
-        {Array.from({ length: pages }, (_, i) => <button key={i} className={`svc-slider-dot${i === safePage ? ' is-active' : ''}`} onClick={() => go(i)} aria-label={`Page ${i + 1}`} aria-selected={i === safePage} />)}
+        {Array.from({ length: pages }, (_, i) => <button key={i} className={`svc-slider-dot${i === safePage ? ' is-active' : ''}`} onClick={() => go(i)} aria-label={`Page ${i + 1}`} aria-selected={i === safePage}>
+          {i === safePage && <span className="svc-progress" key={progressKey} aria-hidden="true" />}
+        </button>)}
       </div>
       <button className="svc-slider-arrow" onClick={() => go(safePage + 1)} aria-label="Next services">→</button>
     </div>
