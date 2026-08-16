@@ -134,20 +134,20 @@ html.intro-locked, html.intro-locked body { overflow: hidden; }
 .site-header {
   position: fixed; top: 44px; left: 20px; right: 20px; z-index: 20;
   padding: 10px 22px;
-  background: transparent;
-  color: #fff;
-  border: 0;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--navy);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(7, 26, 47, 0.08);
   border-radius: 18px;
+  box-shadow: 0 18px 44px rgba(0, 26, 51, 0.16);
   transition: background .35s ease, padding .35s ease, box-shadow .35s ease, top .35s ease, color .35s ease;
   transform: translateY(-100%);
   animation: headerDown 1.2s var(--ease-expo) .1s both;
 }
 @keyframes headerDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
 .site-header.scrolled {
-  background: rgba(255, 255, 255, 0.96);
-  color: var(--navy);
-  border: 1px solid rgba(7, 26, 47, 0.08);
-  box-shadow: 0 18px 44px rgba(0, 26, 51, 0.22);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 18px 44px rgba(0, 26, 51, 0.24);
   padding: 8px 20px;
   top: 12px;
 }
@@ -165,22 +165,21 @@ html.intro-locked, html.intro-locked body { overflow: hidden; }
 .header-wordmark { display: grid; justify-items: center; line-height: 1; text-align: center; justify-self: start; }
 .header-logo { justify-self: start; display: inline-flex; line-height: 0; }
 .header-logo img {
-  width: auto; height: 46px; display: block;
+  width: auto; height: 42px; display: block;
   transition: height .3s ease, filter .3s ease;
   filter: drop-shadow(0 2px 8px rgba(0, 26, 51, 0.4));
 }
 .header-logo:hover img { filter: drop-shadow(0 4px 14px rgba(30, 95, 214, 0.5)); }
 .wordmark-main { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #fff; text-transform: uppercase; }
 .wordmark-sub { font-size: 12px; font-weight: 500; font-family: var(--font-mono), monospace; letter-spacing: .34em; color: var(--red-warm); text-transform: uppercase; margin-top: 4px; }
-/* desktop nav center — transparent over hero (white text) → navy on white bar */
+/* desktop nav center — NWS white-bar style with navy text */
 .nav-desktop { display: flex; align-items: center; justify-content: center; gap: 4px; }
 .nav-link {
   display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px;
   color: inherit; font-size: 14px; font-weight: 600; letter-spacing: .01em;
   border-radius: 999px; background: none; border: 0; cursor: pointer; transition: .25s ease;
 }
-.nav-link:hover { color: var(--red-warm); background: rgba(255, 255, 255, 0.12); }
-.site-header.scrolled .nav-link:hover { background: rgba(30, 95, 214, 0.08); }
+.nav-link:hover { color: var(--red-warm); background: rgba(30, 95, 214, 0.08); }
 .nav-link.active { color: #fff; background: var(--navy); box-shadow: 0 6px 16px rgba(0, 26, 51, 0.25); }
 .nav-caret { font-size: 10px; color: var(--red-warm); }
 .nav-drop { position: relative; }

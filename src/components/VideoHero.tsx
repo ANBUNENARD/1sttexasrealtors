@@ -75,8 +75,6 @@ export function VideoHero({ started = true }: { started?: boolean }) {
     <div className="video-hero-overlay" aria-hidden="true" />
     <div className="video-hero-glow" aria-hidden="true" />
     <div className="video-hero-content">
-      {/* NWS-style badge pill with dot */}
-      <div className="hero-badge"><span className="hero-badge-dot" aria-hidden="true" /><span>Family owned since 2004 · Clear Lake NASA</span></div>
       {/* NWS-style staggered headline lines */}
       <h1 className="display-hero" style={{ opacity: 0, transform: 'translateY(32px)', animation: 'heroUp 1s var(--ease-expo) forwards .15s' }}>
         <span className="hero-line">Real estate guidance</span>
