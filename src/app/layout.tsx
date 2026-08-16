@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Manrope, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
 
@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   description: '1st Texas Realtors in Clear Lake — local realtors, real-time listings, buying, selling, renting, and property management.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://1sttexasrealtors.com'),
   openGraph: { title: '1st Texas Realtors', description: 'Local real estate guidance in Clear Lake NASA and surrounding communities.', type: 'website' },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
