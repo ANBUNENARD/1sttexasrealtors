@@ -96,7 +96,7 @@ export function SiteHeader() {
               <div className="nav-panel-feature"><span className="mono-label">Areas we serve</span><b>Clear Lake NASA &amp; surrounding communities</b><Link className="text-link" href="/clear-lake-tx-homes-for-sale/">Clear Lake homes for sale <span>↗</span></Link></div>
             </div>}
           </div>
-          <Link href="/#faq" className="nav-link">FAQs</Link>
+          <Link href="/faqs/" className="nav-link">FAQs</Link>
         </nav>
 
         {/* CTA RIGHT (NWS "Book Now" position) */}

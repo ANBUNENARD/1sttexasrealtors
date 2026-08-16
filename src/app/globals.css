@@ -589,21 +589,35 @@ blockquote cite {
 .page-content blockquote::before { color: rgba(30, 95, 214, 0.25); }
 .page-content blockquote:hover { border-color: rgba(30, 95, 214, 0.45); box-shadow: var(--shadow-lift); }
 /* exact client flow: floating photos beside quotes, flowing list */
-.testimonial-flow { display: flex; flex-direction: column; gap: 22px; }
-.testimonial-block { position: relative; }
-.testimonial-block blockquote { overflow: hidden; }
-.testimonial-block .testimonial-photo {
-  float: right; width: min(200px, 36vw); height: auto; margin: 10px 0 14px 26px;
-  border-radius: 14px; border: 1px solid var(--line); box-shadow: var(--shadow-card);
+/* uniform testimonial cards — photo as framed evidence, consistent reading */
+.testimonial-flow { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.testimonial-block {
+  background: #fff; border: 1px solid var(--line); border-radius: 18px;
+  box-shadow: var(--shadow-card); padding: 24px; display: flex; flex-direction: column; gap: 16px;
   transition: transform .3s var(--ease-spring), box-shadow .3s ease;
 }
-.testimonial-block .testimonial-photo:hover { transform: translateY(-4px) scale(1.02); box-shadow: var(--shadow-lift); }
-.testimonial-block blockquote::after { content: ""; display: block; clear: both; }
+.testimonial-block:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.testimonial-block blockquote { margin: 0; display: grid; gap: 12px; }
+.testimonial-block .stars { color: var(--red); font-size: 14px; letter-spacing: .14em; }
+.testimonial-block blockquote p { margin: 0; font-size: 15px; line-height: 1.7; color: var(--ink); }
+.testimonial-block blockquote cite {
+  display: block; font-style: normal; font-weight: 700; font-size: 13px;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--navy); margin-top: 4px;
+}
+.testimonial-block .testimonial-photo {
+  width: 100%; height: 170px; object-fit: cover; border-radius: 12px;
+  border: 1px solid var(--line); box-shadow: var(--shadow-card);
+  transition: transform .3s var(--ease-spring), box-shadow .3s ease;
+}
+.testimonial-block .testimonial-photo:hover { transform: scale(1.02); box-shadow: var(--shadow-lift); }
+.testimonial-block:has(.testimonial-photo) { grid-template-columns: 1.6fr 1fr; align-items: center; }
+.testimonial-block:has(.testimonial-photo) blockquote { grid-column: 1; grid-row: 1; }
+.testimonial-block:has(.testimonial-photo) .testimonial-photo { grid-column: 2; grid-row: 1; }
 /* drop cap — the client's signature light-blue first letter */
 .page-content blockquote p::first-letter {
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 62px; line-height: .85; float: left;
-  padding: 6px 10px 0 0; color: #4a90c2; font-weight: 700;
+  font-size: 46px; line-height: .9; float: left;
+  padding: 4px 8px 0 0; color: #4a90c2; font-weight: 700;
 }
 .page-content blockquote .stars { display: block; color: var(--red); font-size: 14px; letter-spacing: .14em; margin-bottom: 12px; }
 /* reviews summary band */
@@ -624,7 +638,7 @@ blockquote cite {
 .client-gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 44px; }
 .client-gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); transition: .3s ease; }
 .client-gallery img:hover { transform: scale(1.03); box-shadow: var(--shadow-lift); }
-/* trust badges row (Equal Housing / MLS / Realtor / Texas Monthly) */
+/* trust badges row (Equal Housing / MLS / Realtor / Texas Monthly) — footer only */
 .trust-badges { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px; padding: 30px 0 10px; }
 .trust-badges img { height: 40px; width: auto; opacity: .85; transition: .25s ease; }
 .trust-badges img:hover { opacity: 1; }
@@ -750,6 +764,7 @@ blockquote cite {
 /* FAQ */
 .faq-section { background: #edf3f6; }
 .faq-list { display: grid; gap: 14px; max-width: 900px; }
+.faq-list-page { max-width: 960px; margin: 0 auto; gap: 16px; }
 .faq-list details {
   border: 1px solid var(--line); border-radius: var(--r-md); background: white;
   box-shadow: 0 8px 22px rgba(9, 52, 83, 0.05); transition: .25s ease;
@@ -1330,6 +1345,10 @@ blockquote cite {
   .nws-card-grid, .nws-area-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .nws-reviews-grid { grid-template-columns: 1fr; }
   .nws-rev-scroll { height: 420px; }
+  .testimonial-flow { grid-template-columns: 1fr; }
+  .testimonial-block:has(.testimonial-photo) { grid-template-columns: 1fr; }
+  .testimonial-block:has(.testimonial-photo) blockquote { grid-column: 1; grid-row: 1; }
+  .testimonial-block:has(.testimonial-photo) .testimonial-photo { grid-column: 1; grid-row: 2; height: 220px; }
   .nws-reviews { padding: 70px 20px; }
   .client-gallery { grid-template-columns: repeat(2, 1fr); }
   .cta-steps { flex-direction: column; margin: 40px 20px 0; }

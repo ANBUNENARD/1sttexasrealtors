@@ -12,7 +12,7 @@ import { FeaturedStrip } from '@/components/FeaturedStrip'
 import { ChatFab } from '@/components/ChatFab'
 import { AreaChoiceModal } from '@/components/AreaChoiceModal'
 import { WordReveal } from '@/components/WordReveal'
-import { areaSlug, serviceAreas, testimonials } from '@/content/site'
+import { areaSlug, serviceAreas, testimonials, faqs } from '@/content/site'
 import { testimonialsExact } from '@/content/testimonials-exact'
 import { areaCards } from '@/content/area-cards'
 
@@ -21,14 +21,6 @@ const services = [
   ['Selling a Home', 'Market analysis, staging, marketing, negotiation, and focused closing support.', '/seller-services/', '/assets/reference/seabrookhomesforsale.jpg'],
   ['Homes for Rent', 'Neighborhood guidance, rental listings, leasing, and property management.', '/homes-for-rent/', '/assets/reference/clearlaketxhomesforsale.jpg'],
   ['New Construction', 'Builder guidance and experienced representation from plans to closing.', '/new-home-construction/', '/assets/reference/friendswoodhomesforsale.jpg'],
-]
-
-const faqs = [
-  ['How do I get started with buying a home?', 'Get pre-approved by a mortgage banker for the amount you want, then use our real-time MLS Home Search to explore homes for sale and rent. We guide you through offers, contingencies, addendums, and closing.'],
-  ['What is a free Market Analysis?', 'We review your home, neighborhood, and recent sales to recommend a competitive price and a marketing plan — at no cost and with no obligation.'],
-  ['Do you help with rentals and property management?', 'Yes. We handle real-time rental listings, tenant interviews, background checks, leases, deposits, maintenance, and repairs for owners.'],
-  ['Which areas do you serve?', 'We serve Clear Lake NASA and surrounding communities including League City, Friendswood, Seabrook, Kemah, Nassau Bay, Galveston, Pearland, and more.'],
-  ['Are you a full-service brokerage?', 'Family owned since 2004, we represent buyers, sellers, renters, and commercial clients with over 100 years of combined experience.'],
 ]
 
 export default function Home() {
