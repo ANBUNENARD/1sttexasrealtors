@@ -945,19 +945,21 @@ blockquote cite {
 }
 .nws-reviews-title { margin: 0; color: #fff; font-size: clamp(30px, 4.5vw, 52px); letter-spacing: -0.03em; line-height: 1.08; }
 .nws-reviews-sub { margin: 0; color: rgba(255,255,255,.85); font-size: 17px; }
-.nws-reviews-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
+.nws-reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+.nws-rev-col { display: grid; gap: 20px; align-content: start; }
+.nws-rev-col-mid .nws-review-card { min-height: 100%; }
 .nws-review-card {
   margin: 0; padding: 24px; border-radius: 18px;
   background: #fff; color: var(--ink);
   display: flex; flex-direction: column; gap: 12px;
   box-shadow: 0 18px 44px rgba(0, 26, 51, 0.22);
   transition: transform .4s var(--ease-spring);
-  position: relative;
+  position: relative; overflow: hidden;
 }
 .nws-review-card:hover { transform: translateY(-6px); }
-.nws-review-card::after { /* fade-out at bottom like NWS */
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 70px;
-  background: linear-gradient(180deg, transparent, #fff);
+.nws-review-card::after { /* fade-out at bottom INTO the blue band like NWS */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 96px;
+  background: linear-gradient(180deg, rgba(255,255,255,0), rgba(30, 95, 214, 0.55) 78%, rgba(30, 95, 214, 0.9));
   border-radius: 0 0 18px 18px; pointer-events: none;
 }
 .nws-avatar {
@@ -969,12 +971,12 @@ blockquote cite {
 .nws-review-card figcaption b { color: var(--navy); font-size: 16px; }
 .nws-review-card figcaption small { color: var(--muted); font-size: 12px; }
 .nws-review-card .stars { color: #f5a623; font-size: 15px; letter-spacing: .1em; }
-.nws-review-card blockquote { margin: 0; color: var(--ink); font-size: 14px; line-height: 1.6; }
-.nws-review-photo { padding: 0; overflow: hidden; }
-.nws-review-photo img { width: 100%; height: 150px; object-fit: cover; }
-.nws-review-photo figcaption { padding: 0 24px; margin-top: 14px; }
-.nws-review-photo .stars, .nws-review-photo blockquote { margin-left: 24px; margin-right: 24px; }
-.nws-review-photo blockquote { padding-bottom: 22px; }
+.nws-review-card blockquote { margin: 0; color: var(--ink); font-size: 14.5px; line-height: 1.65; }
+.nws-review-photo { padding: 0; overflow: hidden; gap: 0; }
+.nws-review-photo img { width: 100%; height: 170px; object-fit: cover; }
+.nws-review-photo figcaption { padding: 14px 24px 2px; }
+.nws-review-photo .stars { margin-left: 24px; margin-right: 24px; padding-bottom: 20px; }
+.nws-review-photo::after { display: none; }
 .nws-reviews-cta {
   justify-self: center; display: inline-flex; align-items: center; gap: 10px;
   padding: 13px 26px; border-radius: 999px;
@@ -1308,7 +1310,7 @@ blockquote cite {
   .idx-tabs { overflow-x: auto; }
   .search-map { height: 400px; }
   .nws-card-grid, .nws-area-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-  .nws-reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  .nws-reviews-grid { grid-template-columns: 1fr; }
   .nws-reviews { padding: 70px 20px; }
   .client-gallery { grid-template-columns: repeat(2, 1fr); }
   .cta-steps { flex-direction: column; margin: 40px 20px 0; }
