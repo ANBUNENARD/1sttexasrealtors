@@ -42,6 +42,29 @@ export default function Home() {
     <VideoBand />
     <FeaturedStrip />
     <section className="section faq-section reveal" id="faq"><div className="section-heading"><p className="eyebrow">Common questions</p><WordReveal as="h2" className="display-section">Answers before you ask.</WordReveal><p>Everything you need to know about buying, selling, renting, and working with our team.</p></div><div className="faq-list">{faqs.map(([question, answer], index) => <details key={question}><summary><span className="faq-index">{String(index + 1).padStart(2, '0')}</span>{question}<i className="faq-chip">+</i></summary><p>{answer}</p></details>)}</div></section>
-    <section className="section areas-section reveal" id="areas"><div className="section-heading"><p className="eyebrow">Areas we serve</p><WordReveal as="h2" className="display-section">Local Realtors across Clear Lake NASA.</WordReveal><p>We complete every move promptly, effectively, and with the utmost attention to detail.</p></div><div className="nws-area-grid">{areaCards.map((card, index) => <Link key={card.slug} href={`/realtors-in-${areaSlug(card.name)}/`} className="nws-area-card reveal-item"><div className="nws-area-media"><img src={card.image} alt={`Homes in ${card.name}`} loading="lazy" /><span className="nws-area-tag">Service area</span><span className="nws-area-num">{String(index + 1).padStart(2, '0')}</span></div><div className="nws-area-body"><h3>{card.name}, TX</h3><p>{card.desc}</p><span className="nws-area-link">Explore area <span>→</span></span></div></Link>)}</div></section>
+    <section className="section areas-section reveal" id="areas"><div className="section-heading"><p className="eyebrow">Areas we serve</p><WordReveal as="h2" className="display-section">Local Realtors across Clear Lake NASA.</WordReveal><p>We complete every move promptly, effectively, and with the utmost attention to detail.</p></div>
+      {/* NWS-style dual sliding rows — row 1 slides left, row 2 slides right */}
+      <div className="areas-slider" aria-label="Service areas carousel">
+        <div className="areas-slide-row">
+          <div className="areas-slide-track areas-slide-left">{areaCards.slice(0, 11).map(card => <AreaCard key={card.slug} card={card} />)}{areaCards.slice(0, 11).map(card => <AreaCard key={`dup-${card.slug}`} card={card} ariaHidden />)}</div>
+        </div>
+        <div className="areas-slide-row">
+          <div className="areas-slide-track areas-slide-right">{areaCards.slice(11).map(card => <AreaCard key={card.slug} card={card} />)}{areaCards.slice(11).map(card => <AreaCard key={`dup-${card.slug}`} card={card} ariaHidden />)}</div>
+        </div>
+      </div>
+    </section>
   </main><SiteFooter /><ScrollReveals /><ScrollSpy /><LeadModal /><ChatFab /></div>
+}
+
+// Area card used in the sliding rows — links to the dedicated landing page
+function AreaCard({ card, ariaHidden = false }: { card: { name: string; slug: string; image: string; desc: string }; ariaHidden?: boolean }) {
+  return <Link
+    href={`/realtors-in-${areaSlug(card.name)}/`}
+    className="nws-area-card"
+    aria-hidden={ariaHidden || undefined}
+    tabIndex={ariaHidden ? -1 : undefined}
+  >
+    <div className="nws-area-media"><img src={card.image} alt={ariaHidden ? '' : `Homes in ${card.name}`} loading="lazy" /><span className="nws-area-tag">Service area</span></div>
+    <div className="nws-area-body"><h3>{card.name}, TX</h3><p>{card.desc}</p><span className="nws-area-link">Explore area <span>→</span></span></div>
+  </Link>
 }
