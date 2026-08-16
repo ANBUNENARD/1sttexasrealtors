@@ -39,14 +39,17 @@ function DropCard({ review, active, onActive }: { review: (typeof testimonialsEx
     return () => obs.disconnect()
   }, [onActive])
 
-  const letter = review.quote.replace(/[“”"'`\s]/g, '').charAt(0).toUpperCase() || '“'
+  // true drop cap: the big letter IS the first character of the quote,
+  // and the rest of the text flows right after it ("V" + "ery pleased! Thank you.")
+  const cleaned = review.quote.replace(/^[“”"'`\s]+/, '').replace(/[”"'`\s]+$/, '')
+  const letter = cleaned.charAt(0).toUpperCase() || '“'
+  const rest = cleaned.slice(1)
 
   return <div ref={ref} className={`testimonial-block drop-card${on ? ' is-on' : ''}${active ? ' is-active' : ''}`}>
     {review.images.map((img, j) => <img key={j} className="testimonial-photo" src={`/assets/client/${img}`} alt="1st Texas Realtors in Clear Lake" loading="lazy" />)}
     <blockquote>
-      <span className="drop-letter" aria-hidden="true">{letter}</span>
+      <p className="drop-cap-text"><span className="drop-letter" aria-hidden="true">{letter}</span>{rest}<span className="quote-close">”</span></p>
       <span className="drop-stars stars" aria-label="Rated 5 out of 5 stars">★★★★★</span>
-      <p>“{review.quote}”</p>
       {review.author && <cite>{review.author}</cite>}
     </blockquote>
   </div>
