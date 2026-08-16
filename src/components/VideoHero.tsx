@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 // Hero: "SERVING {area} AND NEARBY" — each area has its OWN high-quality
-// looping motion clip (an MP4 "video GIF": real aerial footage for the lake/
-// house areas, cinematic Ken Burns motion on high-res photos for the others).
-// The area text and its clip change TOGETHER every 4 seconds, continuously,
-// crossfading between areas.
+// looping motion clip (an MP4 "video GIF": stabilized real aerial footage for
+// the lake/house areas, jitter-free cinematic Ken Burns on high-res photos for
+// the others). The area text and its clip change TOGETHER every 3 seconds,
+// continuously, with an instant cut (no crossfade).
 const AREAS = [
   { name: 'Clear Lake City', src: '/videos/hero-clear-lake-city.mp4', poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg', alt: 'Clear Lake City Texas aerial' },
   { name: 'League City',     src: '/videos/hero-league-city.mp4',     poster: '/assets/reference/leaguecityhomesforsale.jpg',          alt: 'League City Texas aerial' },
@@ -19,7 +19,7 @@ const AREAS = [
   { name: 'Pearland',        src: '/videos/hero-pearland.mp4',        poster: '/assets/reference/NASAhomesforsale.jpg',               alt: 'Pearland Texas and the NASA area' },
 ]
 
-const SLIDE_MS = 4000 // 4 seconds per area — text + motion clip change together
+const SLIDE_MS = 3000 // 3 seconds per area — text + motion clip change together, instant cut
 
 export function VideoHero({ started = true }: { started?: boolean }) {
   const [active, setActive] = useState(0)
