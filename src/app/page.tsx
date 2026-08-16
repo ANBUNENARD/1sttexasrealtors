@@ -10,6 +10,7 @@ import { VideoHero } from '@/components/VideoHero'
 import { VideoBand } from '@/components/VideoBand'
 import { FeaturedStrip } from '@/components/FeaturedStrip'
 import { ChatFab } from '@/components/ChatFab'
+import { AreaChoiceModal } from '@/components/AreaChoiceModal'
 import { WordReveal } from '@/components/WordReveal'
 import { areaSlug, serviceAreas, testimonials } from '@/content/site'
 import { areaCards } from '@/content/area-cards'
@@ -31,6 +32,7 @@ const faqs = [
 
 export default function Home() {
   const [started] = useState(true)
+  const [choiceArea, setChoiceArea] = useState<{ name: string; image: string } | null>(null)
 
   return <div className="site-shell"><SiteHeader /><main id="main-content">
     <VideoHero started={started} />
@@ -46,25 +48,28 @@ export default function Home() {
       {/* NWS-style dual sliding rows — row 1 slides left, row 2 slides right */}
       <div className="areas-slider" aria-label="Service areas carousel">
         <div className="areas-slide-row">
-          <div className="areas-slide-track areas-slide-left">{areaCards.slice(0, 11).map(card => <AreaCard key={card.slug} card={card} />)}{areaCards.slice(0, 11).map(card => <AreaCard key={`dup-${card.slug}`} card={card} ariaHidden />)}</div>
+          <div className="areas-slide-track areas-slide-left">{areaCards.slice(0, 11).map(card => <AreaCard key={card.slug} card={card} onChoose={setChoiceArea} />)}{areaCards.slice(0, 11).map(card => <AreaCard key={`dup-${card.slug}`} card={card} onChoose={setChoiceArea} ariaHidden />)}</div>
         </div>
         <div className="areas-slide-row">
-          <div className="areas-slide-track areas-slide-right">{areaCards.slice(11).map(card => <AreaCard key={card.slug} card={card} />)}{areaCards.slice(11).map(card => <AreaCard key={`dup-${card.slug}`} card={card} ariaHidden />)}</div>
+          <div className="areas-slide-track areas-slide-right">{areaCards.slice(11).map(card => <AreaCard key={card.slug} card={card} onChoose={setChoiceArea} />)}{areaCards.slice(11).map(card => <AreaCard key={`dup-${card.slug}`} card={card} onChoose={setChoiceArea} ariaHidden />)}</div>
         </div>
       </div>
     </section>
-  </main><SiteFooter /><ScrollReveals /><ScrollSpy /><LeadModal /><ChatFab /></div>
+  </main><SiteFooter /><ScrollReveals /><ScrollSpy /><LeadModal /><ChatFab />
+  {choiceArea && <AreaChoiceModal area={choiceArea.name} image={choiceArea.image} onClose={() => setChoiceArea(null)} />}
+</div>
 }
 
-// Area card used in the sliding rows — links to the dedicated landing page
-function AreaCard({ card, ariaHidden = false }: { card: { name: string; slug: string; image: string; desc: string }; ariaHidden?: boolean }) {
-  return <Link
-    href={`/realtors-in-${areaSlug(card.name)}/`}
+// Area card used in the sliding rows — click opens the Buy/Rent/Sell choice
+function AreaCard({ card, ariaHidden = false, onChoose }: { card: { name: string; slug: string; image: string; desc: string }; ariaHidden?: boolean; onChoose: (a: { name: string; image: string }) => void }) {
+  return <button
+    type="button"
     className="nws-area-card"
     aria-hidden={ariaHidden || undefined}
     tabIndex={ariaHidden ? -1 : undefined}
+    onClick={() => onChoose({ name: card.name, image: card.image })}
   >
     <div className="nws-area-media"><img src={card.image} alt={ariaHidden ? '' : `Homes in ${card.name}`} loading="lazy" /><span className="nws-area-tag">Service area</span></div>
     <div className="nws-area-body"><h3>{card.name}, TX</h3><p>{card.desc}</p><span className="nws-area-link">Explore area <span>→</span></span></div>
-  </Link>
+  </button>
 }
