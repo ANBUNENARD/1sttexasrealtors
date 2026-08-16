@@ -978,7 +978,18 @@ blockquote cite {
   transition: transform .3s var(--ease-spring), box-shadow .3s ease;
 }
 .nws-reviews-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,26,51,.3); }
-/* NWS areas — image cards */
+/* NWS areas — sliding rows (left + right), cards link to landing pages */
+.areas-slider { display: grid; gap: 18px; overflow: hidden; position: relative; }
+.areas-slide-row { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+.areas-slide-track { display: flex; gap: 18px; width: max-content; padding: 6px 0 14px; }
+.areas-slide-left { animation: areasSlideLeft 60s linear infinite; }
+.areas-slide-right { animation: areasSlideRight 60s linear infinite; }
+.areas-slide-row:hover .areas-slide-track { animation-play-state: paused; }
+@keyframes areasSlideLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes areasSlideRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.areas-slide-track .nws-area-card { width: 320px; flex-shrink: 0; }
+.areas-section { overflow: hidden; }
+/* NWS areas — image cards (static grid fallback) */
 .nws-area-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .nws-area-card {
   display: flex; flex-direction: column; overflow: hidden; border-radius: 18px;
@@ -1258,6 +1269,7 @@ blockquote cite {
   .listing-grid { grid-template-columns: 1fr; }
   .search-filters { grid-template-columns: 1fr; }
   .nws-card-grid, .nws-area-grid, .nws-reviews-grid { grid-template-columns: 1fr; }
+  .areas-slide-track .nws-area-card { width: 260px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1266,4 +1278,6 @@ blockquote cite {
     transition: none !important;
     scroll-behavior: auto !important;
   }
+  .areas-slide-right { transform: none; }
+  .areas-slide-row { overflow-x: auto; }
 }
