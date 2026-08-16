@@ -7,6 +7,7 @@ import { ScrollReveals } from '@/components/Motion'
 import { LeadModal } from '@/components/LeadModal'
 import { VideoHero } from '@/components/VideoHero'
 import { FeaturedStrip } from '@/components/FeaturedStrip'
+import { ReviewColumns } from '@/components/ReviewColumns'
 import { ChatFab } from '@/components/ChatFab'
 import { AreaChoiceModal } from '@/components/AreaChoiceModal'
 import { ServicesSlider } from '@/components/ServicesSlider'
@@ -35,16 +36,8 @@ export default function Home() {
     <section className="section section-dark nws-services reveal" id="services"><div className="section-heading"><p className="eyebrow">How we help</p><WordReveal as="h2" className="display-section">A better way forward.</WordReveal><p>From buying and selling to renting, staging, relocation, and commercial property — a full-service brokerage for every move.</p></div><ServicesSlider services={services.map(([title, body, href, image, badge]) => ({ title, body, href, image, badge }))} /></section>
     <section className="section split-section reveal" id="team"><div><p className="eyebrow">Local knowledge</p><WordReveal as="h2" className="display-section">People who know the place.</WordReveal><p>From Clear Lake City and Friendswood to League City, Kemah, Seabrook, and Galveston, we know the neighborhoods, schools, grocery stores, commutes, and local people.</p><Link className="button button-navy" href="/agents/">Meet our Realtors <span className="btn-icon">↗</span></Link></div><img src="/assets/reference/1st-Texas-Realtors-Team2.png" alt="The 1st Texas Realtors team" /></section>
     <section className="nws-reviews reveal" id="reviews"><div className="nws-reviews-inner"><div className="nws-reviews-head"><span className="nws-pill-badge">Client feedback</span><h2 className="nws-reviews-title">Check what our clients are saying</h2><p className="nws-reviews-sub">Don’t take our word for it</p></div>
-      {/* 3 columns, each slowly auto-scrolling through every testimonial */}
-      <div className="nws-reviews-grid">
-        {[0, 1, 2].map(col => <div className="nws-rev-col" key={col}>
-          <div className="nws-rev-scroll">
-            <div className={`nws-rev-track${col === 0 ? ' nws-rev-track-down' : col === 1 ? ' nws-rev-track-up' : ' nws-rev-track-down'}`}>
-              {[...testimonialsExact.slice(col * 25, col * 25 + 25), ...testimonialsExact.slice(col * 25, col * 25 + 25)].map((review, i) => <figure className="nws-review-card" key={`${col}-${i}`} aria-hidden={i >= 25 || undefined}><span className="nws-avatar" aria-hidden="true">{review.author.replace('— ', '').charAt(0)}</span><figcaption><b>{review.author.replace('— ', '')}</b></figcaption><blockquote>“{review.quote}”</blockquote></figure>)}
-            </div>
-          </div>
-        </div>)}
-      </div>
+      {/* 3 columns, each slowly auto-scrolling through every testimonial — no stars; photo reviews first, click to flip */}
+      <ReviewColumns />
     <Link className="nws-reviews-cta" href="/realtor-reviews/">Read all testimonials <span>→</span></Link></div></section>
     <section className="section reveal" id="next-move"><div className="cta-showcase"><p className="eyebrow">Your next move</p><h2>Let’s make a plan.</h2><p>Call us for immediate assistance or explore our service areas and real-time home search.</p><Link className="button button-red" href="/contact/">Contact a Realtor <span className="btn-icon">↗</span></Link></div><div className="cta-steps"><Link className="reveal-item" href="/register/"><span>01</span>Register <b>↗</b></Link><Link className="reveal-item" href="/home-search/"><span>02</span>Home search <b>↗</b></Link><Link className="reveal-item" href="/contact/"><span>03</span>Contact us <b>↗</b></Link></div></section>
     <FeaturedStrip />
