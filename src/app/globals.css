@@ -885,6 +885,7 @@ blockquote cite {
 .search-empty { border: 1px dashed #b9c9d4; border-radius: 16px; padding: 28px; display: grid; gap: 14px; background: #fff; }
 .search-empty p { margin: 0; color: var(--muted); }
 .search-sell-card { border: 1px solid var(--line); border-radius: 20px; padding: 32px; background: linear-gradient(180deg, #fff, #f2f7fa); box-shadow: var(--shadow-card); display: grid; gap: 12px; }
+.area-search { display: grid; gap: 20px; }
 .search-sell-card h2 { margin: 0; color: var(--navy); font-size: clamp(24px, 3vw, 34px); letter-spacing: -0.03em; }
 .search-sell-card p { margin: 0; color: var(--muted); max-width: 640px; }
 /* ============================================================
