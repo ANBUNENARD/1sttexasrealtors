@@ -39,12 +39,20 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+/* NWS reference typography: Manrope for every heading (h1-h6 + display classes) */
+h1, h2, h3, h4, h5, h6,
+.display-hero, .display-section, .display-headline, .display-title,
+.nws-reviews-title, .nws-card-body h3, .footer h2, .footer-cta h2,
+.video-band h2, .area-hero-card h2, .page-hero h1 {
+  font-family: var(--font-display), 'Manrope', 'Geist', 'Segoe UI', Arial, Helvetica, sans-serif;
+  letter-spacing: -0.025em;
+}
 body {
   margin: 0;
   overflow-x: hidden;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-display), 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), 'Geist', 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
   font-size: 17px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -615,7 +623,7 @@ blockquote cite {
 .testimonial-block:has(.testimonial-photo) .testimonial-photo { grid-column: 2; grid-row: 1; }
 /* drop cap — the client's signature light-blue first letter */
 .page-content blockquote p::first-letter {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-display), 'Manrope', Georgia, serif;
   font-size: 46px; line-height: .9; float: left;
   padding: 4px 8px 0 0; color: #4a90c2; font-weight: 700;
 }
