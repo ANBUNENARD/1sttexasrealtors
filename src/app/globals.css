@@ -620,19 +620,20 @@ blockquote cite {
 .reviews-page-wrap { display: grid; gap: 18px; }
 .drop-card { position: relative; overflow: hidden; display: flex; flex-direction: column; }
 /* true drop cap — the big letter IS the first character; text wraps around it.
-   Uniform sizing keeps every column's cards visually identical. */
+   Matches the ORIGINAL site's style exactly: blockquote p::first-letter
+   { font-size: 200%; color: #7883c1 } — a modest 2x letter in blue-lavender. */
 .drop-cap-text {
   margin: 0; font-size: 15px; line-height: 1.7; color: var(--ink);
   overflow: hidden; /* contain the float so all cards align */
 }
 .drop-letter {
-  float: left; margin: 4px 10px 0 0;
+  float: left; margin: 3px 7px 0 0;
   font-family: var(--font-display), 'Manrope', sans-serif;
-  font-size: 58px; font-weight: 800; line-height: .86; letter-spacing: -0.03em;
-  color: #9dbde6; user-select: none; pointer-events: none;
+  font-size: 200%; font-weight: 700; line-height: .95; letter-spacing: -0.02em;
+  color: #7883c1; user-select: none; pointer-events: none;
   /* starts hidden above the card, drops into place when the card scrolls in */
-  opacity: 0; transform: translateY(-130%) rotate(-6deg);
-  transition: opacity .5s ease, transform .9s var(--ease-spring);
+  opacity: 0; transform: translateY(-130%) rotate(-4deg);
+  transition: opacity .5s ease, transform .8s var(--ease-spring);
 }
 .drop-card.is-on .drop-letter {
   opacity: 1; transform: translateY(0) rotate(0deg);
@@ -651,7 +652,7 @@ blockquote cite {
   opacity: 0; transform: scale(.97);
   transition: opacity .9s ease .25s, transform .9s var(--ease-expo) .25s;
 }
-.drop-card cite { margin-top: auto; padding-top: 12px; }
+.drop-card cite { margin-top: auto; padding-top: 12px; font-style: italic; font-weight: 400; color: var(--ink); letter-spacing: .01em; text-transform: none; }
 /* "Show more" button */
 .reviews-more-wrap { display: grid; gap: 10px; justify-items: center; padding: 18px 0 6px; }
 .reviews-more {
