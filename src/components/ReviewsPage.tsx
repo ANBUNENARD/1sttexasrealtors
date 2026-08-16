@@ -67,9 +67,24 @@ function DropCard({ review, active, onActive }: { review: Review; active: boolea
         <span className="photo-frame"><img src={img} alt={`${name} — 1st Texas Realtors in Clear Lake`} loading="lazy" /></span>
         <span className="photo-name">{name}</span>
       </button>
-      <div className="photo-back">
-        <blockquote>“{cleaned}”</blockquote>
-        <cite>{review.author}</cite>
+      <div
+        role="button"
+        tabIndex={0}
+        className="photo-back"
+        onClick={() => setOpen(false)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            setOpen(false)
+          }
+        }}
+        aria-expanded={open}
+        aria-label={`Hide review from ${name}, back to photo`}
+      >
+        <span className="photo-back-inner">
+          <blockquote>“{cleaned}”</blockquote>
+          <cite>{review.author}</cite>
+        </span>
       </div>
     </div>
   }

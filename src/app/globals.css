@@ -653,24 +653,31 @@ blockquote cite {
 }
 .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .photo-name { color: var(--navy); font-size: 15px; font-weight: 700; }
-/* the review side — hidden behind the photo until the flip */
+/* the review side — hidden behind the photo until the flip.
+   TEXT TAKES ITS NATURAL SPACE (no fixed max-height — quotes are never
+   clipped); the card grows to fit. Clicking the text flips the card
+   back to the photo. The text FADES IN only AFTER the flip completes. */
 .photo-back {
-  display: grid; gap: 10px; max-height: 0; opacity: 0; overflow: hidden;
+  display: grid; grid-template-rows: 0fr; width: 100%;
+  border: 0; padding: 0; margin: 0; background: none; cursor: pointer;
+  text-align: left; font: inherit; color: inherit;
+  opacity: 0;
   transform: rotateX(-90deg); transform-origin: top center;
-  transition: max-height .7s var(--ease-expo), opacity .6s ease .15s, transform .7s var(--ease-expo);
+  transition: grid-template-rows .75s var(--ease-expo), transform .75s var(--ease-expo), opacity .25s ease;
 }
-.photo-back blockquote { margin: 0; font-size: 16px; line-height: 1.75; color: var(--ink); font-family: var(--font-sans), 'Geist', sans-serif; }
-.photo-back cite { margin-top: auto; padding-top: 8px; font-style: italic; font-weight: 400; color: var(--ink); }
+.photo-back-inner { overflow: hidden; min-height: 0; display: grid; gap: 10px; }
+.photo-back-inner blockquote { margin: 0; font-size: 16px; line-height: 1.75; color: var(--ink); font-family: var(--font-sans), 'Geist', sans-serif; }
+.photo-back-inner cite { margin-top: auto; padding-top: 8px; font-style: italic; font-weight: 400; color: var(--ink); }
 .photo-card.is-open .photo-frame { transform: rotateX(-180deg); }
 .photo-card.is-open .photo-front { opacity: 0; transform: translateY(-8px); }
 .photo-card.is-open .photo-back {
-  max-height: 460px; opacity: 1; transform: rotateX(0deg);
-  transition: max-height .7s var(--ease-expo), opacity .7s ease .2s, transform .7s var(--ease-expo) .15s;
+  grid-template-rows: 1fr; opacity: 1; transform: rotateX(0deg);
+  transition: grid-template-rows .75s var(--ease-expo), transform .75s var(--ease-expo) .15s, opacity .5s ease .6s;
 }
 /* reduced motion: no flip, no drop — static cards */
 @media (prefers-reduced-motion: reduce) {
   .photo-front, .photo-back, .drop-card .drop-cap-text, .drop-card cite { opacity: 1; transform: none; transition: none; }
-  .photo-card.is-open .photo-back { max-height: none; }
+  .photo-card.is-open .photo-back { grid-template-rows: 1fr; }
 }
 /* "Show more" button */
 .reviews-more-wrap { display: grid; gap: 10px; justify-items: center; padding: 18px 0 6px; }
