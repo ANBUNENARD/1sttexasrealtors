@@ -885,6 +885,126 @@ blockquote cite {
 .search-sell-card { border: 1px solid var(--line); border-radius: 20px; padding: 32px; background: linear-gradient(180deg, #fff, #f2f7fa); box-shadow: var(--shadow-card); display: grid; gap: 12px; }
 .search-sell-card h2 { margin: 0; color: var(--navy); font-size: clamp(24px, 3vw, 34px); letter-spacing: -0.03em; }
 .search-sell-card p { margin: 0; color: var(--muted); max-width: 640px; }
+/* ============================================================
+   NWS-STYLE SECTIONS — services / reviews / areas (your theme)
+   ============================================================ */
+.nws-services { background: var(--navy-deep); }
+.nws-services .section-heading h2, .nws-services .section-heading p { color: #fff; }
+.nws-services .section-heading .eyebrow { color: var(--red-warm); }
+.nws-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1280px; margin: 0 auto; }
+.nws-service-card {
+  display: flex; flex-direction: column; overflow: hidden; border-radius: 18px;
+  background: var(--red); color: #fff;
+  box-shadow: 0 20px 50px rgba(0, 26, 51, 0.35);
+  transition: transform .4s var(--ease-spring), box-shadow .4s ease;
+}
+.nws-service-card:hover { transform: translateY(-8px); box-shadow: 0 30px 70px rgba(0, 26, 51, 0.5); }
+.nws-card-media { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+.nws-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease-expo); }
+.nws-service-card:hover .nws-card-media img { transform: scale(1.08); }
+.nws-card-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 2;
+  padding: 6px 14px; border-radius: 999px;
+  background: #fff; color: var(--navy); font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.nws-card-arrow {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  width: 40px; height: 40px; border-radius: 99px;
+  display: grid; place-items: center;
+  background: #fff; color: var(--red); font-size: 16px;
+  box-shadow: 0 6px 16px rgba(0, 26, 51, 0.25);
+  transition: transform .3s var(--ease-spring);
+}
+.nws-service-card:hover .nws-card-arrow { transform: translateX(3px); }
+.nws-card-body { display: flex; flex-direction: column; gap: 10px; padding: 24px 22px 26px; flex: 1; }
+.nws-card-body h3 { margin: 0; color: #fff; font-size: 23px; letter-spacing: -0.02em; }
+.nws-card-body p { margin: 0; color: rgba(255,255,255,.92); font-size: 14.5px; line-height: 1.6; }
+.nws-card-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: auto; align-self: flex-start;
+  padding: 11px 22px; border-radius: 999px;
+  background: #fff; color: var(--red); font-size: 14px; font-weight: 700;
+  transition: transform .3s var(--ease-spring), box-shadow .3s ease;
+}
+.nws-card-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,26,51,.25); }
+/* NWS reviews — red band, white cards, photo card, fade */
+.nws-reviews { background: linear-gradient(160deg, #d92b23, var(--red) 55%, var(--red-warm)); color: #fff; padding: 90px 7vw; }
+.nws-reviews-inner { max-width: 1280px; margin: 0 auto; display: grid; gap: 44px; }
+.nws-reviews-head { display: grid; justify-items: center; text-align: center; gap: 12px; }
+.nws-pill-badge {
+  display: inline-flex; padding: 8px 20px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.5); color: #fff;
+  font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+}
+.nws-reviews-title { margin: 0; color: #fff; font-size: clamp(30px, 4.5vw, 52px); letter-spacing: -0.03em; line-height: 1.08; }
+.nws-reviews-sub { margin: 0; color: rgba(255,255,255,.85); font-size: 17px; }
+.nws-reviews-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; align-items: stretch; }
+.nws-review-card {
+  margin: 0; padding: 24px; border-radius: 18px;
+  background: #fff; color: var(--ink);
+  display: flex; flex-direction: column; gap: 12px;
+  box-shadow: 0 18px 44px rgba(0, 26, 51, 0.22);
+  transition: transform .4s var(--ease-spring);
+  position: relative;
+}
+.nws-review-card:hover { transform: translateY(-6px); }
+.nws-review-card::after { /* fade-out at bottom like NWS */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 70px;
+  background: linear-gradient(180deg, transparent, #fff);
+  border-radius: 0 0 18px 18px; pointer-events: none;
+}
+.nws-avatar {
+  width: 46px; height: 46px; border-radius: 99px; flex-shrink: 0;
+  display: grid; place-items: center;
+  background: var(--navy); color: #fff; font-size: 19px; font-weight: 700;
+}
+.nws-review-card figcaption { display: grid; gap: 2px; }
+.nws-review-card figcaption b { color: var(--navy); font-size: 16px; }
+.nws-review-card figcaption small { color: var(--muted); font-size: 12px; }
+.nws-review-card .stars { color: #f5a623; font-size: 15px; letter-spacing: .1em; }
+.nws-review-card blockquote { margin: 0; color: var(--ink); font-size: 14px; line-height: 1.6; }
+.nws-review-photo { padding: 0; overflow: hidden; }
+.nws-review-photo img { width: 100%; height: 150px; object-fit: cover; }
+.nws-review-photo figcaption { padding: 0 24px; margin-top: 14px; }
+.nws-review-photo .stars, .nws-review-photo blockquote { margin-left: 24px; margin-right: 24px; }
+.nws-review-photo blockquote { padding-bottom: 22px; }
+.nws-reviews-cta {
+  justify-self: center; display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 26px; border-radius: 999px;
+  background: #fff; color: var(--red); font-weight: 700; font-size: 15px;
+  transition: transform .3s var(--ease-spring), box-shadow .3s ease;
+}
+.nws-reviews-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,26,51,.3); }
+/* NWS areas — image cards */
+.nws-area-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.nws-area-card {
+  display: flex; flex-direction: column; overflow: hidden; border-radius: 18px;
+  background: #fff; border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  transition: transform .4s var(--ease-spring), box-shadow .4s ease;
+}
+.nws-area-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+.nws-area-media { position: relative; aspect-ratio: 16/9; overflow: hidden; }
+.nws-area-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease-expo); }
+.nws-area-card:hover .nws-area-media img { transform: scale(1.08); }
+.nws-area-tag {
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  padding: 5px 12px; border-radius: 999px;
+  background: var(--red); color: #fff; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .06em;
+}
+.nws-area-num {
+  position: absolute; bottom: 10px; right: 12px; z-index: 2;
+  color: #fff; font-family: var(--font-mono), monospace; font-size: 12px;
+  text-shadow: 0 1px 6px rgba(0,26,51,.6);
+}
+.nws-area-body { display: grid; gap: 6px; padding: 18px 20px 20px; }
+.nws-area-body h3 { margin: 0; color: var(--navy); font-size: 18px; letter-spacing: -0.01em; }
+.nws-area-body p { margin: 0; color: var(--muted); font-size: 13.5px; line-height: 1.55; }
+.nws-area-link { color: var(--red); font-weight: 700; font-size: 13.5px; margin-top: 4px; }
+.nws-area-link span { display: inline-block; transition: transform .3s var(--ease-spring); }
+.nws-area-card:hover .nws-area-link span { transform: translateX(4px); }
 /* IDX-style tabs + panels */
 .idx-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); }
 .idx-tab {
@@ -1103,6 +1223,9 @@ blockquote cite {
   .search-filters { grid-template-columns: 1fr 1fr; }
   .idx-tabs { overflow-x: auto; }
   .search-map { height: 400px; }
+  .nws-card-grid, .nws-area-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .nws-reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  .nws-reviews { padding: 70px 20px; }
   .client-gallery { grid-template-columns: repeat(2, 1fr); }
   .cta-steps { flex-direction: column; margin: 40px 20px 0; }
   .cta-steps a { border-right: 0; border-bottom: 1px solid var(--line); }
@@ -1130,6 +1253,7 @@ blockquote cite {
   .chat-fab { left: 16px; bottom: 16px; width: 48px; height: 48px; }
   .listing-grid { grid-template-columns: 1fr; }
   .search-filters { grid-template-columns: 1fr; }
+  .nws-card-grid, .nws-area-grid, .nws-reviews-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
