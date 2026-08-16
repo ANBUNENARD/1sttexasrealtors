@@ -132,42 +132,34 @@ html.intro-locked, html.intro-locked body { overflow: hidden; }
 .promo-bar-phone { color: #fff; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
 .promo-bar-phone:hover { color: #ffe3de; }
 .site-header {
-  position: fixed; top: 36px; left: 0; right: 0; z-index: 20;
-  width: 100%; padding: 14px 26px;
-  background: rgba(7, 26, 47, 0.55); color: white;
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  border: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  transition: background .3s ease, padding .3s ease, box-shadow .3s ease;
+  position: fixed; top: 44px; left: 20px; right: 20px; z-index: 20;
+  padding: 10px 22px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--navy);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(7, 26, 47, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 18px 44px rgba(0, 26, 51, 0.16);
+  transition: background .3s ease, padding .3s ease, box-shadow .3s ease, top .3s ease;
   transform: translateY(-100%);
   animation: headerDown 1.2s var(--ease-expo) .1s both;
 }
 @keyframes headerDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
 .site-header.scrolled {
-  background: rgba(7, 26, 47, 0.92);
-  box-shadow: 0 10px 30px rgba(0, 26, 51, 0.4);
-  padding: 10px 26px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 44px rgba(0, 26, 51, 0.22);
+  padding: 8px 20px;
+  top: 12px;
 }
 .site-header.scrolled .header-logo img { height: 40px; }
-/* NWS floating rounded nav on scroll (screenshot 2 style, your theme) */
-@media (min-width: 1100px) {
-  .site-header.scrolled {
-    top: 14px; left: 20px; right: 20px; width: auto;
-    background: rgba(7, 26, 47, 0.85);
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: 18px;
-    box-shadow: 0 18px 44px rgba(0, 26, 51, 0.45);
-    padding: 10px 22px;
-  }
-  .site-header.scrolled .nav-wrap { max-width: none; }
-}
 .nav-wrap { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 26px; max-width: 1400px; margin: auto; }
 .menu-btn {
   display: inline-flex; align-items: center; gap: 10px; padding: 10px 8px; justify-self: start;
-  background: none; border: 0; color: #fff; cursor: pointer;
+  background: none; border: 0; color: var(--navy); cursor: pointer;
   font-size: 13px; text-transform: uppercase; letter-spacing: .08em;
   transition: color .25s ease;
 }
-.menu-btn:hover { color: #ff9c8a; }
+.menu-btn:hover { color: var(--red); }
 .menu-btn .mono-label { font-size: 13px; letter-spacing: .08em; }
 .menu-btn-mobile { display: none; }
 .header-wordmark { display: grid; justify-items: center; line-height: 1; text-align: center; justify-self: start; }
@@ -175,22 +167,22 @@ html.intro-locked, html.intro-locked body { overflow: hidden; }
 .header-logo img {
   width: auto; height: 46px; display: block;
   border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 26, 51, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 26, 51, 0.25);
   transition: height .3s ease, box-shadow .3s ease;
 }
 .header-logo:hover img { box-shadow: 0 6px 22px rgba(239, 64, 53, 0.35); }
 .wordmark-main { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #fff; text-transform: uppercase; }
 .wordmark-sub { font-size: 12px; font-weight: 500; font-family: var(--font-mono), monospace; letter-spacing: .34em; color: var(--red-warm); text-transform: uppercase; margin-top: 4px; }
-/* desktop nav center */
+/* desktop nav center — NWS white-bar style with navy text */
 .nav-desktop { display: flex; align-items: center; justify-content: center; gap: 4px; }
 .nav-link {
-  display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px;
-  color: rgba(255,255,255,.9); font-size: 14px; font-weight: 600; letter-spacing: .01em;
-  border-radius: 10px; background: none; border: 0; cursor: pointer; transition: .25s ease;
+  display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px;
+  color: var(--navy); font-size: 14px; font-weight: 600; letter-spacing: .01em;
+  border-radius: 999px; background: none; border: 0; cursor: pointer; transition: .25s ease;
 }
-.nav-link:hover { color: #fff; background: rgba(255,255,255,.08); }
-.nav-link.active { color: #fff; background: rgba(239,64,53,.22); }
-.nav-caret { font-size: 10px; color: var(--red-warm); }
+.nav-link:hover { color: var(--red); background: rgba(239, 64, 53, 0.08); }
+.nav-link.active { color: #fff; background: var(--navy); box-shadow: 0 6px 16px rgba(0, 26, 51, 0.25); }
+.nav-caret { font-size: 10px; color: var(--red); }
 .nav-drop { position: relative; }
 /* NWS mega-panel */
 .nav-panel {
@@ -222,8 +214,9 @@ html.intro-locked, html.intro-locked body { overflow: hidden; }
 .nav-panel-feature .text-link { color: var(--red); font-weight: 700; font-size: 13px; }
 .header-actions { display: flex; align-items: center; gap: 14px; justify-self: end; }
 .header-cta { min-height: 44px; padding: 11px 22px; font-size: 14px; }
-.phone { font-weight: 700; white-space: nowrap; font-size: 14px; }
-.account-link { color: #e8f1f6; font-size: 13px; font-weight: 500; font-family: var(--font-mono), monospace; text-transform: uppercase; letter-spacing: .08em; }
+.phone { font-weight: 700; white-space: nowrap; font-size: 14px; color: var(--navy); }
+.phone:hover { color: var(--red); }
+.account-link { color: var(--navy); font-size: 13px; font-weight: 500; font-family: var(--font-mono), monospace; text-transform: uppercase; letter-spacing: .08em; }
 .register-link {
   color: #fff; font-size: 13px; font-weight: 500; font-family: var(--font-mono), monospace;
   text-transform: uppercase; letter-spacing: .08em;
@@ -1182,8 +1175,8 @@ blockquote cite {
 
 @media (max-width: 700px) {
   .promo-bar { font-size: 11.5px; padding: 7px 14px; gap: 6px; }
-  .site-header { top: 34px; padding: 10px 16px; }
-  .site-header.scrolled { padding: 8px 16px; }
+  .site-header { top: 40px; left: 10px; right: 10px; padding: 8px 14px; border-radius: 14px; }
+  .site-header.scrolled { padding: 6px 14px; top: 8px; }
   .nav-wrap { grid-template-columns: auto 1fr auto; gap: 12px; }
   .nav-desktop { display: none; }
   .menu-btn-mobile { display: inline-flex; justify-self: end; }
