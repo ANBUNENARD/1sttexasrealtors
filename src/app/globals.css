@@ -940,37 +940,30 @@ blockquote cite {
 .nws-reviews-title { margin: 0; color: #fff; font-size: clamp(30px, 4.5vw, 52px); letter-spacing: -0.03em; line-height: 1.08; }
 .nws-reviews-sub { margin: 0; color: rgba(255,255,255,.85); font-size: 17px; }
 .nws-reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
-.nws-rev-col { display: grid; gap: 20px; align-content: start; }
-.nws-rev-col-mid .nws-review-card { min-height: 100%; }
+.nws-rev-col { display: grid; }
+.nws-rev-scroll { height: 540px; overflow: hidden; position: relative; border-radius: 18px; -webkit-mask-image: linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent); }
+.nws-rev-track { display: grid; gap: 16px; animation: revScrollDown 95s linear infinite; }
+.nws-rev-track-mid { animation-duration: 115s; }
+.nws-rev-scroll:hover .nws-rev-track { animation-play-state: paused; }
+@keyframes revScrollDown { from { transform: translateY(0); } to { transform: translateY(-50%); } }
 .nws-review-card {
-  margin: 0; padding: 24px; border-radius: 18px;
+  margin: 0; padding: 22px; border-radius: 16px;
   background: #fff; color: var(--ink);
-  display: flex; flex-direction: column; gap: 12px;
-  box-shadow: 0 18px 44px rgba(0, 26, 51, 0.22);
+  display: flex; flex-direction: column; gap: 10px;
+  box-shadow: 0 14px 34px rgba(0, 26, 51, 0.18);
   transition: transform .4s var(--ease-spring);
-  position: relative; overflow: hidden;
 }
-.nws-review-card:hover { transform: translateY(-6px); }
-.nws-review-card::after { /* fade-out at bottom INTO the blue band like NWS */
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 96px;
-  background: linear-gradient(180deg, rgba(255,255,255,0), rgba(30, 95, 214, 0.55) 78%, rgba(30, 95, 214, 0.9));
-  border-radius: 0 0 18px 18px; pointer-events: none;
-}
+.nws-review-card:hover { transform: translateY(-3px); }
 .nws-avatar {
-  width: 46px; height: 46px; border-radius: 99px; flex-shrink: 0;
+  width: 42px; height: 42px; border-radius: 99px; flex-shrink: 0;
   display: grid; place-items: center;
-  background: var(--navy); color: #fff; font-size: 19px; font-weight: 700;
+  background: var(--navy); color: #fff; font-size: 17px; font-weight: 700;
 }
 .nws-review-card figcaption { display: grid; gap: 2px; }
-.nws-review-card figcaption b { color: var(--navy); font-size: 16px; }
+.nws-review-card figcaption b { color: var(--navy); font-size: 15px; }
 .nws-review-card figcaption small { color: var(--muted); font-size: 12px; }
-.nws-review-card .stars { color: #f5a623; font-size: 15px; letter-spacing: .1em; }
-.nws-review-card blockquote { margin: 0; color: var(--ink); font-size: 14.5px; line-height: 1.65; }
-.nws-review-photo { padding: 0; overflow: hidden; gap: 0; }
-.nws-review-photo img { width: 100%; height: 170px; object-fit: cover; }
-.nws-review-photo figcaption { padding: 14px 24px 2px; }
-.nws-review-photo .stars { margin-left: 24px; margin-right: 24px; padding-bottom: 20px; }
-.nws-review-photo::after { display: none; }
+.nws-review-card .stars { color: #f5a623; font-size: 14px; letter-spacing: .1em; }
+.nws-review-card blockquote { margin: 0; color: var(--ink); font-size: 13.5px; line-height: 1.6; }
 .nws-reviews-cta {
   justify-self: center; display: inline-flex; align-items: center; gap: 10px;
   padding: 13px 26px; border-radius: 999px;
@@ -1336,6 +1329,7 @@ blockquote cite {
   .search-map { height: 400px; }
   .nws-card-grid, .nws-area-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .nws-reviews-grid { grid-template-columns: 1fr; }
+  .nws-rev-scroll { height: 420px; }
   .nws-reviews { padding: 70px 20px; }
   .client-gallery { grid-template-columns: repeat(2, 1fr); }
   .cta-steps { flex-direction: column; margin: 40px 20px 0; }
@@ -1378,4 +1372,6 @@ blockquote cite {
   }
   .areas-slide-right { transform: none; }
   .areas-slide-row { overflow-x: auto; }
+  .nws-rev-track { transform: none; }
+  .nws-rev-scroll { height: auto; overflow-y: auto; max-height: 540px; }
 }
