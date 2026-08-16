@@ -3,13 +3,23 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { testimonialsExact } from '@/content/testimonials-exact'
 
-// Reviews page: 6 reviews shown initially, "Show more" reveals the rest
-// (and "Show fewer" collapses back). Each review DROPS DOWN when scrolled
-// into view, and rises back UP when scrolled out of view — two-way animation.
+// Reviews landing page ("Read all testimonials"):
+// - NO stars anywhere.
+// - Reviews WITH a photo come FIRST (ascending by quote length), then the rest.
+// - Photo cards: click the photo -> it drops down + FLIPS (3D) -> reveals that
+//   review. Click again -> flips back.
+// - Text-only cards: drop-down reveal on scroll (no click).
+// - 6 shown initially; "Show more" reveals the rest (with the same animation).
+type Review = (typeof testimonialsExact)[number]
+const withImg = (r: Review) => r.images && r.images.length > 0
+
 export function ReviewsPage() {
   const [showAll, setShowAll] = useState(false)
   const [active, setActive] = useState(0)
-  const reviews = [...testimonialsExact].sort((a, b) => a.quote.length - b.quote.length)
+  // image reviews first (ascending), then the rest (ascending)
+  const reviews = [...testimonialsExact]
+    .sort((a, b) => a.quote.length - b.quote.length)
+    .sort((a, b) => Number(withImg(b)) - Number(withImg(a)))
   const visible = showAll ? reviews : reviews.slice(0, 6)
 
   return <div className="reviews-page-wrap">
@@ -25,10 +35,11 @@ export function ReviewsPage() {
   </div>
 }
 
-// one review card — drops down into view on scroll-in, rises back up on scroll-out
-function DropCard({ review, active, onActive }: { review: (typeof testimonialsExact)[number]; active: boolean; onActive: () => void }) {
+// one review card — drops down into view on scroll; photo cards flip on click
+function DropCard({ review, active, onActive }: { review: Review; active: boolean; onActive: () => void }) {
   const ref = useRef<HTMLDivElement>(null)
   const [on, setOn] = useState(false)
+  const [open, setOpen] = useState(false)
 
   // two-way scroll trigger: entering viewport -> drop in; leaving -> rise back up
   useEffect(() => {
@@ -44,13 +55,29 @@ function DropCard({ review, active, onActive }: { review: (typeof testimonialsEx
     return () => obs.disconnect()
   }, [onActive])
 
-  // normal font review — no big drop-cap letter, just the quote text
+  const hasPhoto = withImg(review)
+  const img = hasPhoto ? `/assets/client/${review.images[0]}` : null
   const cleaned = review.quote.replace(/^[“”"'`\s]+/, '').replace(/[”"'`\s]+$/, '')
+  const name = review.author.replace(/^—\s*|^–\s*/, '')
 
+  // photo card: dedicated image on top; click -> drops + flips -> the review
+  if (hasPhoto && img) {
+    return <div ref={ref} className={`testimonial-block drop-card photo-card${on ? ' is-on' : ''}${open ? ' is-open' : ''}${active ? ' is-active' : ''}`}>
+      <button type="button" className="photo-front" onClick={() => setOpen(o => !o)} aria-label={`Show review from ${name}`}>
+        <span className="photo-frame"><img src={img} alt={`${name} — 1st Texas Realtors in Clear Lake`} loading="lazy" /></span>
+        <span className="photo-name">{name}</span>
+      </button>
+      <div className="photo-back">
+        <blockquote>“{cleaned}”</blockquote>
+        <cite>{review.author}</cite>
+      </div>
+    </div>
+  }
+
+  // text-only card: drop-down reveal (stars removed — normal font quote)
   return <div ref={ref} className={`testimonial-block drop-card${on ? ' is-on' : ''}${active ? ' is-active' : ''}`}>
     <blockquote>
       <p className="drop-cap-text">“{cleaned}”</p>
-      <span className="drop-stars stars" aria-label="Rated 5 out of 5 stars">★★★★★</span>
       {review.author && <cite>{review.author}</cite>}
     </blockquote>
   </div>
