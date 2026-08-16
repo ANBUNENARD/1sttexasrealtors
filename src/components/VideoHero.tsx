@@ -3,26 +3,28 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-// Hero: "SERVING {area} AND NEARBY" — each area has its own photo displayed
-// as a living Ken Burns "GIF" (slow zoom + drift). The area text and its photo
-// change TOGETHER every 4 seconds, continuously, crossfading between areas.
+// Hero: "SERVING {area} AND NEARBY" — each area has its OWN high-quality
+// looping motion clip (an MP4 "video GIF": real aerial footage for the lake/
+// house areas, cinematic Ken Burns motion on high-res photos for the others).
+// The area text and its clip change TOGETHER every 4 seconds, continuously,
+// crossfading between areas.
 const AREAS = [
-  { name: 'Clear Lake City', img: '/assets/areas/clear-lake-sale-1-clear-lake-homes-for-sale-jpeg', alt: 'Homes for sale in Clear Lake City TX' },
-  { name: 'League City',     img: '/assets/areas/league-city-1-4725-isla-canela-lane-239-jpeg',     alt: 'Homes for sale in League City TX' },
-  { name: 'Friendswood',     img: '/assets/areas/friendswood-1-friendswood-homes-01-e1682175182867-jpeg', alt: 'Homes for sale in Friendswood TX' },
-  { name: 'Seabrook',        img: '/assets/areas/seabrook-1-seabrook-homes-01-e1682175503186-jpeg',  alt: 'Homes for sale in Seabrook TX' },
-  { name: 'Kemah',           img: '/assets/areas/kemah-1-kemah-homes-01-e1682175228189-jpeg',         alt: 'Homes for sale in Kemah TX' },
-  { name: 'Nassau Bay',      img: '/assets/areas/nassau-bay-1-nassau-bay-homes-01-e1682175347786-jpeg', alt: 'Homes for sale in Nassau Bay TX' },
-  { name: 'Galveston',       img: '/assets/areas/galveston-1-pirates-beach-239-jpeg',                 alt: 'Homes for sale in Galveston TX' },
-  { name: 'Pearland',        img: '/assets/areas/pearland-1-pearland-homes-01-e1699454752509-jpeg',   alt: 'Homes for sale in Pearland TX' },
+  { name: 'Clear Lake City', src: '/videos/hero-clear-lake-city.mp4', poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg', alt: 'Clear Lake City Texas aerial' },
+  { name: 'League City',     src: '/videos/hero-league-city.mp4',     poster: '/assets/reference/leaguecityhomesforsale.jpg',          alt: 'League City Texas aerial' },
+  { name: 'Friendswood',     src: '/videos/hero-friendswood.mp4',     poster: '/assets/reference/friendswoodhomesforsale.jpg',         alt: 'Friendswood Texas aerial' },
+  { name: 'Seabrook',        src: '/videos/hero-seabrook.mp4',        poster: '/assets/reference/seabrookhomesforsale.jpg',            alt: 'Seabrook Texas aerial' },
+  { name: 'Kemah',           src: '/videos/hero-kemah.mp4',           poster: '/assets/reference/seabrookhomesforsale02.jpg',          alt: 'Waterfront homes near Kemah Texas' },
+  { name: 'Nassau Bay',      src: '/videos/hero-nassau-bay.mp4',      poster: '/assets/reference/clearlaketxhomesforsale.jpg',         alt: 'Homes for sale in Nassau Bay Texas' },
+  { name: 'Galveston',       src: '/videos/hero-galveston.mp4',       poster: '/assets/reference/leaguecityhomesforsale.jpg',          alt: 'Coastal homes near Galveston Texas' },
+  { name: 'Pearland',        src: '/videos/hero-pearland.mp4',        poster: '/assets/reference/NASAhomesforsale.jpg',               alt: 'Pearland Texas and the NASA area' },
 ]
 
-const SLIDE_MS = 4000 // 4 seconds per area — text + image change together
+const SLIDE_MS = 4000 // 4 seconds per area — text + motion clip change together
 
 export function VideoHero({ started = true }: { started?: boolean }) {
   const [active, setActive] = useState(0)
 
-  // single 4s timer drives BOTH the area text and its photo
+  // single 4s timer drives BOTH the area text and its motion clip
   useEffect(() => {
     if (!started) return
     const interval = setInterval(() => setActive(a => (a + 1) % AREAS.length), SLIDE_MS)
@@ -33,8 +35,14 @@ export function VideoHero({ started = true }: { started?: boolean }) {
     <div className="video-hero-media" aria-hidden="true">
       {AREAS.map((area, i) => (
         <div key={area.name} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
-          {/* the "GIF" — the area photo living with a Ken Burns zoom, looping forever */}
-          <Image src={area.img} alt={area.alt} fill sizes="100vw" quality={90} priority={i === 0} loading={i === 0 ? undefined : 'lazy'} className="video-hero-img" />
+          <Image className="hero-poster" src={area.poster} alt="" fill sizes="100vw" priority={i === 0} loading={i === 0 ? undefined : 'lazy'} />
+          {/* the "GIF" — a high-quality looping motion clip (MP4), plays forever */}
+          <video
+            autoPlay muted loop playsInline preload={i === active ? 'auto' : 'none'} poster={area.poster}
+            className="hero-video" aria-hidden="true"
+          >
+            <source src={area.src} type="video/mp4" />
+          </video>
         </div>
       ))}
     </div>
@@ -45,7 +53,7 @@ export function VideoHero({ started = true }: { started?: boolean }) {
         <span className="hero-line">Real estate guidance</span>
         <span className="hero-line hero-line-accent">that feels personal.</span>
       </h1>
-      {/* area cycler — text changes every 4s, synced with the photo */}
+      {/* area cycler — text changes every 4s, synced with the motion clip */}
       <p className="video-hero-cycler" style={{ opacity: 0, transform: 'translateY(24px)', animation: 'heroUp 1s var(--ease-expo) forwards .3s' }}>
         <span className="mono-label">Serving</span>
         <span className="cycler-line" aria-live="polite"><span key={active} className="cycler-word">{AREAS[active].name}</span></span>
