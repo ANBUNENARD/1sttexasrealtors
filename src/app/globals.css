@@ -1200,8 +1200,45 @@ blockquote cite {
 .nws-review-card figcaption { display: grid; gap: 2px; }
 .nws-review-card figcaption b { color: var(--navy); font-size: 15px; }
 .nws-review-card figcaption small { color: var(--muted); font-size: 12px; }
-.nws-review-card .stars { color: #f5a623; font-size: 14px; letter-spacing: .1em; }
 .nws-review-card blockquote { margin: 0; color: var(--ink); font-size: 13.5px; line-height: 1.6; }
+/* --- photo review cards: click -> photo drops down + flips (3D) -> review --- */
+.nws-photo-card { padding: 14px; gap: 10px; }
+.nws-photo-front {
+  border: 0; padding: 0; margin: 0; background: none; cursor: pointer; text-align: left;
+  display: grid; gap: 9px; width: 100%;
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .7s ease, transform .7s var(--ease-expo);
+}
+.nws-photo-card.is-on .nws-photo-front { opacity: 1; transform: translateY(0); transition-delay: .15s; }
+.nws-photo-frame {
+  display: block; width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--line); box-shadow: var(--shadow-card);
+  transform-style: preserve-3d; perspective: 900px;
+}
+.nws-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nws-photo-name { color: var(--navy); font-size: 15px; font-weight: 700; }
+/* the review side — hidden behind the photo until the flip */
+.nws-photo-back {
+  display: grid; gap: 10px; max-height: 0; opacity: 0; overflow: hidden;
+  transform: rotateX(-90deg); transform-origin: top center;
+  transition: max-height .7s var(--ease-expo), opacity .6s ease .15s, transform .7s var(--ease-expo);
+}
+.nws-photo-card.is-open .nws-photo-frame { transform: rotateX(-180deg); transition: transform .7s var(--ease-expo); }
+.nws-photo-card.is-open .nws-photo-front { opacity: 0; transform: translateY(-8px); }
+.nws-photo-card.is-open .nws-photo-back {
+  max-height: 420px; opacity: 1; transform: rotateX(0deg);
+  transition: max-height .7s var(--ease-expo), opacity .7s ease .2s, transform .7s var(--ease-expo) .15s;
+}
+.nws-photo-back figcaption b { color: var(--navy); font-size: 15px; }
+.nws-photo-back blockquote { font-size: 13.5px; line-height: 1.6; }
+/* text-only cards: simple drop-down reveal on scroll */
+.nws-review-card { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s var(--ease-expo); }
+.nws-review-card.is-on { opacity: 1; transform: translateY(0); }
+/* reduced motion: no flip, no drop — static cards */
+@media (prefers-reduced-motion: reduce) {
+  .nws-photo-front, .nws-photo-back, .nws-review-card { opacity: 1; transform: none; transition: none; }
+  .nws-photo-card.is-open .nws-photo-back { max-height: none; }
+}
 .nws-reviews-cta {
   justify-self: center; display: inline-flex; align-items: center; gap: 10px;
   padding: 13px 26px; border-radius: 999px;
