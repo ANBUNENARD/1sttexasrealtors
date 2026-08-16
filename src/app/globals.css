@@ -637,7 +637,7 @@ blockquote cite {
 /* when scrolled out of view, everything rises back up (reverse) */
 .drop-card cite { margin-top: auto; padding-top: 12px; font-style: italic; font-weight: 400; color: var(--ink); letter-spacing: .01em; text-transform: none; }
 /* --- photo review cards on this page: click -> photo drops + flips (3D) -> review --- */
-.photo-card { padding: 16px; gap: 10px; }
+.photo-card { padding: 16px; gap: 10px; position: relative; }
 .photo-front {
   border: 0; padding: 0; margin: 0; background: none; cursor: pointer; text-align: left;
   display: grid; gap: 9px; width: 100%;
@@ -648,36 +648,36 @@ blockquote cite {
 .photo-frame {
   display: block; width: 100%; aspect-ratio: 16/10; border-radius: 12px; overflow: hidden;
   border: 1px solid var(--line); box-shadow: var(--shadow-card);
-  perspective: 900px; transform-style: preserve-3d;
   transition: transform .7s var(--ease-expo);
 }
 .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .photo-name { color: var(--navy); font-size: 15px; font-weight: 700; }
-/* the review side — hidden behind the photo until the flip.
-   TEXT TAKES ITS NATURAL SPACE (no fixed max-height — quotes are never
-   clipped); the card grows to fit. Clicking the text flips the card
-   back to the photo. The text FADES IN only AFTER the flip completes. */
+/* the review side — absolutely fills the WHOLE card so the text occupies the
+   entire flipped card (no gap where the photo was, no card growth). Clicking
+   the text flips the card back to the photo. The text FADES IN only AFTER
+   the flip completes. */
 .photo-back {
-  display: grid; grid-template-rows: 0fr; width: 100%;
-  border: 0; padding: 0; margin: 0; background: none; cursor: pointer;
-  text-align: left; font: inherit; color: inherit;
+  position: absolute; inset: 0; border: 0; padding: 20px; margin: 0; background: #fff;
+  cursor: pointer; text-align: left; font: inherit; color: inherit;
+  border-radius: 18px;
   opacity: 0;
   transform: rotateX(-90deg); transform-origin: top center;
-  transition: grid-template-rows .75s var(--ease-expo), transform .75s var(--ease-expo), opacity .25s ease;
+  transition: transform .7s var(--ease-expo), opacity .3s ease;
+  overflow-y: auto;
 }
-.photo-back-inner { overflow: hidden; min-height: 0; display: grid; gap: 10px; }
+.photo-back-inner { min-height: 100%; display: grid; gap: 10px; align-content: center; }
 .photo-back-inner blockquote { margin: 0; font-size: 16px; line-height: 1.75; color: var(--ink); font-family: var(--font-sans), 'Geist', sans-serif; }
 .photo-back-inner cite { margin-top: auto; padding-top: 8px; font-style: italic; font-weight: 400; color: var(--ink); }
 .photo-card.is-open .photo-frame { transform: rotateX(-180deg); }
 .photo-card.is-open .photo-front { opacity: 0; transform: translateY(-8px); }
 .photo-card.is-open .photo-back {
-  grid-template-rows: 1fr; opacity: 1; transform: rotateX(0deg);
-  transition: grid-template-rows .75s var(--ease-expo), transform .75s var(--ease-expo) .15s, opacity .5s ease .6s;
+  opacity: 1; transform: rotateX(0deg);
+  transition: transform .7s var(--ease-expo) .15s, opacity .5s ease .6s;
 }
 /* reduced motion: no flip, no drop — static cards */
 @media (prefers-reduced-motion: reduce) {
   .photo-front, .photo-back, .drop-card .drop-cap-text, .drop-card cite { opacity: 1; transform: none; transition: none; }
-  .photo-card.is-open .photo-back { grid-template-rows: 1fr; }
+  .photo-card.is-open .photo-back { opacity: 1; }
 }
 /* --- STICKY REVIEWS (About-page pattern): stationary panel + scroll sections --- */
 .sticky-reviews-layout {
@@ -1298,6 +1298,44 @@ blockquote cite {
 .nws-review-card figcaption b { color: var(--navy); font-size: 15px; }
 .nws-review-card figcaption small { color: var(--muted); font-size: 12px; }
 .nws-review-card blockquote { margin: 0; color: var(--ink); font-size: 13.5px; line-height: 1.6; }
+/* --- photo review cards in the columns: FIXED-size card, photo fills the
+   whole card; click -> the card FLIPS IN PLACE and the review text fills the
+   ENTIRE card (no gap where the photo was, no growth). Click text -> flips
+   back. Only applies to reviews that have an image. --- */
+.nws-photo-card {
+  position: relative; margin: 0; padding: 0; overflow: hidden;
+  border-radius: 16px; background: #fff;
+  box-shadow: 0 14px 34px rgba(0, 26, 51, 0.18);
+  aspect-ratio: 16/11; display: block;
+  transform-style: preserve-3d;
+}
+.nws-photo-front {
+  position: absolute; inset: 0; border: 0; padding: 0; margin: 0; background: none;
+  cursor: pointer; display: flex; flex-direction: column; text-align: left;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  transition: transform .8s var(--ease-expo);
+}
+.nws-photo-frame { flex: 1; min-height: 0; overflow: hidden; display: block; }
+.nws-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nws-photo-name {
+  padding: 10px 14px; color: #fff; font-size: 14px; font-weight: 700;
+  background: linear-gradient(180deg, transparent, rgba(7, 16, 48, 0.82));
+}
+/* the review side — absolutely fills the WHOLE card so the text occupies
+   every pixel of the flipped card; clicking the text flips back */
+.nws-photo-back {
+  position: absolute; inset: 0; border: 0; padding: 20px; margin: 0; background: #fff;
+  cursor: pointer; display: flex; flex-direction: column; justify-content: center; gap: 8px;
+  text-align: left; font: inherit; color: inherit;
+  transform: rotateY(180deg);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  transition: transform .8s var(--ease-expo);
+  overflow-y: auto;
+}
+.nws-photo-back figcaption { color: var(--navy); font-size: 15px; }
+.nws-photo-back blockquote { margin: 0; color: var(--ink); font-size: 14px; line-height: 1.65; }
+.nws-photo-card.is-open .nws-photo-front { transform: rotateY(180deg); }
+.nws-photo-card.is-open .nws-photo-back { transform: rotateY(360deg); }
 .nws-reviews-cta {
   justify-self: center; display: inline-flex; align-items: center; gap: 10px;
   padding: 13px 26px; border-radius: 999px;

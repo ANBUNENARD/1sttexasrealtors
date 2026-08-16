@@ -73,7 +73,17 @@ function ReviewCard({ review, hidden, opened, onToggle }: { review: Review; hidd
         <span className="nws-photo-frame"><img src={img} alt={`${name} — 1st Texas Realtors in Clear Lake`} loading="lazy" /></span>
         <span className="nws-photo-name">{name}</span>
       </button>
-      <div className="nws-photo-back">
+      <div
+        role="button"
+        tabIndex={0}
+        className="nws-photo-back"
+        onClick={onToggle}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle() }
+        }}
+        aria-expanded={opened}
+        aria-label={`Hide review from ${name}, back to photo`}
+      >
         <figcaption><b>{name}</b></figcaption>
         <blockquote>“{review.quote}”</blockquote>
       </div>
