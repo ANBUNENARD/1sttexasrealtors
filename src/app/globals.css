@@ -679,6 +679,60 @@ blockquote cite {
   .photo-front, .photo-back, .drop-card .drop-cap-text, .drop-card cite { opacity: 1; transform: none; transition: none; }
   .photo-card.is-open .photo-back { grid-template-rows: 1fr; }
 }
+/* --- STICKY REVIEWS (About-page pattern): stationary panel + scroll sections --- */
+.sticky-reviews-layout {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px;
+  max-width: 1360px; margin: 0 auto;
+}
+.sticky-reviews-media { position: relative; height: 100%; min-height: 480px; }
+.sticky-reviews-panel {
+  position: sticky; top: 110px;
+  aspect-ratio: 4/4.8; border-radius: 24px; overflow: hidden;
+  background: var(--navy-deep); box-shadow: var(--shadow-lift);
+}
+.sticky-rev-slide {
+  position: absolute; inset: 0;
+  opacity: 0; transform: scale(1.06);
+  transition: opacity .9s var(--ease-expo), transform 1.2s var(--ease-expo);
+}
+.sticky-rev-slide.is-active { opacity: 1; transform: scale(1); }
+.sticky-rev-photo { object-fit: cover; }
+/* text reviews show as a quote card in the panel */
+.sticky-rev-quote {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  justify-content: center; gap: 16px; padding: 40px 36px;
+  color: #fff; background: linear-gradient(160deg, var(--navy-deep), #123a70);
+}
+.sticky-rev-mark { font-family: Georgia, serif; font-size: 64px; line-height: .6; color: #6f9bd8; }
+.sticky-rev-quote blockquote { margin: 0; font-size: 18px; line-height: 1.7; color: #eef3f9; }
+.sticky-rev-quote cite { font-style: italic; color: #b9cbe0; font-size: 14.5px; }
+.sticky-rev-label {
+  position: absolute; left: 18px; bottom: 18px; z-index: 2; max-width: calc(100% - 36px);
+  padding: 10px 18px; border-radius: 99px;
+  background: rgba(7, 26, 47, 0.72); backdrop-filter: blur(10px);
+  color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .14em;
+  font-family: var(--font-mono), monospace; text-transform: uppercase;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+/* right side — one section per review, ascending; each drives the panel */
+.sticky-reviews-content { display: grid; gap: 26px; padding-top: 12px; }
+.sticky-rev-section {
+  scroll-margin-top: 120px; padding: 26px 28px;
+  background: #fff; border: 1px solid var(--line); border-radius: 18px;
+  box-shadow: var(--shadow-card); display: grid; gap: 10px;
+}
+.sticky-rev-index {
+  font-family: var(--font-mono), monospace; font-size: 13px; font-weight: 700;
+  letter-spacing: .14em; color: var(--red);
+}
+.sticky-rev-section blockquote { margin: 0; font-size: 16.5px; line-height: 1.75; color: var(--ink); font-family: var(--font-sans), 'Geist', sans-serif; }
+.sticky-rev-section cite { font-style: italic; font-weight: 400; color: var(--navy); }
+.sticky-reviews-content .page-cta { margin-top: 30px; }
+@media (max-width: 900px) {
+  .sticky-reviews-layout { grid-template-columns: 1fr; gap: 28px; }
+  .sticky-reviews-panel { position: relative; top: 0; aspect-ratio: 4/3; }
+  .sticky-reviews-content { gap: 20px; }
+}
 /* "Show more" button */
 .reviews-more-wrap { display: grid; gap: 10px; justify-items: center; padding: 18px 0 6px; }
 .reviews-more {
