@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 // Hero: "SERVING {area} AND NEARBY" — each area has its OWN high-quality
 // looping motion clip (an MP4 "video GIF"). The 4 original aerial clips are
@@ -29,6 +29,7 @@ const SLIDE_MS = 3000 // 3 seconds per area — text + motion clip change togeth
 
 export function VideoHero({ started = true }: { started?: boolean }) {
   const [active, setActive] = useState(0)
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
 
   // single 3s timer drives BOTH the area text and its motion clip
   useEffect(() => {
@@ -37,13 +38,25 @@ export function VideoHero({ started = true }: { started?: boolean }) {
     return () => clearInterval(interval)
   }, [started])
 
+  // only the ACTIVE clip plays; others pause at frame 1 (no simultaneous
+  // decode, no stutter, no flicker when switching)
+  useEffect(() => {
+    videoRefs.current.forEach((v, i) => {
+      if (!v) return
+      if (i === active) { v.currentTime = 0; v.play().catch(() => {}) }
+      else v.pause()
+    })
+  }, [active, started])
+
   return <section className="video-hero" aria-label="1st Texas Realtors">
     <div className="video-hero-media" aria-hidden="true">
       {AREAS.map((area, i) => (
         <div key={area.name} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
           <Image className="hero-poster" src={area.poster} alt="" fill sizes="100vw" priority={i === 0} loading={i === 0 ? undefined : 'lazy'} />
+          {/* all videos preload (buffered before their turn); the effect plays only the ACTIVE one and pauses the rest */}
           <video
-            autoPlay muted loop playsInline preload={i === active ? 'auto' : 'none'} poster={area.poster}
+            ref={el => { videoRefs.current[i] = el }}
+            muted loop playsInline preload="auto" poster={area.poster}
             className="hero-video" aria-hidden="true"
           >
             <source src={area.src} type="video/mp4" />
