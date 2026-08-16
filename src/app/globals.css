@@ -832,37 +832,33 @@ blockquote cite {
 
 /* Scroll spy */
 /* ============================================================
-   ABOUT — sticky image panel (left) + scrolling content (right)
+   ABOUT — three rows: each image pinned in its OWN spot (left),
+   text scrolls alongside (right)
    ============================================================ */
 .about-sticky-layout {
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px;
-  max-width: 1280px; margin: 0 auto; align-items: start;
+  display: grid; gap: 64px; max-width: 1280px; margin: 0 auto;
 }
-.about-sticky-media { position: relative; }
-.about-sticky-panel {
+.about-row {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: start;
+}
+.about-row-media { position: relative; min-height: 480px; }
+.about-row-img {
   position: sticky; top: 110px;
-  aspect-ratio: 4/4.6; border-radius: 22px; overflow: hidden;
+  aspect-ratio: 4/4.4; border-radius: 22px; overflow: hidden;
   background: var(--navy-deep); box-shadow: var(--shadow-lift);
 }
-.about-sticky-img {
-  position: absolute; inset: 0; opacity: 0; transform: scale(1.04);
-  transition: opacity .7s var(--ease-expo), transform .7s var(--ease-expo);
-}
-.about-sticky-img.is-active { opacity: 1; transform: scale(1); }
-.about-sticky-photo { object-fit: cover; }
+.about-row-photo { object-fit: cover; }
 .about-sticky-label {
-  position: absolute; left: 18px; bottom: 18px; z-index: 2;
+  position: absolute; left: 16px; bottom: 16px; z-index: 2;
   padding: 8px 16px; border-radius: 99px;
   background: rgba(7, 26, 47, 0.72); backdrop-filter: blur(10px);
   color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .14em;
   font-family: var(--font-mono), monospace; text-transform: uppercase;
 }
-.about-sticky-content { display: grid; gap: 40px; }
-.about-section { padding: 26px 0; border-top: 1px solid var(--line); }
-.about-section:first-child { border-top: 0; padding-top: 0; }
-.about-section .display-section { font-size: clamp(26px, 3.4vw, 40px); margin: 6px 0 16px; }
-.about-section p { color: var(--muted); font-size: 16px; line-height: 1.75; margin: 0 0 14px; }
-.about-section p strong { color: var(--navy); font-weight: 700; }
+.about-row-text { padding-top: 10px; }
+.about-row-text .display-section { font-size: clamp(26px, 3.4vw, 40px); margin: 6px 0 16px; }
+.about-row-text p { color: var(--muted); font-size: 16px; line-height: 1.75; margin: 0 0 14px; }
+.about-row-text p strong { color: var(--navy); font-weight: 700; }
 .about-bullets { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .about-bullets li {
   position: relative; padding-left: 26px; color: var(--ink); font-size: 15.5px; line-height: 1.6;
@@ -1351,8 +1347,10 @@ blockquote cite {
 }
 
 @media (max-width: 900px) {
-  .about-sticky-layout { grid-template-columns: 1fr; gap: 28px; }
-  .about-sticky-panel { position: relative; top: 0; aspect-ratio: 4/3; }
+  .about-sticky-layout { gap: 44px; }
+  .about-row { grid-template-columns: 1fr; gap: 24px; }
+  .about-row-media { min-height: 0; }
+  .about-row-img { position: relative; top: 0; aspect-ratio: 4/3; }
   .about-side-ctas { grid-template-columns: 1fr; }
 }
 
