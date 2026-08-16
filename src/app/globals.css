@@ -1551,6 +1551,20 @@ blockquote cite {
   .lead-modal { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; }
   .lead-modal-image { min-height: 160px; }
   .lead-modal-content { padding: 28px 22px; }
+  /* mobile optimization pass — compact banners & panels so everything fits */
+  .trust-banner { padding: 26px 16px; gap: 14px 18px; }
+  .trust-banner-logos { gap: 14px 18px; }
+  .trust-banner-logos img { height: 30px; }
+  .trust-banner-logos .badge-logo { height: 34px; }
+  .reviews-summary { gap: 10px; margin: -6px 0 32px; }
+  .reviews-summary-item { min-width: 0; padding: 16px 18px; flex: 1 1 30%; }
+  .reviews-summary-item strong { font-size: 26px; }
+  .svc-slider-arrow { width: 40px; height: 40px; min-height: 40px; }
+  .svc-slider-dots { gap: 6px; }
+  .svc-slider-dot.is-active { width: 32px; }
+  .svc-coverflow-card { flex-basis: 250px; }
+  .full-menu-columns { gap: 8px 12px; }
+  .full-menu-links a { font-size: 13.5px; padding: 8px 8px; }
 }
 
 @media (max-width: 480px) {
@@ -1563,6 +1577,36 @@ blockquote cite {
   .nws-card-grid, .nws-area-grid, .nws-reviews-grid { grid-template-columns: 1fr; }
   .areas-slide-track .nws-area-card { width: 260px; }
   .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+  /* mobile optimization pass — small phones */
+  .promo-bar { font-size: 10.5px; padding: 7px 10px; }
+  .display-hero { font-size: clamp(32px, 9.5vw, 44px); }
+  .video-hero-content { padding: 118px 18px 16px; }
+  .svc-coverflow-card { flex-basis: 210px; }
+  .svc-coverflow-viewport { padding: 16px 0 10px; }
+  .svc-slider-controls { gap: 12px; }
+  .reviews-summary { flex-direction: column; align-items: stretch; }
+  .reviews-summary-item { flex: 1 1 auto; }
+  .trust-banner-logos img { height: 26px; }
+  .trust-banner-logos .badge-logo { height: 30px; }
+  .full-menu-columns { grid-template-columns: 1fr; gap: 4px; }
+  .full-menu-links a { font-size: 15px; padding: 10px 8px; }
+  .full-menu-inner { padding: 14px 16px 20px; }
+  .section { padding: 46px 16px; }
+  .page-hero { padding: 64px 16px 44px; }
+  .section-heading h2, .page-hero h1 { font-size: 32px; }
+  .nws-reviews { padding: 56px 16px; }
+  .nws-rev-scroll { height: 380px; }
+  .testimonial-block blockquote p { font-size: 15px; line-height: 1.6; }
+  .client-gallery { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .footer { padding: 40px 16px 20px; margin: 0 .4rem .4rem; }
+  .footer h2 { font-size: 30px; }
+  .area-choice-card { border-radius: 18px; }
+  .area-choice-body { padding: 20px 18px 22px; }
+  .area-choice-media { aspect-ratio: 16/8; }
+  .about-sticky-content { gap: 44px; }
+  .svcpage-content { gap: 26px; }
+  .svc-slider-dot { width: 8px; height: 8px; min-height: 8px; }
+  .svc-slider-dot.is-active { width: 26px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
