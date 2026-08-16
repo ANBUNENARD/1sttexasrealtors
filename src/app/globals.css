@@ -832,23 +832,26 @@ blockquote cite {
 
 /* Scroll spy */
 /* ============================================================
-   ABOUT — three rows: each image pinned in its OWN spot (left),
-   text scrolls alongside (right)
+   ABOUT — like basehabitation: ONE sticky image panel (left),
+   text scrolls (right); image transitions after each section's text
    ============================================================ */
 .about-sticky-layout {
-  display: grid; gap: 80px; max-width: 1360px; margin: 0 auto;
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px;
+  max-width: 1360px; margin: 0 auto; align-items: start;
 }
-.about-row {
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: start;
-}
-.about-row-media { position: relative; min-height: 560px; }
-.about-row-img {
+.about-sticky-media { position: relative; }
+.about-sticky-panel {
   position: sticky; top: 110px;
   aspect-ratio: 4/4.8; border-radius: 24px; overflow: hidden;
   background: var(--navy-deep); box-shadow: var(--shadow-lift);
 }
-.about-row-img-inner { position: absolute; inset: -8%; will-change: transform; }
-.about-row-photo { object-fit: cover; transition: transform .4s ease; }
+.about-sticky-img {
+  position: absolute; inset: 0;
+  opacity: 0; transform: scale(1.08);
+  transition: opacity .9s var(--ease-expo), transform 1.2s var(--ease-expo);
+}
+.about-sticky-img.is-active { opacity: 1; transform: scale(1); }
+.about-sticky-photo { object-fit: cover; }
 .about-sticky-label {
   position: absolute; left: 18px; bottom: 18px; z-index: 2;
   padding: 10px 18px; border-radius: 99px;
@@ -856,10 +859,11 @@ blockquote cite {
   color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .14em;
   font-family: var(--font-mono), monospace; text-transform: uppercase;
 }
-.about-row-text { padding-top: 12px; }
-.about-row-text .display-section { font-size: clamp(34px, 4.4vw, 52px); margin: 10px 0 26px; line-height: 1.15; }
-.about-row-text p { color: var(--muted); font-size: 18px; line-height: 1.85; margin: 0 0 20px; }
-.about-row-text p strong { color: var(--navy); font-weight: 700; }
+.about-sticky-content { display: grid; gap: 90px; padding-top: 12px; }
+.about-section { scroll-margin-top: 120px; }
+.about-section .display-section { font-size: clamp(34px, 4.4vw, 52px); margin: 10px 0 26px; line-height: 1.15; }
+.about-section p { color: var(--muted); font-size: 18px; line-height: 1.85; margin: 0 0 20px; }
+.about-section p strong { color: var(--navy); font-weight: 700; }
 .about-bullets { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
 .about-bullets li {
   position: relative; padding-left: 30px; color: var(--ink); font-size: 17.5px; line-height: 1.65;
@@ -1393,12 +1397,11 @@ blockquote cite {
 }
 
 @media (max-width: 900px) {
-  .about-sticky-layout { gap: 44px; }
-  .about-row { grid-template-columns: 1fr; gap: 24px; }
-  .about-row-media { min-height: 0; }
-  .about-row-img { position: relative; top: 0; aspect-ratio: 4/3; }
-  .about-row-text .display-section { font-size: clamp(28px, 6vw, 38px); }
-  .about-row-text p { font-size: 17px; line-height: 1.75; }
+  .about-sticky-layout { grid-template-columns: 1fr; gap: 28px; }
+  .about-sticky-panel { position: relative; top: 0; aspect-ratio: 4/3; }
+  .about-sticky-content { gap: 56px; }
+  .about-section .display-section { font-size: clamp(28px, 6vw, 38px); }
+  .about-section p { font-size: 17px; line-height: 1.75; }
   .about-side-ctas { grid-template-columns: 1fr; }
 }
 
