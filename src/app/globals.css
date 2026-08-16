@@ -873,6 +873,18 @@ blockquote cite {
 .about-side-ctas > div { display: grid; gap: 8px; justify-items: start; }
 .about-side-ctas p { font-size: 13.5px !important; color: var(--muted); margin: 0 !important; }
 .about-area-note { color: var(--red) !important; font-weight: 600; }
+/* basehabitation-style wordsMask headline: words slide up from behind a mask, accent word in serif italic */
+.mask-headline { display: grid; gap: 2px; overflow: hidden; }
+.mask-line { display: flex; flex-wrap: wrap; gap: 0.28em; }
+.mask-word {
+  display: inline-block; opacity: 0; transform: translateY(110%);
+  transition: opacity .65s var(--ease-expo), transform .65s var(--ease-expo);
+}
+.mask-headline.is-on .mask-word { opacity: 1; transform: translateY(0); }
+.mask-accent {
+  font-family: Georgia, 'Times New Roman', serif; font-style: italic;
+  font-weight: 500; color: var(--red-warm);
+}
 
 /* ============================================================
    INNER PAGES
