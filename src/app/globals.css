@@ -966,6 +966,25 @@ blockquote cite {
   font-family: var(--font-mono), monospace; text-transform: uppercase;
 }
 .svcpage-content { display: grid; gap: 42px; padding-top: 8px; }
+/* "View Homes for Sale" area links (source parity block) */
+.svc-area-links { padding: 4px 0 8px; }
+.svc-area-links-title { font-size: 22px; margin: 0 0 12px; }
+.svc-area-links-row { display: flex; flex-wrap: wrap; align-items: center; row-gap: 10px; }
+.svc-area-link {
+  display: inline-flex; align-items: center; color: var(--red); font-weight: 600;
+  font-size: 16.5px; text-decoration: none; padding: 6px 4px; line-height: 1.2;
+  transition: color .25s ease;
+}
+.svc-area-link:hover { color: var(--red-warm); }
+.svc-area-sep { color: #b7c4d0; margin: 0 10px; font-weight: 400; }
+/* MLS line */
+.svc-mls-line { font-weight: 600; color: var(--navy); padding: 6px 0 2px; }
+/* testimonial (source parity block) */
+.svc-testimonial { margin: 26px 0 6px; padding: 26px 28px; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow-card); }
+.svc-testimonial blockquote { margin: 0; font-size: 17px; line-height: 1.7; color: var(--ink); font-style: italic; }
+.svc-testimonial figcaption { margin-top: 12px; font-size: 14.5px; font-weight: 700; color: var(--navy); letter-spacing: .03em; }
+/* long area heading (source parity) */
+.svc-area-note { margin: 8px 0 0; font-size: 15.5px; color: var(--red); font-weight: 600; }
 .svcpage-title { font-size: clamp(34px, 4.4vw, 52px); margin: 0 0 4px; line-height: 1.12; }
 .svcpage-intro { color: var(--muted); font-size: 17px; line-height: 1.7; margin: 0; }
 .svcpage-section { scroll-margin-top: 120px; padding-top: 6px; }
