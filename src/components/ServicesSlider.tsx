@@ -24,11 +24,13 @@ export function ServicesSlider({ services }: { services: ServiceItem[] }) {
   const hover = useRef(false)
   const cardRef = useRef<HTMLElement | null>(null)
 
-  // measure the actual card width so centering works at every screen size
+  // measure the actual card LAYOUT width so centering works at every screen
+  // size — offsetWidth ignores the scale transform (getBoundingClientRect
+  // would report a scaled width and break the centering math)
   useEffect(() => {
     const measure = () => {
       if (cardRef.current) {
-        const w = cardRef.current.getBoundingClientRect().width
+        const w = cardRef.current.offsetWidth
         if (w > 0) setCardW(w)
       }
     }
