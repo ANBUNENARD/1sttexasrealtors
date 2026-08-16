@@ -16,6 +16,10 @@ export type ServicePage = {
   sections: { title: string; body: string }[]
   image?: string
   images?: string[]
+  areaLinks?: { name: string; href: string }[]
+  testimonial?: { quote: string; author: string }
+  mlsLine?: string
+  areaNote?: string
 }
 
 export const phone = '(281) 241-3121'
@@ -136,10 +140,36 @@ export const servicePages: Record<string, ServicePage> = {
     sections: [
       { title: 'The first step', body: 'The first step to buying a home is getting pre-approved by a mortgage banker for the desired amount. This crucial first step provides the seller with confidence that you are a qualified buyer and significantly speeds up the loan process. As your Realtor, we will include the pre-approved letter with the offer to increase the likelihood of a successful contract.' },
       { title: 'Beyond the purchase price', body: 'To maximize the contract value for our clients, we go far beyond the purchase price evaluating each and every line-item searching for concessions and addendums that add value to the transaction without increasing the cost. For example, homes for sale often require a repair or improvement, such as rain gutters, that can be requested of the seller to perform.' },
-      { title: 'Today\'s market', body: 'In 2026, the inventory of homes for sale has increased slightly over time with interest rates hovering around 6%, however, nice homes that are priced right continue to sell relatively quick. Searching for a home can be both exciting and stressful in an unpredictable market with lots of competition, but unfortunately, waiting out a competitive housing market may not be a good idea. Interest rates are always fluctuating, but should be going down causing future home prices to soar, especially in the most coveted neighborhoods which are always limited in availability.' },
+      { title: 'Today\'s market', body: 'In 2026, the inventory of homes for sale has increased slightly over time with interest rates hovering around 6%, however, nice homes that are priced right continue to sell relatively quick. Searching for a home can be both exciting and stressful in an unpredictable market with lots of competition, but unfortunately, waiting out a competitive housing market may not be a good idea. Interest rates are always fluctuating, but should be going down causing future home prices to soar, especially in the most coveted neighborhoods which are always limited in availability. For a sell-and-buy contingency scenario, we provide creative ways to leverage equity built up over time to compensate for homes spending 2-weeks to a month longer on the market to sell compared to previous years.' },
       { title: 'Foreclosure specialists', body: 'With higher interest rates, taxes and insurance premiums coupled with longer days on the market, foreclosures are rising. We are foreclosure specialists working with banks, lenders and Freddie Mac to provide access to a large and growing number of foreclosures.' },
       { title: 'Home Buyer Services', body: 'Represent your best Interest. Negotiate with the Seller\'s Agent. Guidance on mortgage, analysis and providers. School and Community Information. Short sales, Foreclosures, REO. Financial Transaction Expert. New Home Construction, Builders. Relocation Assistance. Map Search of Property Listings. Real-time MLS Home Search. Email alerts for new Property Listings. Stay with you through Closing & Beyond.' },
     ],
+    areaLinks: [
+      { name: 'Baytown', href: '/realtors-in-baytown/' },
+      { name: 'Clear Lake City', href: '/clear-lake-tx-homes-for-sale/' },
+      { name: 'Clear Lake Shores', href: '/realtors-in-clear-lake-shores-2/' },
+      { name: 'Deer Park', href: '/realtors-in-deer-park-2/' },
+      { name: 'Dickinson', href: '/realtors-in-dickinson/' },
+      { name: 'El Lago', href: '/realtors-in-el-lago/' },
+      { name: 'Friendswood', href: '/realtors-in-friendswood/' },
+      { name: 'Galveston', href: '/realtors-in-galveston/' },
+      { name: 'Kemah', href: '/realtors-in-kemah/' },
+      { name: 'La Porte', href: '/realtors-in-la-porte-2/' },
+      { name: 'League City', href: '/realtors-in-league-city/' },
+      { name: 'Nassau Bay', href: '/realtors-in-nassau-bay/' },
+      { name: 'Pasadena', href: '/realtors-in-pasadena/' },
+      { name: 'Pearland', href: '/realtors-in-pearland-2/' },
+      { name: 'San Leon', href: '/realtors-in-san-leon-2/' },
+      { name: 'Seabrook', href: '/realtors-in-seabrook/' },
+      { name: 'Shoreacres', href: '/realtors-in-shoreacres-2/' },
+      { name: 'Taylor Lake Village', href: '/realtors-in-taylor-lake-village/' },
+      { name: 'Texas City', href: '/realtors-in-texas-city-2/' },
+      { name: 'Tiki Island', href: '/realtors-in-tiki-island/' },
+      { name: 'Webster', href: '/realtors-in-webster-2/' },
+    ],
+    testimonial: { quote: 'We had a fantastic experience with David and Simone Karstedt! They are, hands down, the best in the business. Without being pushy, they gave my husband and I the best practical advice for purchasing our first home. Thank you both for your perfect direction and getting us into the home of our dreams! If you are looking for a home, call these two.', author: 'Michelle McWhorter Ziglar' },
+    mlsLine: 'View homes for sale using the custom based real-time MLS Home Search.',
+    areaNote: '1st Texas Realtors for expert Home Buying services in Baytown, Clear Lake City, Clear Lake Shores, Deer Park, Dickinson, El Lago, Friendswood, Galveston, Kemah, La Porte, League City, Nassau Bay, Pasadena, Pearland, Seabrook, Taylor Lake Village, Texas City, Tiki Island and Webster, Texas.',
   },
   'seller-services': {
     slug: 'seller-services', title: 'Home Selling', eyebrow: 'Sell with a strategy',
