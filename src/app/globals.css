@@ -643,6 +643,21 @@ blockquote cite {
 .trust-badges img { height: 40px; width: auto; opacity: .85; transition: .25s ease; }
 .trust-badges img:hover { opacity: 1; }
 .trust-badges .badge-logo { height: 46px; }
+/* navy credential banner (reviews page) — like the client's navy footer strip */
+.trust-banner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 18px 34px;
+  margin: 44px auto 8px; padding: 34px 44px; border-radius: 20px;
+  background: linear-gradient(135deg, #071a2f, #0a2440 60%, #123a70);
+  box-shadow: var(--shadow-card);
+}
+.trust-banner-label {
+  font-family: var(--font-mono), monospace; font-size: 12px; letter-spacing: .2em;
+  text-transform: uppercase; color: rgba(255, 255, 255, 0.65); width: 100%; text-align: center;
+}
+.trust-banner-logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 26px; }
+.trust-banner-logos img { height: 46px; width: auto; filter: brightness(1.06) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35)); transition: transform .25s ease, filter .25s ease; }
+.trust-banner-logos img:hover { transform: translateY(-3px); filter: brightness(1.12) drop-shadow(0 4px 12px rgba(30, 95, 214, 0.5)); }
+.trust-banner-logos .badge-logo { height: 52px; }
 
 /* CTA showcase — full-width navy band (Chapitre style) */
 .cta-showcase {
