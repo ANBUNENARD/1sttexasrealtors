@@ -2,55 +2,60 @@
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-// NWS-style services slider: 3 cards per view (1 on mobile), arrows + dots,
-// auto-advances every 3 seconds with a loading-progress animation on the
-// active dot, pauses on hover, loops infinitely.
+// NWS-style services coverflow carousel: the MIDDLE card is bigger than its
+// neighbors; transitioning shrinks the center card while the next one grows.
+// Auto-advances every 3 seconds (loading progress on the active dot),
+// ONE-WAY infinite loop (end -> start continuously), pauses on hover.
 export type ServiceItem = { title: string; body: string; href: string; image: string; badge: string }
 
+const CARD_W = 360 // css px per card in the coverflow
+const GAP = 18
+
 export function ServicesSlider({ services }: { services: ServiceItem[] }) {
-  const [page, setPage] = useState(0)
-  const [perView, setPerView] = useState(3)
+  const [active, setActive] = useState(0)
   const [progressKey, setProgressKey] = useState(0)
   const timer = useRef<ReturnType<typeof setInterval> | null>(null)
   const hover = useRef(false)
+  const n = services.length
 
+  // auto-advance every 3 seconds — ONE-WAY loop (wraps end -> start)
   useEffect(() => {
-    const check = () => setPerView(window.innerWidth > 1000 ? 3 : window.innerWidth > 640 ? 2 : 1)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-
-  const pages = Math.max(1, Math.ceil(services.length / perView))
-  const safePage = page >= pages ? pages - 1 : page
-
-  // auto-advance every 3 seconds (restarting the loading progress each change)
-  useEffect(() => {
-    const tick = () => { if (!hover.current) { setPage(p => (p + 1) % pages); setProgressKey(k => k + 1) } }
+    const tick = () => { if (!hover.current) { setActive(a => (a + 1) % n); setProgressKey(k => k + 1) } }
     timer.current = setInterval(tick, 3000)
     return () => { if (timer.current) clearInterval(timer.current) }
-  }, [pages, perView])
+  }, [n])
 
-  const go = useCallback((p: number) => { setPage(((p % pages) + pages) % pages); setProgressKey(k => k + 1) }, [pages])
+  const go = useCallback((a: number) => { setActive(((a % n) + n) % n); setProgressKey(k => k + 1) }, [n])
 
-  return <div className="svc-slider" role="region" aria-label="Our services carousel">
-    <div className="svc-slider-viewport" onMouseEnter={() => { hover.current = true }} onMouseLeave={() => { hover.current = false }}>
-      <div className="svc-slider-track" style={{ transform: `translateX(-${safePage * (100 / perView)}%)` }}>
-        {services.map(s => <article className="svc-slider-card" key={s.title}>
-          <div className="nws-card-media"><img src={s.image} alt={s.title} loading="lazy" /><span className="nws-card-badge">{s.badge}</span><Link href={s.href} className="nws-card-arrow" aria-label={`${s.title} — learn more`}><span>→</span></Link></div>
-          <div className="nws-card-body"><h3>{s.title}</h3><p>{s.body}</p><Link className="nws-card-btn" href={s.href}>Learn more <span>→</span></Link></div>
-        </article>)}
+  // center the active card
+  const trackX = `calc(50% - ${active * (CARD_W + GAP) + CARD_W / 2}px)`
+
+  return <div className="svc-slider svc-coverflow" role="region" aria-label="Our services carousel">
+    <div className="svc-coverflow-viewport" onMouseEnter={() => { hover.current = true }} onMouseLeave={() => { hover.current = false }}>
+      <div className="svc-coverflow-track" style={{ transform: `translateX(${trackX})` }}>
+        {services.map((s, i) => {
+          const dist = ((i - active + n * 3) % n) - (n >> 1) // shortest wrapped distance (negative = left)
+          const isCenter = i === active
+          // scale: center 1.12, immediate neighbors 0.92, far 0.84; opacity fades with distance
+          const scale = isCenter ? 1.12 : Math.abs(dist) === 1 ? 0.92 : 0.84
+          const opacity = isCenter ? 1 : Math.abs(dist) === 1 ? 0.85 : 0.45
+          const z = isCenter ? 3 : Math.abs(dist) === 1 ? 2 : 1
+          return <article key={s.title} className={`svc-coverflow-card${isCenter ? ' is-center' : ''}`} style={{ transform: `scale(${scale})`, opacity, zIndex: z }} aria-hidden={!isCenter && Math.abs(dist) > 2 || undefined}>
+            <div className="nws-card-media"><img src={s.image} alt={s.title} loading="lazy" /><span className="nws-card-badge">{s.badge}</span><Link href={s.href} className="nws-card-arrow" aria-label={`${s.title} — learn more`}><span>→</span></Link></div>
+            <div className="nws-card-body"><h3>{s.title}</h3><p>{s.body}</p><Link className="nws-card-btn" href={s.href}>Learn more <span>→</span></Link></div>
+          </article>
+        })}
       </div>
     </div>
 
     <div className="svc-slider-controls">
-      <button className="svc-slider-arrow" onClick={() => go(safePage - 1)} aria-label="Previous services">←</button>
+      <button className="svc-slider-arrow" onClick={() => go(active - 1)} aria-label="Previous services">←</button>
       <div className="svc-slider-dots" role="tablist" aria-label="Service pages">
-        {Array.from({ length: pages }, (_, i) => <button key={i} className={`svc-slider-dot${i === safePage ? ' is-active' : ''}`} onClick={() => go(i)} aria-label={`Page ${i + 1}`} aria-selected={i === safePage}>
-          {i === safePage && <span className="svc-progress" key={progressKey} aria-hidden="true" />}
+        {Array.from({ length: n }, (_, i) => <button key={i} className={`svc-slider-dot${i === active ? ' is-active' : ''}`} onClick={() => go(i)} aria-label={`Service ${i + 1}`} aria-selected={i === active}>
+          {i === active && <span className="svc-progress" key={progressKey} aria-hidden="true" />}
         </button>)}
       </div>
-      <button className="svc-slider-arrow" onClick={() => go(safePage + 1)} aria-label="Next services">→</button>
+      <button className="svc-slider-arrow" onClick={() => go(active + 1)} aria-label="Next services">→</button>
     </div>
   </div>
 }
