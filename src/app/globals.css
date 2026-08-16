@@ -147,6 +147,7 @@ html.intro-locked, html.intro-locked body { overflow: hidden; }
   box-shadow: 0 10px 30px rgba(0, 26, 51, 0.4);
   padding: 10px 26px;
 }
+.site-header.scrolled .header-logo img { height: 40px; }
 /* NWS floating rounded nav on scroll (screenshot 2 style, your theme) */
 @media (min-width: 1100px) {
   .site-header.scrolled {
@@ -170,6 +171,14 @@ html.intro-locked, html.intro-locked body { overflow: hidden; }
 .menu-btn .mono-label { font-size: 13px; letter-spacing: .08em; }
 .menu-btn-mobile { display: none; }
 .header-wordmark { display: grid; justify-items: center; line-height: 1; text-align: center; justify-self: start; }
+.header-logo { justify-self: start; display: inline-flex; line-height: 0; }
+.header-logo img {
+  width: auto; height: 46px; display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 26, 51, 0.35);
+  transition: height .3s ease, box-shadow .3s ease;
+}
+.header-logo:hover img { box-shadow: 0 6px 22px rgba(239, 64, 53, 0.35); }
 .wordmark-main { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #fff; text-transform: uppercase; }
 .wordmark-sub { font-size: 12px; font-weight: 500; font-family: var(--font-mono), monospace; letter-spacing: .34em; color: var(--red-warm); text-transform: uppercase; margin-top: 4px; }
 /* desktop nav center */
@@ -1179,6 +1188,8 @@ blockquote cite {
   .nav-desktop { display: none; }
   .menu-btn-mobile { display: inline-flex; justify-self: end; }
   .header-cta, .header-actions .phone { display: none; }
+  .header-logo img { height: 36px; }
+  .full-menu .header-logo img { height: 40px; }
   .menu-btn .mono-label { display: none; }
   .wordmark-main { font-size: 17px; }
   .wordmark-sub { font-size: 8px; letter-spacing: .24em; }

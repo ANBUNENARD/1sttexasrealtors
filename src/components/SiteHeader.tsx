@@ -69,8 +69,8 @@ export function SiteHeader() {
 
     <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-wrap">
-        {/* logo LEFT (NWS position) */}
-        <Link href="/" onClick={closeMenu} className="header-wordmark" aria-label="1st Texas Realtors"><span className="wordmark-main">1st Texas</span><span className="wordmark-sub">Realtors</span></Link>
+        {/* logo LEFT (NWS position) — client's real logo */}
+        <Link href="/" onClick={closeMenu} className="header-logo" aria-label="1st Texas Realtors"><img src="/assets/reference/1stTexasRealtors-logo.png" alt="1st TEXAS REALTORS — Full Service Brokerage" width={152} height={73} /></Link>
 
         {/* nav CENTER with categorized dropdowns (NWS anatomy) */}
         <nav className="nav-desktop" aria-label="Main navigation">
@@ -117,7 +117,7 @@ export function SiteHeader() {
       <div className="full-menu-inner">
         <div className="full-menu-head">
           <button className="menu-close-btn" aria-label="Close menu" onClick={closeMenu}><svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><path d="M1 1h16M1 7h16M1 13h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg><span className="mono-label">Close</span></button>
-          <Link href="/" onClick={closeMenu} className="header-wordmark" aria-label="1st Texas Realtors"><span className="wordmark-main wordmark-menu">1st Texas</span><span className="wordmark-sub wordmark-menu">Realtors</span></Link>
+          <Link href="/" onClick={closeMenu} className="header-logo" aria-label="1st Texas Realtors"><img src="/assets/reference/1stTexasRealtors-logo.png" alt="1st TEXAS REALTORS — Full Service Brokerage" width={152} height={73} /></Link>
           <div className="full-menu-actions">
             <a className="account-link" href="/home-search/">Available listings</a>
             <a className="account-link register-link" href="/register/">Inquire</a>
