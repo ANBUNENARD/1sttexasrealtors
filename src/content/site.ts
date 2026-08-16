@@ -15,6 +15,7 @@ export type ServicePage = {
   intro: string
   sections: { title: string; body: string }[]
   image?: string
+  images?: string[]
 }
 
 export const phone = '(281) 241-3121'
@@ -131,6 +132,7 @@ export const servicePages: Record<string, ServicePage> = {
     slug: 'home-buyers', title: 'Home Buying', eyebrow: 'Buy with confidence',
     intro: 'Family owned since 2004, 1st Texas Realtors for expert Realtors with local real estate experience in Clear Lake NASA. We provide comprehensive Realtor services when buying single family residential homes, town homes and high-rise condominiums.',
     image: '/assets/reference/clearlaketxhomesforsale.jpg',
+    images: ['/assets/reference/clearlaketxhomesforsale.jpg', '/assets/reference/leaguecityhomesforsale.jpg', '/assets/reference/NASAhomesforsale.jpg', '/assets/client/Clear-Lake-239.jpg', '/assets/client/Team-239.jpg'],
     sections: [
       { title: 'The first step', body: 'The first step to buying a home is getting pre-approved by a mortgage banker for the desired amount. This crucial first step provides the seller with confidence that you are a qualified buyer and significantly speeds up the loan process. As your Realtor, we will include the pre-approved letter with the offer to increase the likelihood of a successful contract.' },
       { title: 'Beyond the purchase price', body: 'To maximize the contract value for our clients, we go far beyond the purchase price evaluating each and every line-item searching for concessions and addendums that add value to the transaction without increasing the cost. For example, homes for sale often require a repair or improvement, such as rain gutters, that can be requested of the seller to perform.' },
@@ -143,6 +145,7 @@ export const servicePages: Record<string, ServicePage> = {
     slug: 'seller-services', title: 'Home Selling', eyebrow: 'Sell with a strategy',
     intro: 'Family owned since 2004, 1st Texas Realtors for expert local Realtors in the Clear Lake NASA area, dedicated customer service and real time listings. Our Realtors total over 100-years combined real estate experience; when you hire one, you get the knowledge and experience of all. We provide comprehensive Realtor services when selling single family residential homes, town homes, high-rise condominiums, land and lots.',
     image: '/assets/reference/seabrookhomesforsale.jpg',
+    images: ['/assets/reference/seabrookhomesforsale.jpg', '/assets/reference/seabrookhomesforsale02.jpg', '/assets/reference/friendswoodhomesforsale.jpg', '/assets/reference/leaguecityhomesforsale.jpg', '/assets/client/David-Simone-239.jpg'],
     sections: [
       { title: 'Market Analysis', body: 'The first step is to complete a Market Analysis to determine the best price for your home; this is the most important decision of the sales process. The market research includes analyzing the most recent and comparable home sales, current listings and a comparison of all the amenities of each property. Our clients can also do their own research of comparable home listings using the real-time Home Search on this website.' },
       { title: 'Home Staging & Renovations', body: 'Less is More! Follow our Home Staging Guidelines to add significant value to the sale of your home with little or no extra cost. The timeline can be shortened by focusing on Renovations & Repairs that matter the most for selling your home quickly. At the same time, avoiding pricey renovations and major home projects with an unpredictable amount of time and money. We advise you on repairs and upgrades that are worth your time and investment for the sale of your home.' },
@@ -155,6 +158,7 @@ export const servicePages: Record<string, ServicePage> = {
     slug: 'homes-for-rent', title: 'Homes for Rent & Property Management', eyebrow: 'Find the right fit',
     intro: 'Family owned since 2004, the 1st Texas Realtors provide expert Realtors with local real estate experience in Clear Lake NASA. We provide comprehensive Realtor services when renting or leasing homes, town homes and high-rise condominiums.',
     image: '/assets/reference/NASAhomesforsale.jpg',
+    images: ['/assets/reference/NASAhomesforsale.jpg', '/assets/client/Shrimp-Boat-239.jpg'],
     sections: [
       { title: 'Renting', body: 'As long-time residents of the Clear Lake NASA area, we can find the best home, in the best neighborhood, with the best commutes and schools. We will negotiate with the owner for the best value and quality of life; click below to view all rental home listings and call us to schedule a visit.' },
       { title: 'Leasing & property management', body: 'We provide professional leasing and property management service including listing homes for rent on the MLS, interviewing prospective tenants, performing background checks, completing the lease and collecting a deposit. Contact us for a free market analysis to determine the best rent to charge for your home and itemize a checklist to prepare the property for a new lease.' },
@@ -163,6 +167,7 @@ export const servicePages: Record<string, ServicePage> = {
   'new-home-construction': {
     slug: 'new-home-construction', title: 'New Home Construction', eyebrow: 'Build your next chapter',
     intro: 'We help families with new home construction in the Clear Lake area and have experience with Trendmaker Homes, Taylor Morrison Home Builders, DR Horton and Gehan Homes.',
+    images: ['/assets/reference/friendswoodhomesforsale.jpg', '/assets/reference/clearlaketxhomesforsale.jpg', '/assets/reference/leaguecityhomesforsale.jpg', '/assets/reference/seabrookhomesforsale02.jpg'],
     sections: [
       { title: 'New Homes versus Resale Homes', body: 'If you\'re debating whether to construct a new home or buy a resale home, there are many considerations. Price remains a priority, but also consider the intangibles such as a Victorian architecture with large trees in an established neighborhood. New homes are new; there is no compromise in taste, tolerating damage or use by previous owners. New homes cost more than resale homes, and can vary significantly from builder to builder on a case by case basis. Dollar for dollar, you might get 10-20% less home in materials or square footage than a resale home. New homes are more energy efficient with the most stringent building codes and technology to regulate heating and cooling with minimum energy use. You can negotiate a lower price on a resale home, however, home builders are less likely to negotiate on price because they operate on a fixed cost basis for labor and materials. New homes have a warranty, new appliances, HVAC, high efficiency wiring, sealant and insulation providing a layer of security and peace of mind.' },
       { title: 'Custom Homes versus Production Homes', body: 'Custom homes showcase personal taste for architecture, recreation such as a swimming pool with water falls, stone tiled veranda, or basement sports man cave. Home builders have in-house architects, home designers, interior designers and landscape artists, but you can use an independent source for any service. Production homes offer a wide range of house plans, designs and material options but usually limited to chosen neighborhoods and based on several price level models. There are fewer decisions to make on a production home, less customization and usually the construction process completes in less time.' },
@@ -173,6 +178,7 @@ export const servicePages: Record<string, ServicePage> = {
   'home-staging': {
     slug: 'home-staging', title: 'Home Staging & Renovations', eyebrow: 'Prepare to stand out',
     intro: 'Follow these home staging guidelines to add significant value to the sale of your home at little to no cost.',
+    images: ['/assets/reference/NASAhomesforsale.jpg', '/assets/reference/friendswoodhomesforsale.jpg', '/assets/reference/leaguecityhomesforsale.jpg', '/assets/reference/seabrookhomesforsale.jpg', '/assets/reference/clearlaketxhomesforsale.jpg'],
     sections: [
       { title: 'Less is More!', body: 'View your home from across the street and take note of anything unusual such as loose artifacts, overgrown hedges, dead branches etc. Remove or address all unusual features from the property view. If offered, take advantage of the free city brush and bulky item pickups.' },
       { title: 'Declutter and organize', body: 'If you are living in the home during the sale, remove all clutter and organize the remaining items. The Container store has many affordable storage solutions great for between home sale and time of move; items such as newspapers, mail and laundry should be packed and out of sight. Remove a portion of your furniture and the rooms will look larger. It\'s no longer about functionality; we want to create the perception of larger by reducing the amount of contents.' },
@@ -184,6 +190,7 @@ export const servicePages: Record<string, ServicePage> = {
   'relocation-service': {
     slug: 'relocation-service', title: 'Relocation Service', eyebrow: 'Know where you\'re going',
     intro: '1st Texas Realtors for expert Clear Lake relocation service; our Realtors total over 100-years combined real estate experience; when you hire one, you get the experience and knowledge of all. No matter where you\'re from, we can all agree picking up your life and relocating can be very difficult even for the well prepared. Add children, pets and a deadline to begin your new job and it\'s even more stressful. But we can help!',
+    images: ['/assets/reference/Clear-Lake-Texas-e1736781694121.jpg', '/assets/client/Clear-Lake-239.jpg', '/assets/client/Fishing-Pier-239.jpg', '/assets/client/Space-Shuttle-239.jpg', '/assets/client/1st-texas-realtors-night-couple-e1617199697674.jpg'],
     sections: [
       { title: 'Steps to relocating to Clear Lake', body: 'Make a visit. Before you relocate, visit at least once. We recommend touring the NASA Johnson Space Center and enjoying the waterfront. With a short-term rental arrangement, you have an opportunity to live and get to know the new neighborhood much better and make a more informed purchase decision.' },
       { title: 'Make a Relocation Plan', body: 'After your visit to Clear Lake, it is time for a Relocation Plan. The timeline and critical decision points should be written down: budget for buying or renting, desired neighborhoods, schools and necessary commutes, location and proximity to friends or family that live in Clear Lake, Texas. We provide a comprehensive list of criteria for you to consider before relocating.' },
@@ -196,6 +203,7 @@ export const servicePages: Record<string, ServicePage> = {
     slug: 'commercial-property-realtors', title: 'Commercial Property Realtors', eyebrow: 'Local commercial expertise',
     intro: 'Family owned since 2004, the 1st Texas Realtors is a full-service real estate brokerage with vast commercial property experience in buying, selling, permitting, financing and property management of commercial property and multi family for sale. I specialize in businesses including banks, automotive, churches, restaurants, office space and multi-unit residential apartments. — David Karstedt',
     image: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg',
+    images: ['/assets/reference/Clear-Lake-Texas-e1736781694121.jpg', '/assets/reference/seabrookhomesforsale02.jpg'],
     sections: [
       { title: 'Commercial experience', body: 'David Karstedt has over 25-years experience buying and selling commercial property in the Clear Lake NASA area, and established relationships with developers and regulatory agencies to ensure the commercial process is streamlined from beginning to end.' },
       { title: 'Commercial Property and Multi Family for Sale in Clear Lake', body: '(1) Multi Family Apartments or Condominiums: use the Home Search selecting rental income to view real-time listings of apartments and multi family for sale. Register to save custom commercial property searches and receive automatic email alerts when new multi-family units become available. (2) Commercial Property: we will find all commercial property for sale that match your criteria whether a restaurant, automotive, bank or Church. If you are selling your commercial property, we\'ll complete a Market Analysis to determine the most accurate price to sell the property. (3) Schedule an Appointment: commercial properties and multi family apartments are complex transactions that engage multiple parties. Whether your interest is buying, selling, financing, refinancing, zoning or regulatory, it is best to discuss with a Commercial Realtor.' },
