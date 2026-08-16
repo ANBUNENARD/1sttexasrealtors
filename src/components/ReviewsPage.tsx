@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import { testimonialsExact } from '@/content/testimonials-exact'
 
 // Reviews page: 6 reviews shown initially, "Show more" reveals the rest
-// (and "Show fewer" collapses back). Each review's drop-cap letter DROPS DOWN
-// when scrolled into view, then the text follows — for every card.
+// (and "Show fewer" collapses back). Each review DROPS DOWN when scrolled
+// into view, and rises back UP when scrolled out of view — two-way animation.
 export function ReviewsPage() {
   const [showAll, setShowAll] = useState(false)
   const [active, setActive] = useState(0)
@@ -13,7 +13,7 @@ export function ReviewsPage() {
   const visible = showAll ? reviews : reviews.slice(0, 6)
 
   return <div className="reviews-page-wrap">
-    <div className="reviews-summary"><div className="reviews-summary-item"><strong>74</strong><span>Client reviews</span></div><div className="reviews-summary-item"><span className="stars" aria-label="Rated 5 out of 5 stars">★★★★★</span><span>Rated 5 stars</span></div><div className="reviews-summary-item"><strong>Top 3%</strong><span>Texas Monthly since 2010</span></div></div>
+    <div className="reviews-summary"><div className="reviews-summary-item"><strong>74</strong><span>Client reviews</span></div><div className="reviews-summary-item"><strong>Top 3%</strong><span>Texas Monthly since 2010</span></div></div>
     <div className="testimonial-flow">
       {visible.map((review, i) => <DropCard key={`${review.author}-${i}`} review={review} active={active === i} onActive={() => setActive(i)} />)}
     </div>
@@ -25,32 +25,31 @@ export function ReviewsPage() {
   </div>
 }
 
-// one review card — the drop-cap letter falls in, then the text reveals
+// one review card — drops down into view on scroll-in, rises back up on scroll-out
 function DropCard({ review, active, onActive }: { review: (typeof testimonialsExact)[number]; active: boolean; onActive: () => void }) {
   const ref = useRef<HTMLDivElement>(null)
   const [on, setOn] = useState(false)
 
-  // scroll-trigger: when the card enters the viewport, play the drop animation
+  // two-way scroll trigger: entering viewport -> drop in; leaving -> rise back up
   useEffect(() => {
     const el = ref.current
     if (!el) return
     const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { setOn(true); onActive(); obs.disconnect() } })
+      entries.forEach(e => {
+        if (e.isIntersecting) { setOn(true); onActive() }
+        else setOn(false)
+      })
     }, { threshold: 0.2 })
     obs.observe(el)
     return () => obs.disconnect()
   }, [onActive])
 
-  // true drop cap: the big letter IS the first character of the quote,
-  // and the rest of the text flows right after it ("V" + "ery pleased! Thank you.")
+  // normal font review — no big drop-cap letter, just the quote text
   const cleaned = review.quote.replace(/^[“”"'`\s]+/, '').replace(/[”"'`\s]+$/, '')
-  const letter = cleaned.charAt(0).toUpperCase() || '“'
-  const rest = cleaned.slice(1)
 
   return <div ref={ref} className={`testimonial-block drop-card${on ? ' is-on' : ''}${active ? ' is-active' : ''}`}>
-    {review.images.map((img, j) => <img key={j} className="testimonial-photo" src={`/assets/client/${img}`} alt="1st Texas Realtors in Clear Lake" loading="lazy" />)}
     <blockquote>
-      <p className="drop-cap-text"><span className="drop-letter" aria-hidden="true">{letter}</span>{rest}<span className="quote-close">”</span></p>
+      <p className="drop-cap-text">“{cleaned}”</p>
       <span className="drop-stars stars" aria-label="Rated 5 out of 5 stars">★★★★★</span>
       {review.author && <cite>{review.author}</cite>}
     </blockquote>

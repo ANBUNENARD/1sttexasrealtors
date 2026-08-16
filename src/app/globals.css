@@ -619,39 +619,22 @@ blockquote cite {
    ============================================================ */
 .reviews-page-wrap { display: grid; gap: 18px; }
 .drop-card { position: relative; overflow: hidden; display: flex; flex-direction: column; }
-/* true drop cap — the big letter IS the first character; text wraps around it.
-   Matches the ORIGINAL site's style exactly: blockquote p::first-letter
-   { font-size: 200%; color: #7883c1 } — a modest 2x letter in blue-lavender. */
+/* normal-font review text — no big drop-cap letter, clean readable body text */
 .drop-cap-text {
-  margin: 0; font-size: 15px; line-height: 1.7; color: var(--ink);
-  overflow: hidden; /* contain the float so all cards align */
-}
-.drop-letter {
-  float: left; margin: 3px 7px 0 0;
-  font-family: var(--font-display), 'Manrope', sans-serif;
-  font-size: 200%; font-weight: 700; line-height: .95; letter-spacing: -0.02em;
-  color: #7883c1; user-select: none; pointer-events: none;
-  /* starts hidden above the card, drops into place when the card scrolls in */
-  opacity: 0; transform: translateY(-130%) rotate(-4deg);
-  transition: opacity .5s ease, transform .8s var(--ease-spring);
-}
-.drop-card.is-on .drop-letter {
-  opacity: 1; transform: translateY(0) rotate(0deg);
+  margin: 0; font-size: 16px; line-height: 1.75; color: var(--ink);
+  font-family: var(--font-sans), 'Geist', sans-serif;
 }
 .quote-close { color: var(--ink); }
 .drop-card blockquote { display: flex; flex-direction: column; flex: 1; }
+/* two-way drop animation: enter viewport -> drop down; leave -> rise back up */
 .drop-card .drop-cap-text, .drop-card .drop-stars, .drop-card cite {
-  opacity: 0; transform: translateY(14px);
+  opacity: 0; transform: translateY(26px);
   transition: opacity .7s ease, transform .7s var(--ease-expo);
 }
-.drop-card.is-on .drop-cap-text { transition-delay: .45s; opacity: 1; transform: translateY(0); }
-.drop-card.is-on .drop-stars { transition-delay: .3s; opacity: 1; transform: translateY(0); }
-.drop-card.is-on cite { transition-delay: .6s; opacity: 1; transform: translateY(0); }
-.drop-card.is-on .testimonial-photo { opacity: 1; transform: scale(1); }
-.drop-card .testimonial-photo {
-  opacity: 0; transform: scale(.97);
-  transition: opacity .9s ease .25s, transform .9s var(--ease-expo) .25s;
-}
+.drop-card.is-on .drop-cap-text { transition-delay: .35s; opacity: 1; transform: translateY(0); }
+.drop-card.is-on .drop-stars { transition-delay: .2s; opacity: 1; transform: translateY(0); }
+.drop-card.is-on cite { transition-delay: .5s; opacity: 1; transform: translateY(0); }
+/* when scrolled out of view, everything rises back up (reverse) */
 .drop-card cite { margin-top: auto; padding-top: 12px; font-style: italic; font-weight: 400; color: var(--ink); letter-spacing: .01em; text-transform: none; }
 /* "Show more" button */
 .reviews-more-wrap { display: grid; gap: 10px; justify-items: center; padding: 18px 0 6px; }
@@ -668,15 +651,6 @@ blockquote cite {
 /* cards revealed by "Show more" play the same drop animation on scroll */
 .reviews-page-wrap .testimonial-block { transition: transform .3s var(--ease-spring), box-shadow .3s ease; }
 .reviews-page-wrap .testimonial-block.is-active { border-color: rgba(30, 95, 214, 0.35); }
-.testimonial-block .testimonial-photo {
-  width: 100%; height: 170px; object-fit: cover; border-radius: 12px;
-  border: 1px solid var(--line); box-shadow: var(--shadow-card);
-  transition: transform .3s var(--ease-spring), box-shadow .3s ease;
-}
-.testimonial-block .testimonial-photo:hover { transform: scale(1.02); box-shadow: var(--shadow-lift); }
-.testimonial-block:has(.testimonial-photo) { grid-template-columns: 1.6fr 1fr; align-items: center; }
-.testimonial-block:has(.testimonial-photo) blockquote { grid-column: 1; grid-row: 1; }
-.testimonial-block:has(.testimonial-photo) .testimonial-photo { grid-column: 2; grid-row: 1; }
 /* drop cap — the client's signature light-blue first letter */
 .page-content blockquote p::first-letter {
   font-family: var(--font-display), 'Manrope', Georgia, serif;
@@ -1603,9 +1577,6 @@ blockquote cite {
   .nws-reviews-grid { grid-template-columns: 1fr; }
   .nws-rev-scroll { height: 420px; }
   .testimonial-flow { grid-template-columns: 1fr; }
-  .testimonial-block:has(.testimonial-photo) { grid-template-columns: 1fr; }
-  .testimonial-block:has(.testimonial-photo) blockquote { grid-column: 1; grid-row: 1; }
-  .testimonial-block:has(.testimonial-photo) .testimonial-photo { grid-column: 1; grid-row: 2; height: 220px; }
   .nws-reviews { padding: 70px 20px; }
   .client-gallery { grid-template-columns: repeat(2, 1fr); }
   .cta-steps { flex-direction: column; margin: 40px 20px 0; }
