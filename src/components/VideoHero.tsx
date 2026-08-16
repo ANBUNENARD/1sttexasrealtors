@@ -4,19 +4,25 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 // Hero: "SERVING {area} AND NEARBY" — each area has its OWN high-quality
-// looping motion clip (an MP4 "video GIF": stabilized real aerial footage for
-// the lake/house areas, jitter-free cinematic Ken Burns on high-res photos for
-// the others). The area text and its clip change TOGETHER every 3 seconds,
-// continuously, with an instant cut (no crossfade).
+// looping motion clip (an MP4 "video GIF"). The 4 original aerial clips are
+// kept; the rest are real stock motion scenes sourced for this hero. The area
+// text and its clip change TOGETHER every 3 seconds, instantly (no crossfade).
 const AREAS = [
+  // original aerial clips (unchanged)
   { name: 'Clear Lake City', src: '/videos/hero-clear-lake-city.mp4', poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg', alt: 'Clear Lake City Texas aerial' },
   { name: 'League City',     src: '/videos/hero-league-city.mp4',     poster: '/assets/reference/leaguecityhomesforsale.jpg',          alt: 'League City Texas aerial' },
-  { name: 'Friendswood',     src: '/videos/hero-friendswood.mp4',     poster: '/assets/reference/friendswoodhomesforsale.jpg',         alt: 'Friendswood Texas aerial' },
   { name: 'Seabrook',        src: '/videos/hero-seabrook.mp4',        poster: '/assets/reference/seabrookhomesforsale.jpg',            alt: 'Seabrook Texas aerial' },
-  { name: 'Kemah',           src: '/videos/hero-kemah.mp4',           poster: '/assets/reference/seabrookhomesforsale02.jpg',          alt: 'Waterfront homes near Kemah Texas' },
-  { name: 'Nassau Bay',      src: '/videos/hero-nassau-bay.mp4',      poster: '/assets/reference/clearlaketxhomesforsale.jpg',         alt: 'Homes for sale in Nassau Bay Texas' },
-  { name: 'Galveston',       src: '/videos/hero-galveston.mp4',       poster: '/assets/reference/leaguecityhomesforsale.jpg',          alt: 'Coastal homes near Galveston Texas' },
-  { name: 'Pearland',        src: '/videos/hero-pearland.mp4',        poster: '/assets/reference/NASAhomesforsale.jpg',               alt: 'Pearland Texas and the NASA area' },
+  { name: 'Friendswood',     src: '/videos/hero-friendswood.mp4',     poster: '/assets/reference/friendswoodhomesforsale.jpg',         alt: 'Friendswood Texas aerial' },
+  // new real-motion scenes for the other service areas
+  { name: 'Kemah',           src: '/videos/hero-balcony.mp4',         poster: '/assets/reference/seabrookhomesforsale02.jpg',          alt: 'Balcony view of waterfront living near Kemah' },
+  { name: 'Nassau Bay',      src: '/videos/hero-golf.mp4',            poster: '/assets/reference/clearlaketxhomesforsale.jpg',         alt: 'Aerial golf course near Nassau Bay' },
+  { name: 'Galveston',       src: '/videos/hero-fishing.mp4',         poster: '/assets/reference/leaguecityhomesforsale.jpg',          alt: 'Fishing the Texas coast near Galveston' },
+  { name: 'Pearland',        src: '/videos/hero-mower.mp4',           poster: '/assets/reference/NASAhomesforsale.jpg',               alt: 'Lawn care in Pearland Texas' },
+  { name: 'Baytown',         src: '/videos/hero-dog.mp4',             poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg', alt: 'Neighborhood walks in Baytown' },
+  { name: 'Dickinson',       src: '/videos/hero-mom-baby.mp4',        poster: '/assets/reference/clearlaketxhomesforsale.jpg',         alt: 'Family life in Dickinson' },
+  { name: 'Webster',         src: '/videos/hero-grandma.mp4',         poster: '/assets/reference/seabrookhomesforsale.jpg',            alt: 'Talking with loved ones in Webster' },
+  { name: 'La Porte',        src: '/videos/hero-showing.mp4',         poster: '/assets/reference/leaguecityhomesforsale.jpg',          alt: 'Homes for sale in La Porte' },
+  { name: 'Texas City',      src: '/videos/hero-bighouse.mp4',        poster: '/assets/reference/NASAhomesforsale.jpg',               alt: 'Luxury homes in Texas City' },
 ]
 
 const SLIDE_MS = 3000 // 3 seconds per area — text + motion clip change together, instant cut
@@ -24,7 +30,7 @@ const SLIDE_MS = 3000 // 3 seconds per area — text + motion clip change togeth
 export function VideoHero({ started = true }: { started?: boolean }) {
   const [active, setActive] = useState(0)
 
-  // single 4s timer drives BOTH the area text and its motion clip
+  // single 3s timer drives BOTH the area text and its motion clip
   useEffect(() => {
     if (!started) return
     const interval = setInterval(() => setActive(a => (a + 1) % AREAS.length), SLIDE_MS)
@@ -36,7 +42,6 @@ export function VideoHero({ started = true }: { started?: boolean }) {
       {AREAS.map((area, i) => (
         <div key={area.name} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
           <Image className="hero-poster" src={area.poster} alt="" fill sizes="100vw" priority={i === 0} loading={i === 0 ? undefined : 'lazy'} />
-          {/* the "GIF" — a high-quality looping motion clip (MP4), plays forever */}
           <video
             autoPlay muted loop playsInline preload={i === active ? 'auto' : 'none'} poster={area.poster}
             className="hero-video" aria-hidden="true"
@@ -53,7 +58,7 @@ export function VideoHero({ started = true }: { started?: boolean }) {
         <span className="hero-line">Real estate guidance</span>
         <span className="hero-line hero-line-accent">that feels personal.</span>
       </h1>
-      {/* area cycler — text changes every 4s, synced with the motion clip */}
+      {/* area cycler — text changes every 3s, synced with the motion clip */}
       <p className="video-hero-cycler" style={{ opacity: 0, transform: 'translateY(24px)', animation: 'heroUp 1s var(--ease-expo) forwards .3s' }}>
         <span className="mono-label">Serving</span>
         <span className="cycler-line" aria-live="polite"><span key={active} className="cycler-word">{AREAS[active].name}</span></span>
