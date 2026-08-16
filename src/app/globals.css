@@ -881,6 +881,53 @@ blockquote cite {
 .about-side-ctas p { font-size: 14.5px !important; color: var(--muted); margin: 0 !important; line-height: 1.6; }
 .about-side-ctas .button { min-height: 50px; font-size: 16px; }
 .about-area-note { color: var(--red) !important; font-weight: 600; }
+/* ============================================================
+   SERVICE PAGES — same sticky pattern as About: one pinned image
+   (left), sections scroll (right), image transitions per section
+   ============================================================ */
+.svcpage-layout {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px;
+  max-width: 1360px; margin: 0 auto;
+}
+.svcpage-media { position: relative; height: 100%; min-height: 480px; }
+.svcpage-panel {
+  position: sticky; top: 110px;
+  aspect-ratio: 4/4.6; border-radius: 24px; overflow: hidden;
+  background: var(--navy-deep); box-shadow: var(--shadow-lift);
+}
+.svcpage-img {
+  position: absolute; inset: 0;
+  opacity: 0; transform: scale(1.08);
+  transition: opacity .9s var(--ease-expo), transform 1.2s var(--ease-expo);
+}
+.svcpage-img.is-active { opacity: 1; transform: scale(1); }
+.svcpage-photo { object-fit: cover; }
+.svcpage-label {
+  position: absolute; left: 18px; bottom: 18px; z-index: 2;
+  padding: 10px 18px; border-radius: 99px;
+  background: rgba(7, 26, 47, 0.72); backdrop-filter: blur(10px);
+  color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .14em;
+  font-family: var(--font-mono), monospace; text-transform: uppercase;
+}
+.svcpage-content { display: grid; gap: 42px; padding-top: 8px; }
+.svcpage-title { font-size: clamp(34px, 4.4vw, 52px); margin: 0 0 4px; line-height: 1.12; }
+.svcpage-intro { color: var(--muted); font-size: 17px; line-height: 1.7; margin: 0; }
+.svcpage-section { scroll-margin-top: 120px; padding-top: 6px; }
+.svcpage-section h2 {
+  font-family: var(--font-display), 'Manrope', sans-serif;
+  font-size: clamp(24px, 2.6vw, 34px); letter-spacing: -0.02em;
+  color: var(--navy); margin: 0 0 14px; line-height: 1.2;
+}
+.svcpage-section p { color: var(--muted); font-size: 18px; line-height: 1.85; margin: 0 0 20px; }
+.svcpage-content .page-cta { margin-top: 12px; }
+@media (max-width: 900px) {
+  .svcpage-layout { grid-template-columns: 1fr; gap: 28px; }
+  .svcpage-media { min-height: 0; }
+  .svcpage-panel { position: relative; top: 0; aspect-ratio: 4/3; }
+  .svcpage-content { gap: 32px; }
+  .svcpage-title { font-size: clamp(28px, 6vw, 38px); }
+  .svcpage-section p { font-size: 17px; line-height: 1.75; }
+}
 /* basehabitation-style wordsMask headline: words slide up from behind a mask, accent word in serif italic */
 .mask-headline { display: grid; gap: 2px; overflow: hidden; }
 .mask-line { display: flex; flex-wrap: wrap; gap: 0.28em; }
