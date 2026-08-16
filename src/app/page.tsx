@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SiteFooter } from '@/components/SiteFooter'
 import { ScrollReveals } from '@/components/Motion'
-import { ScrollSpy } from '@/components/ScrollSpy'
 import { LeadModal } from '@/components/LeadModal'
 import { VideoHero } from '@/components/VideoHero'
 import { FeaturedStrip } from '@/components/FeaturedStrip'
@@ -36,7 +35,7 @@ export default function Home() {
       <div className="nws-reviews-grid">
         {[0, 1, 2].map(col => <div className="nws-rev-col" key={col}>
           <div className="nws-rev-scroll">
-            <div className={`nws-rev-track${col === 1 ? ' nws-rev-track-mid' : ''}`}>
+            <div className={`nws-rev-track${col === 0 ? ' nws-rev-track-down' : col === 1 ? ' nws-rev-track-up' : ' nws-rev-track-down'}`}>
               {[...testimonialsExact.slice(col * 25, col * 25 + 25), ...testimonialsExact.slice(col * 25, col * 25 + 25)].map((review, i) => <figure className="nws-review-card" key={`${col}-${i}`} aria-hidden={i >= 25 || undefined}><span className="nws-avatar" aria-hidden="true">{review.author.replace('— ', '').charAt(0)}</span><figcaption><b>{review.author.replace('— ', '')}</b><small>Google Review</small></figcaption><span className="stars" aria-label="Rated 5 out of 5 stars">★★★★★</span><blockquote>“{review.quote}”</blockquote></figure>)}
             </div>
           </div>
@@ -57,7 +56,7 @@ export default function Home() {
         </div>
       </div>
     </section>
-  </main><SiteFooter /><ScrollReveals /><ScrollSpy /><LeadModal /><ChatFab />
+  </main><SiteFooter /><ScrollReveals /><LeadModal /><ChatFab />
   {choiceArea && <AreaChoiceModal area={choiceArea.name} image={choiceArea.image} onClose={() => setChoiceArea(null)} />}
 </div>
 }
