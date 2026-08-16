@@ -207,7 +207,7 @@ html.intro-locked, html.intro-locked body { overflow: hidden; }
   animation: panelIn .25s var(--ease-expo) both;
 }
 .nav-panel-sm { grid-template-columns: 1fr; min-width: 320px; }
-.nav-panel-areas { min-width: 720px; }
+.nav-panel-areas { min-width: 840px; }
 @keyframes panelIn { from { opacity: 0; transform: translateX(-50%) translateY(10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
 .nav-panel-cols { display: grid; gap: 6px; }
 .areas-cols { grid-template-columns: repeat(2, 1fr); gap: 4px 22px; }
