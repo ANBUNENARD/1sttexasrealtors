@@ -976,6 +976,38 @@ blockquote cite {
 .nws-services .section-heading h2, .nws-services .section-heading p { color: #fff; }
 .nws-services .section-heading .eyebrow { color: var(--red-warm); }
 .nws-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1280px; margin: 0 auto; }
+/* NWS-style services slider — cards slide left/right, auto-advance 5s, arrows + dots */
+.svc-slider { max-width: 1280px; margin: 0 auto; display: grid; gap: 22px; }
+.svc-slider-viewport { overflow: hidden; border-radius: 20px; }
+.svc-slider-track {
+  display: flex; gap: 22px; transition: transform .8s var(--ease-expo);
+}
+.svc-slider-card {
+  flex: 0 0 calc((100% - 44px) / 3); min-width: 0;
+  display: flex; flex-direction: column; overflow: hidden; border-radius: 18px;
+  background: var(--red); color: #fff;
+  box-shadow: var(--shadow-card); transition: transform .3s var(--ease-spring), box-shadow .3s ease;
+}
+.svc-slider-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+.svc-slider-controls { display: flex; align-items: center; justify-content: center; gap: 18px; }
+.svc-slider-arrow {
+  width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.08); color: #fff; font-size: 17px; cursor: pointer;
+  display: grid; place-items: center; transition: .25s ease; min-height: 44px;
+}
+.svc-slider-arrow:hover { background: var(--red-warm); border-color: var(--red-warm); transform: scale(1.06); }
+.svc-slider-dots { display: flex; align-items: center; gap: 8px; }
+.svc-slider-dot {
+  width: 9px; height: 9px; border-radius: 99px; border: 0; padding: 0; cursor: pointer;
+  background: rgba(255,255,255,.3); transition: all .3s var(--ease-expo); min-height: 9px;
+}
+.svc-slider-dot.is-active { width: 34px; background: var(--red-warm); }
+@media (max-width: 1000px) {
+  .svc-slider-card { flex-basis: calc((100% - 22px) / 2); }
+}
+@media (max-width: 640px) {
+  .svc-slider-card { flex-basis: 100%; }
+}
 .nws-service-card {
   display: flex; flex-direction: column; overflow: hidden; border-radius: 18px;
   background: var(--red); color: #fff;
