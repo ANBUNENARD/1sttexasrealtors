@@ -7,15 +7,59 @@ const socials = [
   ['LinkedIn', 'https://www.linkedin.com/in/david-karstedt-1st-texas-realtors-677b5217/', 'M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z'],
 ]
 
+// NWS-style organized footer columns
+const services = [
+  ['Buy a Home', '/home-buyers/'],
+  ['Sell Your Home', '/seller-services/'],
+  ['Homes for Rent', '/homes-for-rent/'],
+  ['New Home Construction', '/new-home-construction/'],
+  ['Home Staging', '/home-staging/'],
+  ['Relocation Service', '/relocation-service/'],
+  ['Commercial Property', '/commercial-property-realtors/'],
+]
+
+const moreServices = [
+  ['Home Search', '/home-search/'],
+  ['Register', '/register/'],
+  ['Member Login', '/login/'],
+  ['Clear Lake Homes for Sale', '/clear-lake-tx-homes-for-sale/'],
+  ['View All Our Services', '/home-buyers/'],
+]
+
+const quickLinks = [
+  ['Home', '/'],
+  ['About', '/about/'],
+  ['Testimonials', '/realtor-reviews/'],
+  ['Meet Our Agents', '/agents/'],
+  ['FAQs', '/#faq'],
+  ['Contact', '/contact/'],
+]
+
 export function SiteFooter() {
   return <footer className="footer">
     <div className="footer-cta"><div><p className="eyebrow">Ready when you are</p><h2>Ready to make your move?</h2><p>Local knowledge. Personal service. Family owned since 2004.</p></div><Link className="button button-primary" href="/contact/">Contact a Realtor <span className="btn-icon">↗</span></Link></div>
-    <div className="footer-grid">
-      <div><p className="eyebrow">1st Texas Realtors</p><h2>Local knowledge. Personal service.</h2><p>Family owned since 2004, serving Clear Lake NASA and the surrounding communities.</p><a className="footer-phone" href="tel:+12812413121">{phone}</a><a className="footer-mail" href={`mailto:${email}`}>{email}</a><div className="footer-socials">{socials.map(([label, href, path]) => <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} title={label}><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={path} /></svg><span>{label}</span></a>)}</div></div>
-      <div><p className="eyebrow">Explore</p><Link href="/about/">About us</Link><Link href="/realtor-reviews/">Testimonials</Link><Link href="/agents/">Meet our agents</Link><Link href="/contact/">Contact</Link><Link href="/privacy-policy/">Privacy policy</Link></div>
-      <div className="footer-areas"><p className="eyebrow">Service areas</p>{serviceAreas.map(area => <Link key={area} href={`/realtors-in-${areaSlug(area)}/`}>{area}</Link>)}</div>
+
+    {/* NWS-style top row: logo + tagline left, socials right */}
+    <div className="footer-top">
+      <div className="footer-brand">
+        <img src="/assets/reference/1stTexasRealtors-logo-new.png" alt="1st TEXAS REALTORS — Full Service Brokerage" />
+        <p>Family owned since 2004 · Clear Lake NASA, Texas</p>
+      </div>
+      <div className="footer-socials">{socials.map(([label, href, path]) => <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} title={label}><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d={path} /></svg><span>{label}</span></a>)}</div>
     </div>
+
+    {/* NWS-style 4-column grid */}
+    <div className="footer-grid">
+      <div className="footer-col"><p className="eyebrow">Services</p>{services.map(([label, href]) => <Link key={label} href={href}>{label}</Link>)}</div>
+      <div className="footer-col"><p className="eyebrow">Services</p>{moreServices.map(([label, href]) => <Link key={label} href={href}>{label}</Link>)}</div>
+      <div className="footer-col"><p className="eyebrow">Quick Links</p>{quickLinks.map(([label, href]) => <Link key={label} href={href}>{label}</Link>)}</div>
+      <div className="footer-col footer-contact"><p className="eyebrow">Contact</p><span className="footer-city">Clear Lake NASA, Texas</span><a className="footer-phone" href="tel:+12812413121">{phone}</a><a className="footer-mail" href={`mailto:${email}`}>{email}</a><span className="footer-hours">Monday–Saturday · 9am–6pm</span></div>
+    </div>
+
+    {/* NWS-style area badges row */}
+    <div className="footer-areas-row"><p className="eyebrow">Service Areas</p><div className="footer-areas">{serviceAreas.map(area => <Link key={area} href={`/realtors-in-${areaSlug(area)}/`}>{area}</Link>)}</div></div>
+
     <div className="footer-badges"><img src="/assets/client/Texas-Monthly-5-Star-Real-Estate-Agent.png" alt="Texas Monthly Five-Star Real Estate Agent" className="badge-logo" /><img src="/assets/client/Equal-Housing-Opportunity-Realtors.gif" alt="Equal Housing Opportunity" /><img src="/assets/client/Multiple-Listing-Service-Realtors.gif" alt="Member of the Multiple Listing Service" /><img src="/assets/client/Realtor-Association.gif" alt="Realtor Association Member" /></div>
-    <div className="footer-bottom"><span>© {new Date().getFullYear()} 1st Texas Realtors</span><div className="footer-legal"><Link href="/privacy-policy/">Privacy</Link><Link href="/privacy-policy/">Terms</Link></div></div>
+    <div className="footer-bottom"><span>© {new Date().getFullYear()} 1st Texas Realtors. All rights reserved.</span><div className="footer-legal"><Link href="/privacy-policy/">Privacy</Link><Link href="/privacy-policy/">Terms</Link></div></div>
   </footer>
 }
