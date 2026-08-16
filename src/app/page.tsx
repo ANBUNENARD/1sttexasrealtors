@@ -7,7 +7,6 @@ import { ScrollReveals } from '@/components/Motion'
 import { ScrollSpy } from '@/components/ScrollSpy'
 import { LeadModal } from '@/components/LeadModal'
 import { VideoHero } from '@/components/VideoHero'
-import { VideoBand } from '@/components/VideoBand'
 import { FeaturedStrip } from '@/components/FeaturedStrip'
 import { ChatFab } from '@/components/ChatFab'
 import { AreaChoiceModal } from '@/components/AreaChoiceModal'
@@ -45,7 +44,6 @@ export default function Home() {
       </div>
     <Link className="nws-reviews-cta" href="/realtor-reviews/">Read all testimonials <span>→</span></Link></div></section>
     <section className="section reveal" id="next-move"><div className="cta-showcase"><p className="eyebrow">Your next move</p><h2>Let’s make a plan.</h2><p>Call us for immediate assistance or explore our service areas and real-time home search.</p><Link className="button button-red" href="/contact/">Contact a Realtor <span className="btn-icon">↗</span></Link></div><div className="cta-steps"><Link className="reveal-item" href="/register/"><span>01</span>Register <b>↗</b></Link><Link className="reveal-item" href="/home-search/"><span>02</span>Home search <b>↗</b></Link><Link className="reveal-item" href="/contact/"><span>03</span>Contact us <b>↗</b></Link></div></section>
-    <VideoBand />
     <FeaturedStrip />
     <section className="section faq-section reveal" id="faq"><div className="section-heading"><p className="eyebrow">Common questions</p><WordReveal as="h2" className="display-section">Answers before you ask.</WordReveal><p>Everything you need to know about buying, selling, renting, and working with our team.</p></div><div className="faq-list">{faqs.map(([question, answer], index) => <details key={question}><summary><span className="faq-index">{String(index + 1).padStart(2, '0')}</span>{question}<i className="faq-chip">+</i></summary><p>{answer}</p></details>)}</div></section>
     <section className="section areas-section reveal" id="areas"><div className="section-heading"><p className="eyebrow">Areas we serve</p><WordReveal as="h2" className="display-section">Local Realtors across Clear Lake NASA.</WordReveal><p>We complete every move promptly, effectively, and with the utmost attention to detail.</p></div>
