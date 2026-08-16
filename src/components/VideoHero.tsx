@@ -3,87 +3,52 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-const slides = [
-  { src: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg', alt: 'Clear Lake Texas waterfront homes' },
-  { src: '/assets/reference/clearlaketxhomesforsale.jpg',         alt: 'Home for sale in Clear Lake TX' },
-  { src: '/assets/reference/leaguecityhomesforsale.jpg',          alt: 'Home for sale in League City TX' },
-  { src: '/assets/reference/seabrookhomesforsale.jpg',            alt: 'Home for sale in Seabrook TX' },
+// Hero: "SERVING {area} AND NEARBY" — each area has its own photo displayed
+// as a living Ken Burns "GIF" (slow zoom + drift). The area text and its photo
+// change TOGETHER every 4 seconds, continuously, crossfading between areas.
+const AREAS = [
+  { name: 'Clear Lake City', img: '/assets/areas/clear-lake-sale-1-clear-lake-homes-for-sale-jpeg', alt: 'Homes for sale in Clear Lake City TX' },
+  { name: 'League City',     img: '/assets/areas/league-city-1-4725-isla-canela-lane-239-jpeg',     alt: 'Homes for sale in League City TX' },
+  { name: 'Friendswood',     img: '/assets/areas/friendswood-1-friendswood-homes-01-e1682175182867-jpeg', alt: 'Homes for sale in Friendswood TX' },
+  { name: 'Seabrook',        img: '/assets/areas/seabrook-1-seabrook-homes-01-e1682175503186-jpeg',  alt: 'Homes for sale in Seabrook TX' },
+  { name: 'Kemah',           img: '/assets/areas/kemah-1-kemah-homes-01-e1682175228189-jpeg',         alt: 'Homes for sale in Kemah TX' },
+  { name: 'Nassau Bay',      img: '/assets/areas/nassau-bay-1-nassau-bay-homes-01-e1682175347786-jpeg', alt: 'Homes for sale in Nassau Bay TX' },
+  { name: 'Galveston',       img: '/assets/areas/galveston-1-pirates-beach-239-jpeg',                 alt: 'Homes for sale in Galveston TX' },
+  { name: 'Pearland',        img: '/assets/areas/pearland-1-pearland-homes-01-e1699454752509-jpeg',   alt: 'Homes for sale in Pearland TX' },
 ]
 
-// 4 house "GIFs" — real home footage, each trimmed to a short looping clip
-const VIDEOS = [
-  { src: '/videos/gif-lake-house.mp4',    poster: '/assets/reference/Clear-Lake-Texas-e1736781694121.jpg', dur: 3000 },   // house near a lake — 3s
-  { src: '/videos/gif-aerial-house.mp4',  poster: '/assets/reference/leaguecityhomesforsale.jpg',          dur: 3000 },   // aerial beautiful house — 3s
-  { src: '/videos/gif-garden-house.mp4',  poster: '/assets/reference/friendswoodhomesforsale.jpg',         dur: 5000 },   // garden pans to house — 5s
-  { src: '/videos/gif-river-houses.mp4',  poster: '/assets/reference/seabrookhomesforsale02.jpg',          dur: 4000 },   // aerial houses by river — 4s
-]
-
-// NWS-style rotating area names (your own service areas)
-const AREAS = ['Clear Lake City', 'League City', 'Friendswood', 'Seabrook', 'Kemah', 'Nassau Bay', 'Galveston', 'Pearland']
+const SLIDE_MS = 4000 // 4 seconds per area — text + image change together
 
 export function VideoHero({ started = true }: { started?: boolean }) {
-  const [mode, setMode] = useState<'video' | 'slideshow'>('video')
   const [active, setActive] = useState(0)
-  const [areaIdx, setAreaIdx] = useState(0)
 
-  // rotate: each clip plays for its own duration, then the next cuts in instantly
-  useEffect(() => {
-    if (mode !== 'video' || !started) return
-    const current = VIDEOS[active]
-    const timeout = setTimeout(() => setActive(a => (a + 1) % VIDEOS.length), current.dur)
-    return () => clearTimeout(timeout)
-  }, [mode, started, active])
-
-  // NWS-style location word cycler
+  // single 4s timer drives BOTH the area text and its photo
   useEffect(() => {
     if (!started) return
-    const interval = setInterval(() => setAreaIdx(i => (i + 1) % AREAS.length), 2400)
+    const interval = setInterval(() => setActive(a => (a + 1) % AREAS.length), SLIDE_MS)
     return () => clearInterval(interval)
   }, [started])
 
-  // Ken Burns slideshow fallback
-  useEffect(() => {
-    if (mode !== 'slideshow' || !started) return
-    const interval = setInterval(() => setActive(a => (a + 1) % slides.length), 7000)
-    return () => clearInterval(interval)
-  }, [mode, started])
-
-  const onVideoError = () => setMode('slideshow')
-
   return <section className="video-hero" aria-label="1st Texas Realtors">
     <div className="video-hero-media" aria-hidden="true">
-      {mode === 'video' ? (
-        VIDEOS.map((v, i) => (
-          <div key={v.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
-            <Image className="hero-poster" src={v.poster} alt="" fill sizes="100vw" priority={i === 0} />
-            <video
-              autoPlay muted loop playsInline preload="auto" poster={v.poster}
-              className="hero-video" onError={onVideoError} aria-hidden="true"
-            >
-              <source src={v.src} type="video/mp4" />
-            </video>
-          </div>
-        ))
-      ) : (
-        slides.map((s, i) => (
-          <div key={s.src} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
-            <Image src={s.src} alt={s.alt} fill sizes="100vw" quality={80} priority={i === 0} loading={i === 0 ? undefined : 'lazy'} className="video-hero-img" />
-          </div>
-        ))
-      )}
+      {AREAS.map((area, i) => (
+        <div key={area.name} className={`video-hero-slide${i === active ? ' is-active' : ''}`}>
+          {/* the "GIF" — the area photo living with a Ken Burns zoom, looping forever */}
+          <Image src={area.img} alt={area.alt} fill sizes="100vw" quality={90} priority={i === 0} loading={i === 0 ? undefined : 'lazy'} className="video-hero-img" />
+        </div>
+      ))}
     </div>
     <div className="video-hero-overlay" aria-hidden="true" />
     <div className="video-hero-glow" aria-hidden="true" />
     <div className="video-hero-content">
-      {/* NWS-style staggered headline lines */}
       <h1 className="display-hero" style={{ opacity: 0, transform: 'translateY(32px)', animation: 'heroUp 1s var(--ease-expo) forwards .15s' }}>
         <span className="hero-line">Real estate guidance</span>
         <span className="hero-line hero-line-accent">that feels personal.</span>
       </h1>
-      {/* NWS-style location cycler */}
+      {/* area cycler — text changes every 4s, synced with the photo */}
       <p className="video-hero-cycler" style={{ opacity: 0, transform: 'translateY(24px)', animation: 'heroUp 1s var(--ease-expo) forwards .3s' }}>
         <span className="mono-label">Serving</span>
-        <span className="cycler-line" aria-live="polite"><span key={areaIdx} className="cycler-word">{AREAS[areaIdx]}</span></span>
+        <span className="cycler-line" aria-live="polite"><span key={active} className="cycler-word">{AREAS[active].name}</span></span>
         <span className="mono-label">and nearby</span>
       </p>
       <p className="video-hero-sub" style={{ opacity: 0, transform: 'translateY(24px)', animation: 'heroUp 1s var(--ease-expo) forwards .45s' }}>Top 3% Realtors in Clear Lake, great reviews, and real-time listings for the next move in your story.</p>
