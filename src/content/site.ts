@@ -115,6 +115,17 @@ export const testimonials = [
   { quote: 'David and Simone Karstedt of 1st Texas Realtors have been assisting me on Real Estate deals for the last 10 years. They have handled multiple property purchases and sales. They are experienced and know the market well… and in them you’ll find a firm that you can also trust with the biggest financial moves of your life. I have peace of mind knowing that i can trust not only their judgement but that they aren’t just out to make a buck without keeping my best interests at heart.', author: 'Glen K.' },
 ]
 
+export const faqs: [string, string][] = [
+  ['How do I get started with buying a home?', 'Get pre-approved by a mortgage banker for the amount you want, then use our real-time MLS Home Search to explore homes for sale and rent. We guide you through offers, contingencies, addendums, and closing.'],
+  ['What is a free Market Analysis?', 'We review your home, neighborhood, and recent sales to recommend a competitive price and a marketing plan — at no cost and with no obligation.'],
+  ['Do you help with rentals and property management?', 'Yes. We handle real-time rental listings, tenant interviews, background checks, leases, deposits, maintenance, and repairs for owners.'],
+  ['Which areas do you serve?', 'We serve Clear Lake NASA and surrounding communities including League City, Friendswood, Seabrook, Kemah, Nassau Bay, Galveston, Pearland, and more.'],
+  ['Are you a full-service brokerage?', 'Family owned since 2004, we represent buyers, sellers, renters, and commercial clients with over 100 years of combined experience.'],
+  ['How fast can I sell my home?', 'Every home is different, but our team regularly lists on a Friday and receives multiple offers by the end of the weekend. We price with comparable sales and market a plan tailored to your home.'],
+  ['Can you help me if I am relocating to the Clear Lake area?', 'Absolutely. Relocation clients get the same full-service treatment: neighborhood guidance, school research, commute advice, virtual tours, and real-time listings across the region.'],
+  ['Do you handle commercial real estate?', 'Yes — commercial property sales and leasing are part of our full-service brokerage. Contact us to discuss your commercial needs.'],
+]
+
 export const servicePages: Record<string, ServicePage> = {
   'home-buyers': {
     slug: 'home-buyers', title: 'Home Buying', eyebrow: 'Buy with confidence',
@@ -192,7 +203,7 @@ export const servicePages: Record<string, ServicePage> = {
   },
 }
 
-export const coreRoutes = ['about', 'realtor-reviews', 'agents', 'privacy-policy', 'contact']
+export const coreRoutes = ['about', 'realtor-reviews', 'faqs', 'agents', 'privacy-policy', 'contact']
 export const idxRoutes = ['home-search', 'register', 'login', 'new-home-construction', 'home-staging', 'relocation-service', 'commercial-property-realtors']
 
 export const allStaticPaths = [
