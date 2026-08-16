@@ -4,8 +4,9 @@ import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 
 // About page — three rows. Each row has its OWN image pinned on the left
-// (sticky in its exact place) while the text scrolls alongside on the right.
-// Headlines use the basehabitation-style wordsMask reveal + serif italic accents.
+// (sticky in its exact place). As you scroll through the taller text sections,
+// each pinned image gently zooms/transitions (basehabitation scroll feel),
+// then the next section's image takes over.
 const rows = [
   {
     id: 'about-story',
@@ -26,6 +27,39 @@ const rows = [
     label: '03 · Buying & selling',
   },
 ]
+
+// scroll progress (0→1) of a section through the viewport — drives the image transition
+function useRowProgress(id: string) {
+  const [p, setP] = useState(0)
+  useEffect(() => {
+    const el = document.getElementById(id)
+    if (!el) return
+    const onScroll = () => {
+      const r = el.getBoundingClientRect()
+      const vh = window.innerHeight || 1
+      const total = vh + r.height
+      const passed = vh - r.top
+      setP(Math.min(1, Math.max(0, passed / total)))
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [id])
+  return p
+}
+
+// pinned image with scroll-driven zoom transition (basehabitation Ken Burns feel)
+function RowImage({ row, index }: { row: (typeof rows)[number]; index: number }) {
+  const p = useRowProgress(row.id)
+  // gentle zoom in as the section scrolls through, peaking mid-way, settling as it leaves
+  const scale = 1 + 0.09 * Math.sin(p * Math.PI)
+  return <div className="about-row-img">
+    <div className="about-row-img-inner" style={{ transform: `scale(${scale})` }}>
+      <Image src={row.image} alt={row.alt} fill sizes="(max-width: 900px) 100vw, 42vw" className="about-row-photo" priority={index === 0} />
+    </div>
+    <span className="about-sticky-label">{row.label}</span>
+  </div>
+}
 
 // word-split + mask reveal on scroll (basehabitation wordsMask feel)
 function MaskHeadline({ text, accent }: { text: string; accent: string }) {
@@ -55,12 +89,7 @@ function MaskHeadline({ text, accent }: { text: string; accent: string }) {
 export function StickyAbout() {
   return <div className="about-sticky-layout">
     <section id="about-story" className="about-row">
-      <div className="about-row-media">
-        <div className="about-row-img">
-          <Image src={rows[0].image} alt={rows[0].alt} fill sizes="(max-width: 900px) 100vw, 42vw" className="about-row-photo" priority />
-          <span className="about-sticky-label">{rows[0].label}</span>
-        </div>
-      </div>
+      <div className="about-row-media"><RowImage row={rows[0]} index={0} /></div>
       <div className="about-row-text">
         <p className="eyebrow">Since 2004</p>
         <MaskHeadline text="We get it right the first time." accent="right." />
@@ -70,15 +99,10 @@ export function StickyAbout() {
     </section>
 
     <section id="about-services" className="about-row">
-      <div className="about-row-media">
-        <div className="about-row-img">
-          <Image src={rows[1].image} alt={rows[1].alt} fill sizes="(max-width: 900px) 100vw, 42vw" className="about-row-photo" />
-          <span className="about-sticky-label">{rows[1].label}</span>
-        </div>
-      </div>
+      <div className="about-row-media"><RowImage row={rows[1]} index={1} /></div>
       <div className="about-row-text">
         <p className="eyebrow">Broker &amp; expert Realtors</p>
-        <MaskHeadline text="A full-service" accent="brokerage." />
+        <MaskHeadline text="A full-service brokerage." accent="brokerage." />
         <ul className="about-bullets">
           <li>Broker and expert Realtors.</li>
           <li>Real-time MLS Home Search and property listings.</li>
@@ -94,15 +118,10 @@ export function StickyAbout() {
     </section>
 
     <section id="about-buy-sell" className="about-row">
-      <div className="about-row-media">
-        <div className="about-row-img">
-          <Image src={rows[2].image} alt={rows[2].alt} fill sizes="(max-width: 900px) 100vw, 42vw" className="about-row-photo" />
-          <span className="about-sticky-label">{rows[2].label}</span>
-        </div>
-      </div>
+      <div className="about-row-media"><RowImage row={rows[2]} index={2} /></div>
       <div className="about-row-text">
         <p className="eyebrow">Buying · Selling · Renting</p>
-        <MaskHeadline text="Guidance at" accent="every step." />
+        <MaskHeadline text="Guidance at every step." accent="every step." />
         <p>If you are interested in buying or renting a home, use our <Link className="text-link" href="/home-search/">Home Search <span>↗</span></Link> to view real-time home listings. If you’re selling, we’ll complete a <strong>no-obligation Market Analysis</strong> to determine the most accurate price for your home using comparable home sales, current listings and comparing all amenities.</p>
         <p><Link className="text-link" href="/contact/">Click here to Contact a Realtor <span>↗</span></Link>. Our team of talented Realtors provide you with the critical elements of success; local experience, dedication to customer service and real-time property listings. Every year since 2010, we have been recognized by <strong>Texas Monthly</strong> as Top 3% Realtors in the NASA – Clear Lake area.</p>
         <p className="about-callout">For immediate assistance, please call <a href="tel:+12812413121"><strong>(281) 241-3121</strong></a>.</p>
