@@ -1053,10 +1053,20 @@ blockquote cite {
 .svc-slider-arrow:hover { background: var(--red-warm); border-color: var(--red-warm); transform: scale(1.06); }
 .svc-slider-dots { display: flex; align-items: center; gap: 8px; }
 .svc-slider-dot {
+  position: relative; overflow: hidden;
   width: 9px; height: 9px; border-radius: 99px; border: 0; padding: 0; cursor: pointer;
   background: rgba(255,255,255,.3); transition: all .3s var(--ease-expo); min-height: 9px;
 }
-.svc-slider-dot.is-active { width: 34px; background: var(--red-warm); }
+.svc-slider-dot.is-active { width: 40px; background: rgba(255,255,255,.22); }
+/* loading progress — fills left→right over the 3s auto-advance, then the slide changes */
+.svc-progress {
+  position: absolute; inset: 0; border-radius: 99px;
+  background: var(--red-warm);
+  transform-origin: left center;
+  animation: svcProgress 3s linear forwards;
+}
+@keyframes svcProgress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.svc-slider:hover .svc-progress { animation-play-state: paused; }
 @media (max-width: 1000px) {
   .svc-slider-card { flex-basis: calc((100% - 22px) / 2); }
 }
