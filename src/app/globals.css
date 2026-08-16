@@ -636,6 +636,42 @@ blockquote cite {
 .drop-card.is-on cite { transition-delay: .5s; opacity: 1; transform: translateY(0); }
 /* when scrolled out of view, everything rises back up (reverse) */
 .drop-card cite { margin-top: auto; padding-top: 12px; font-style: italic; font-weight: 400; color: var(--ink); letter-spacing: .01em; text-transform: none; }
+/* --- photo review cards on this page: click -> photo drops + flips (3D) -> review --- */
+.photo-card { padding: 16px; gap: 10px; }
+.photo-front {
+  border: 0; padding: 0; margin: 0; background: none; cursor: pointer; text-align: left;
+  display: grid; gap: 9px; width: 100%;
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s var(--ease-expo);
+}
+.photo-card.is-on .photo-front { opacity: 1; transform: translateY(0); transition-delay: .15s; }
+.photo-frame {
+  display: block; width: 100%; aspect-ratio: 16/10; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--line); box-shadow: var(--shadow-card);
+  perspective: 900px; transform-style: preserve-3d;
+  transition: transform .7s var(--ease-expo);
+}
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-name { color: var(--navy); font-size: 15px; font-weight: 700; }
+/* the review side — hidden behind the photo until the flip */
+.photo-back {
+  display: grid; gap: 10px; max-height: 0; opacity: 0; overflow: hidden;
+  transform: rotateX(-90deg); transform-origin: top center;
+  transition: max-height .7s var(--ease-expo), opacity .6s ease .15s, transform .7s var(--ease-expo);
+}
+.photo-back blockquote { margin: 0; font-size: 16px; line-height: 1.75; color: var(--ink); font-family: var(--font-sans), 'Geist', sans-serif; }
+.photo-back cite { margin-top: auto; padding-top: 8px; font-style: italic; font-weight: 400; color: var(--ink); }
+.photo-card.is-open .photo-frame { transform: rotateX(-180deg); }
+.photo-card.is-open .photo-front { opacity: 0; transform: translateY(-8px); }
+.photo-card.is-open .photo-back {
+  max-height: 460px; opacity: 1; transform: rotateX(0deg);
+  transition: max-height .7s var(--ease-expo), opacity .7s ease .2s, transform .7s var(--ease-expo) .15s;
+}
+/* reduced motion: no flip, no drop — static cards */
+@media (prefers-reduced-motion: reduce) {
+  .photo-front, .photo-back, .drop-card .drop-cap-text, .drop-card cite { opacity: 1; transform: none; transition: none; }
+  .photo-card.is-open .photo-back { max-height: none; }
+}
 /* "Show more" button */
 .reviews-more-wrap { display: grid; gap: 10px; justify-items: center; padding: 18px 0 6px; }
 .reviews-more {
@@ -1201,44 +1237,6 @@ blockquote cite {
 .nws-review-card figcaption b { color: var(--navy); font-size: 15px; }
 .nws-review-card figcaption small { color: var(--muted); font-size: 12px; }
 .nws-review-card blockquote { margin: 0; color: var(--ink); font-size: 13.5px; line-height: 1.6; }
-/* --- photo review cards: click -> photo drops down + flips (3D) -> review --- */
-.nws-photo-card { padding: 14px; gap: 10px; }
-.nws-photo-front {
-  border: 0; padding: 0; margin: 0; background: none; cursor: pointer; text-align: left;
-  display: grid; gap: 9px; width: 100%;
-  opacity: 0; transform: translateY(22px);
-  transition: opacity .7s ease, transform .7s var(--ease-expo);
-}
-.nws-photo-card.is-on .nws-photo-front { opacity: 1; transform: translateY(0); transition-delay: .15s; }
-.nws-photo-frame {
-  display: block; width: 100%; aspect-ratio: 4/3; border-radius: 12px; overflow: hidden;
-  border: 1px solid var(--line); box-shadow: var(--shadow-card);
-  transform-style: preserve-3d; perspective: 900px;
-}
-.nws-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.nws-photo-name { color: var(--navy); font-size: 15px; font-weight: 700; }
-/* the review side — hidden behind the photo until the flip */
-.nws-photo-back {
-  display: grid; gap: 10px; max-height: 0; opacity: 0; overflow: hidden;
-  transform: rotateX(-90deg); transform-origin: top center;
-  transition: max-height .7s var(--ease-expo), opacity .6s ease .15s, transform .7s var(--ease-expo);
-}
-.nws-photo-card.is-open .nws-photo-frame { transform: rotateX(-180deg); transition: transform .7s var(--ease-expo); }
-.nws-photo-card.is-open .nws-photo-front { opacity: 0; transform: translateY(-8px); }
-.nws-photo-card.is-open .nws-photo-back {
-  max-height: 420px; opacity: 1; transform: rotateX(0deg);
-  transition: max-height .7s var(--ease-expo), opacity .7s ease .2s, transform .7s var(--ease-expo) .15s;
-}
-.nws-photo-back figcaption b { color: var(--navy); font-size: 15px; }
-.nws-photo-back blockquote { font-size: 13.5px; line-height: 1.6; }
-/* text-only cards: simple drop-down reveal on scroll */
-.nws-review-card { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s var(--ease-expo); }
-.nws-review-card.is-on { opacity: 1; transform: translateY(0); }
-/* reduced motion: no flip, no drop — static cards */
-@media (prefers-reduced-motion: reduce) {
-  .nws-photo-front, .nws-photo-back, .nws-review-card { opacity: 1; transform: none; transition: none; }
-  .nws-photo-card.is-open .nws-photo-back { max-height: none; }
-}
 .nws-reviews-cta {
   justify-self: center; display: inline-flex; align-items: center; gap: 10px;
   padding: 13px 26px; border-radius: 999px;
