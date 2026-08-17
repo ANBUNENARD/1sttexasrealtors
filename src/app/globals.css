@@ -560,6 +560,24 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
   width: 100%; max-height: 540px; object-fit: cover; border-radius: 24px;
   box-shadow: 0 24px 48px rgba(9, 52, 83, 0.18);
 }
+/* TEAM section — the photo is BLENDED into the section background so it
+   pairs with the text (user: blend the picture into the background, don't
+   let it affect the text). The photo fills the whole section behind a soft
+   gradient; the text sits on top, fully readable. */
+.team-blend-section {
+  position: relative; overflow: hidden;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  min-height: 560px; align-items: center;
+}
+.team-blend-bg { position: absolute; inset: 0; }
+.team-blend-bg img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; box-shadow: none; max-height: none; }
+.team-blend-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(100deg, #f7fafc 0%, rgba(247, 250, 252, 0.94) 32%, rgba(247, 250, 252, 0.55) 55%, rgba(7, 16, 48, 0.28) 100%);
+}
+.team-blend-content { position: relative; z-index: 1; max-width: 620px; }
+.team-blend-content .display-section { color: var(--navy); }
+.team-blend-content p:not(.eyebrow) { color: var(--ink); }
 .section-dark { background: var(--navy); color: white; }
 .section-dark .section-heading h2, .section-dark .section-heading p { color: white; }
 
@@ -1656,6 +1674,9 @@ blockquote cite {
 }
 
 @media (max-width: 900px) {
+  .team-blend-section { grid-template-columns: 1fr; min-height: 0; padding: 90px 24px 80px; }
+  .team-blend-overlay { background: linear-gradient(180deg, rgba(247, 250, 252, 0.9) 0%, rgba(247, 250, 252, 0.82) 60%, rgba(7, 16, 48, 0.35) 100%); }
+  .team-blend-content { max-width: none; }
   .reviews-cols { grid-template-columns: 1fr; gap: 28px; }
   .review-col-sticky { position: relative; top: 0; }
   .blend-card { min-height: 340px; }
