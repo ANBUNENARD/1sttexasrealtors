@@ -33,7 +33,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Baytown homes for rent . As residents of the area, we know the neighborhood, schools and commutes that translate into the best location . We provide excellent customer service and have been rated 5-Star Professionals by Texas Monthly Magazine every year since 2010. In other words, we get it right the first time!",
       ],
     images: [
-        "/assets/areas/baytown-0-nancy-estes-e1570553545400-jpg", "/assets/areas/el-lago-1-el-lago-homes-for-sale-239-jpeg", "/assets/areas/baytown-2-seabrook-homes-for-sale-239-jpeg", "/assets/areas/baytown-3-baytown-homes-for-sale-03-e1752099446587-jpeg", "/assets/areas/baytown-4-baytown-homes-for-sale-04-e1762528190635-jpeg",
+        "/assets/areas/baytown-0-nancy-estes-e1570553545400-jpg-hd", "/assets/areas/el-lago-1-el-lago-homes-for-sale-239-jpeg-hd", "/assets/areas/baytown-2-seabrook-homes-for-sale-239-jpeg-hd", "/assets/areas/baytown-3-baytown-homes-for-sale-03-e1752099446587-jpeg-hd", "/assets/areas/baytown-4-baytown-homes-for-sale-04-e1762528190635-jpeg-hd",
       ],
   },
   "clear-lake-city": {
@@ -56,7 +56,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Clear Lake City Tx homes for rent . Our Realtors average 20-years real estate experience, Top 3% Realtors in Clear Lake City and 5-star rated by Texas Monthly Magazine, please see our Testimonials . The 1st Texas Realtors in Clear Lake City total 100-years combined real estate experience, when you hire one, you get the experience and knowledge of all. Real Estate, or your home, could be the biggest transaction of your life, so having a great relationship with our clients is the priority.", "Rhan helped my family purchase our dream home. They were patient and explained every aspect of the selling and buying process. Their expert guidance made our dream come true! We didn’t think we could sell our house and quickly as we did, but with their guidance it only took 2 weeks! We put them through the ringer when trying to find our new home. We had many, detailed questions and many site visits, in addition to changes in what we wanted from location, price, and floorplans. They supported us through it all and never became impatient. I highly recommend them to any home buyer who wants to avoid the brand name companies that treat you like another number. We never felt pressured! Personalized service that made selling our home and buying our new one a breeze!", "— Jenny R.", "1st Texas Realtors in Clear Lake City , Texas, for expert Realtors and real time listings of homes for sale in Clear Lake, Texas.",
       ],
     images: [
-        "/assets/areas/clear-lake-sale-0-rhan-239-jpg", "/assets/areas/clear-lake-sale-1-clear-lake-homes-for-sale-jpeg", "/assets/areas/clear-lake-sale-2-clear-lake-homes-02-e1752099622414-jpeg", "/assets/areas/clear-lake-sale-3-clear-lake-tx-homes-for-sale-03-e1762528373673-jpeg", "/assets/areas/clear-lake-sale-4-clear-lake-city-homes-for-sale-04-e1765396699992-jpeg", "/assets/areas/clear-lake-sale-5-clear-lake-city-homes-for-sale-05-e1765396743115-jpeg", "/assets/areas/clear-lake-sale-6-clear-lake-city-homes-for-sale-06-e1765396876327-jpeg", "/assets/areas/clear-lake-sale-7-clear-lake-city-homes-for-sale-07-e1765396929601-jpeg", "/assets/areas/clear-lake-city-8-clear-lake-city-homes-for-sale-08-e1765397075935-jpeg",
+        "/assets/areas/clear-lake-sale-0-rhan-239-jpg-hd", "/assets/areas/clear-lake-sale-1-clear-lake-homes-for-sale-jpeg-hd", "/assets/areas/clear-lake-sale-2-clear-lake-homes-02-e1752099622414-jpeg-hd", "/assets/areas/clear-lake-sale-3-clear-lake-tx-homes-for-sale-03-e1762528373673-jpeg-hd", "/assets/areas/clear-lake-sale-4-clear-lake-city-homes-for-sale-04-e1765396699992-jpeg-hd", "/assets/areas/clear-lake-sale-5-clear-lake-city-homes-for-sale-05-e1765396743115-jpeg-hd", "/assets/areas/clear-lake-sale-6-clear-lake-city-homes-for-sale-06-e1765396876327-jpeg-hd", "/assets/areas/clear-lake-sale-7-clear-lake-city-homes-for-sale-07-e1765396929601-jpeg-hd", "/assets/areas/clear-lake-city-8-clear-lake-city-homes-for-sale-08-e1765397075935-jpeg-hd",
       ],
   },
   "clear-lake-shores": {
@@ -77,7 +77,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Clear Lake Shores homes for rent . As residents of the Clear Lake Shores area, we know the neighborhoods, schools and commutes that translate into the best location . We provide excellent customer service, in summary, we get it right the first time! Clear Lake Shores, incorporated 1962, has transformed from vacation homes to permanent residents enjoying waterfront property. There are many tourist focused shops, parks and restaurants in this nice community.", "1st Texas Realtors in Clear Lake Shores for expert Realtors and real time listings of homes for sale in Clear Lake Shores, Texas.",
       ],
     images: [
-        "/assets/areas/clear-lake-sale-0-rhan-239-jpg", "/assets/areas/deer-park-1-2705-bent-tree-trail-1-jpeg", "/assets/areas/baytown-1-1522-san-sebastian-lane-jpeg", "/assets/areas/clear-lake-shores-2-clear-lake-shores-01-e1682175083650-jpeg", "/assets/areas/clear-lake-shores-4-clear-lake-shores-homes-for-sale-04-e1689293557724-jpeg",
+        "/assets/areas/clear-lake-sale-0-rhan-239-jpg-hd", "/assets/areas/deer-park-1-2705-bent-tree-trail-1-jpeg-hd", "/assets/areas/baytown-1-1522-san-sebastian-lane-jpeg-hd", "/assets/areas/clear-lake-shores-2-clear-lake-shores-01-e1682175083650-jpeg-hd", "/assets/areas/clear-lake-shores-4-clear-lake-shores-homes-for-sale-04-e1689293557724-jpeg-hd",
       ],
   },
   "deer-park": {
@@ -98,7 +98,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Deer Park Tx homes for rent . As residents of the Deer Park area, we know the neighborhood, schools and commutes that translates into the best location . In other words, we get it right the first time!", "1st Texas Realtors in Deer Park for expert Realtors and real time listings of homes for sale in Deer Park, Texas.",
       ],
     images: [
-        "/assets/areas/deer-park-0-nancy-239-jpg", "/assets/areas/baytown-1-1522-san-sebastian-lane-jpeg", "/assets/areas/deer-park-2-deer-park-homes-01-e1682266411254-jpeg", "/assets/areas/deer-park-3-deer-park-homes-for-sale-03-e1689293524678-jpeg", "/assets/areas/deer-park-4-realtors-in-deer-park-e1709602936544-jpeg",
+        "/assets/areas/deer-park-0-nancy-239-jpg-hd", "/assets/areas/baytown-1-1522-san-sebastian-lane-jpeg-hd", "/assets/areas/deer-park-2-deer-park-homes-01-e1682266411254-jpeg-hd", "/assets/areas/deer-park-3-deer-park-homes-for-sale-03-e1689293524678-jpeg-hd", "/assets/areas/deer-park-4-realtors-in-deer-park-e1709602936544-jpeg-hd",
       ],
   },
   "dickinson": {
@@ -119,7 +119,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Dickinson homes for rent . As residents of the Dickinson area, we know the neighborhoods, schools and commutes to translate into the best location. In other words, we get it right the first time!", "1st Texas Realtors in Dickinson for expert Realtors, dedicated service and real-time listings of homes for sale in Dickinson, Texas.",
       ],
     images: [
-        "/assets/areas/dickinson-0-mark-bocado-239-jpg", "/assets/areas/dickinson-1-dickinson-homes-01-e1682266469245-jpeg", "/assets/areas/dickinson-2-dickinson-homes-for-sale-02-e1689293490783-jpeg", "/assets/areas/dickinson-3-dickinson-03-e1752100161823-jpeg", "/assets/areas/dickinson-4-dickinson-homes-04-e1762528888821-jpeg",
+        "/assets/areas/dickinson-0-mark-bocado-239-jpg-hd", "/assets/areas/dickinson-1-dickinson-homes-01-e1682266469245-jpeg-hd", "/assets/areas/dickinson-2-dickinson-homes-for-sale-02-e1689293490783-jpeg-hd", "/assets/areas/dickinson-3-dickinson-03-e1752100161823-jpeg-hd", "/assets/areas/dickinson-4-dickinson-homes-04-e1762528888821-jpeg-hd",
       ],
   },
   "el-lago": {
@@ -142,7 +142,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view El Lago homes for rent . As long-time residents of El Lago, we know the neighborhood, schools and commutes that translate into the best overall location. We provide excellent customer service and 5-Star rated Realtors by Texas Monthly Magazine every year since 2010. In other words, we get it right the first time!", "David and Simone at 1st Texas Realtors are an absolute dream team! From the moment we enlisted their help, they provided us with top-notch service and guidance every step of the way. As second-time homebuyers and first-time sellers, we were navigating uncharted waters, but David and Simone made the entire experience incredibly smooth and stress-free (as much as it can be). Their knowledge of the market was unparalleled, and they were ALWAYS available and willing to answer our questions and address any concerns we had. Communication with them was constant, which helped us stay informed and confident throughout the process. What truly stood out to us was their genuine patience and understanding. They took the time to listen to our needs, concerns, and preferences, ensuring that we felt comfortable and supported every step of the way. Most importantly, David and Simone went above and beyond to guide and counsel us, ensuring that we were making smart financial decisions. This personalized approach was exactly what we wanted, and their expertise helped us navigate the complexities of buying and selling with ease and allowed us to feel comfortable. We can confidently say that we will never work with anyone else in the future. David and Simone have earned our trust and loyalty , and we will happily recommend them to anyone looking to buy or sell a home. Even our buyers’ realtor expressed admiration for their professionalism and kindness, highlighting just how exceptional this team truly is. Thank you, David and Simone, for exceeding our expectations and making our real estate journey a memorable and enjoyable one. You are truly the best in the business!", "— Krista Trippel", "This dynamic duo is the real deal, we have used them for several transactions and they have been fabulous. One particular time it took us time to find “the one” and they were incredibly patient as we toured home after home. They always make the process easy and fun as they are just wonderful people. They’ve become two of our favorite people to do business and life with", "— Jennifer Youngdale Morgan", "This Realtor team is outstanding! We are so happy we found them. We are first time home buyers and new to Texas. Simone and David were absolutely wonderful and they genuinely care about their clients. If you are thinking about contacting them, just do it! You will not regret it!", "— Robert Mazza", "We had a wonderful experience with the husband and wife team, David and Simone. They were knowledgeable and steered us in the right direction, but also very pleasant to spend time with. They are an incredible team and we loved working with them every step of the way.", "— Jennifer Meenehan", "We recently had the pleasure of working with 1st Texas Realtors when looking for our first home. From day one, our Agent Simone Karstedt was extremely responsive and had great suggestions for homes to view based on what we were looking for. All throughout the negotiations and closing she will do anything to help, we highly recommend her! Anyone looking to purchase a home would be lucky to work with Simone.", "— Lenny Tucker", "1st Texas Realtors in El Lago , Texas, for expert Realtors and real time listings of homes for sale in El Lago, Texas.",
       ],
     images: [
-        "/assets/areas/el-lago-0-1st-texasrealtors-couple-jpg", "/assets/areas/el-lago-1-realtors-in-el-lago-02-e1716221008969-jpeg", "/assets/areas/el-lago-2-realtors-in-el-lago-01-e1716221048128-jpeg", "/assets/areas/clear-lake-shores-1-el-lago-239-jpeg", "/assets/areas/el-lago-2-el-lago-01-e1682175128759-jpeg",
+        "/assets/areas/el-lago-0-1st-texasrealtors-couple-jpg-hd", "/assets/areas/el-lago-1-realtors-in-el-lago-02-e1716221008969-jpeg-hd", "/assets/areas/el-lago-2-realtors-in-el-lago-01-e1716221048128-jpeg-hd", "/assets/areas/clear-lake-shores-1-el-lago-239-jpeg-hd", "/assets/areas/el-lago-2-el-lago-01-e1682175128759-jpeg-hd",
       ],
   },
   "friendswood": {
@@ -165,7 +165,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Friendswood homes for rent . As residents of the Friendswood area, we know the neighborhood, schools and commutes to translate into the best location. In other words, we get it right the first time.", "1st Texas Realtors in Friendswood for expert Realtors and real-time listings of homes for sale in Friendswood, Texas.",
       ],
     images: [
-        "/assets/areas/clear-lake-sale-0-rhan-239-jpg", "/assets/areas/deer-park-1-2705-bent-tree-trail-1-jpeg", "/assets/areas/friendswood-2-2225-lake-cove-jpeg", "/assets/areas/friendswood-1-friendswood-homes-01-e1682175182867-jpeg", "/assets/areas/friendswood-4-friendswood-homes-04-e1691676091606-jpeg",
+        "/assets/areas/clear-lake-sale-0-rhan-239-jpg-hd", "/assets/areas/deer-park-1-2705-bent-tree-trail-1-jpeg-hd", "/assets/areas/friendswood-2-2225-lake-cove-jpeg-hd", "/assets/areas/friendswood-1-friendswood-homes-01-e1682175182867-jpeg-hd", "/assets/areas/friendswood-4-friendswood-homes-04-e1691676091606-jpeg-hd",
       ],
   },
   "galveston": {
@@ -188,7 +188,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Galveston homes for rent . Our Realtors average 25-years real estate experience, Top 3% Realtors in Galveston and 5-star rated by Texas Monthly Magazine every year since 2010, please see our Testimonials .", "1st Texas Realtors in Galveston , Texas, for expert Realtors and real-time listings of homes for sale in Galveston, Texas.",
       ],
     images: [
-        "/assets/areas/galveston-0-daniel-rickert-1-scaled-e1612391172777-jpg", "/assets/areas/galveston-1-bay-view-home-for-sale-jpeg", "/assets/areas/clear-lake-city-1-pirates-beach-239-jpeg", "/assets/areas/galveston-2-galveston-homes-03-e1682266531621-jpeg", "/assets/areas/galveston-4-galveston-homes-for-sale-04-e1689293456278-jpeg",
+        "/assets/areas/galveston-0-daniel-rickert-1-scaled-e1612391172777-jpg-hd", "/assets/areas/galveston-1-bay-view-home-for-sale-jpeg-hd", "/assets/areas/clear-lake-city-1-pirates-beach-239-jpeg-hd", "/assets/areas/galveston-2-galveston-homes-03-e1682266531621-jpeg-hd", "/assets/areas/galveston-4-galveston-homes-for-sale-04-e1689293456278-jpeg-hd",
       ],
   },
   "kemah": {
@@ -211,7 +211,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Kemah Tx homes for rent . As long-time residents of the Kemah area, we know the neighborhoods, schools, grocery stores, commutes and many of the people. In other words, we will get the right home and the best price.", "1st Texas Realtors in Kemah for expert Realtors and real-time listings of homes for sale in Kemah, Texas.",
       ],
     images: [
-        "/assets/areas/galveston-0-daniel-rickert-1-scaled-e1612391172777-jpg", "/assets/areas/kemah-1-realtors-in-kemah-01-e1716222924565-jpeg", "/assets/areas/kemah-2-realtors-in-kemah-02-e1716222888132-jpeg", "/assets/areas/kemah-1-kemah-homes-01-e1682175228189-jpeg", "/assets/areas/kemah-4-kemah-homes-for-sale-04-e1689293407604-jpeg",
+        "/assets/areas/galveston-0-daniel-rickert-1-scaled-e1612391172777-jpg-hd", "/assets/areas/kemah-1-realtors-in-kemah-01-e1716222924565-jpeg-hd", "/assets/areas/kemah-2-realtors-in-kemah-02-e1716222888132-jpeg-hd", "/assets/areas/kemah-1-kemah-homes-01-e1682175228189-jpeg-hd", "/assets/areas/kemah-4-kemah-homes-for-sale-04-e1689293407604-jpeg-hd",
       ],
   },
   "la-porte": {
@@ -232,7 +232,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "As residents of the La Porte area, we know the neighborhood, schools and commutes that translates into the best location . We provide excellent customer service and have been rated 5-Star Professionals by Texas Monthly Magazine every year since 2010. We get it right the first time!", "Our Realtors average 20-years real estate experience, Top 3% Realtors in La Porte and 5-star rated by Texas Monthly Magazine, please see our Testimonials . Click here to view La Porte Tx homes for rent", "1st Texas Realtors in La Porte for expert Realtors and real-time listings of homes for sale in La Porte, Texas.",
       ],
     images: [
-        "/assets/areas/el-lago-0-1st-texasrealtors-couple-jpg", "/assets/areas/baytown-2-seabrook-homes-for-sale-239-jpeg", "/assets/areas/la-porte-1-la-porte-homes-02-e1682266584824-jpeg", "/assets/areas/la-porte-3-la-porte-homes-for-sale-03-e1689283443213-jpeg", "/assets/areas/la-porte-4-realtors-in-la-porte-e1709601792883-jpeg",
+        "/assets/areas/el-lago-0-1st-texasrealtors-couple-jpg-hd", "/assets/areas/baytown-2-seabrook-homes-for-sale-239-jpeg-hd", "/assets/areas/la-porte-1-la-porte-homes-02-e1682266584824-jpeg-hd", "/assets/areas/la-porte-3-la-porte-homes-for-sale-03-e1689283443213-jpeg-hd", "/assets/areas/la-porte-4-realtors-in-la-porte-e1709601792883-jpeg-hd",
       ],
   },
   "league-city": {
@@ -255,7 +255,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "As residents of League City, we know the neighborhood, schools and commutes that translates into the best location . We provide excellent customer service and have been rated 5-Star Professionals by the Texas Monthly Magazine every year since 2010. In other words, we get it right the first time! Click here to view League City homes for rent .", "1st Texas Realtors in League City , Texas, for expert League City Texas Realtors and real time listings of homes for sale in League City, Texas.",
       ],
     images: [
-        "/assets/areas/clear-lake-city-0-jay-herder-realtor-e1580836669250-png", "/assets/areas/league-city-1-league-city-home-for-sale-02-jpeg", "/assets/areas/league-city-1-league-city-home-for-sale-02-jpeg", "/assets/areas/league-city-2-league-city-homes-01-e1682175271865-jpeg", "/assets/areas/league-city-3-league-city-homes-03-e1683221118140-jpeg",
+        "/assets/areas/clear-lake-city-0-jay-herder-realtor-e1580836669250-png-hd", "/assets/areas/league-city-1-league-city-home-for-sale-02-jpeg-hd", "/assets/areas/league-city-1-league-city-home-for-sale-02-jpeg-hd", "/assets/areas/league-city-2-league-city-homes-01-e1682175271865-jpeg-hd", "/assets/areas/league-city-3-league-city-homes-03-e1683221118140-jpeg-hd",
       ],
   },
   "nassau-bay": {
@@ -278,7 +278,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Nassau Bay homes for rent . As long-time residents of the Kemah area, we know the neighborhoods, schools, grocery stores, commutes and many of the people . We will get the right home on the 1 st try and for the best price. We provide excellent customer service and have been rated 5-Star Professionals by the Texas Monthly Magazine every year since 2010.", "I was referred to 1st Texas Realtors by a friend and I couldn’t have had a better experience. David and Simone were very responsive, answered all of my questions, and helped walk me through my first home sale. The photographer they use to take pictures of the house was phenomenal and you can tell their entire team cares about your experience. We listed my house on a Friday afternoon, had multiple offers by the end of the weekend, and closed on the paper work 3 weeks from the date of listing. I can’t say enough great things about the team and I would highly recommend them to anyone looking for a realtor in the area.", "–Rachel Garcia", "My wife and I recently bought a house in Nassau Bay, and David and Simone were our realtors that were recommended to us from friends, and boy did they live up to the hype! David and Simone worked with my wife and I for months looking at a lot of houses, and they did not give up on us. Once our offer was accepted on the house we bought they were fast, very professional, and quick to respond to the many questions that we had. They are just kind, very responsive, sharp, humble, and all-around awesome people to work with. Anybody that asks us for advice about what realtor to use will get a recommendation to go with David and Simone from us!", "–Nathaniel Fisher", "1st Texas Realtors in Nassau Bay for expert Realtors and real-time listings of homes for sale in Nassau Bay, Texas.",
       ],
     images: [
-        "/assets/areas/el-lago-0-1st-texasrealtors-couple-jpg", "/assets/areas/nassau-bay-1-10315-salmon-239-jpeg", "/assets/areas/deer-park-1-2705-bent-tree-trail-1-jpeg", "/assets/areas/nassau-bay-1-nassau-bay-homes-01-e1682175347786-jpeg", "/assets/areas/nassau-bay-2-nassau-bay-homes-04-e1683221133106-jpeg",
+        "/assets/areas/el-lago-0-1st-texasrealtors-couple-jpg-hd", "/assets/areas/nassau-bay-1-10315-salmon-239-jpeg-hd", "/assets/areas/deer-park-1-2705-bent-tree-trail-1-jpeg-hd", "/assets/areas/nassau-bay-1-nassau-bay-homes-01-e1682175347786-jpeg-hd", "/assets/areas/nassau-bay-2-nassau-bay-homes-04-e1683221133106-jpeg-hd",
       ],
   },
   "pasadena": {
@@ -301,7 +301,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Pasadena Tx homes for rent . As long-time residents of Pasadena, Texas, we know the neighborhoods, schools and commutes that translate into the best location . We provide excellent customer service and have been rated 5-Star Professionals by the Texas Monthly Magazine every year since 2010. In other words, we get it right the first time.", "1st Texas Realtors in Pasadena , Texas, for expert Realtors and real time listings of homes for sale in Pasadena, Texas.",
       ],
     images: [
-        "/assets/areas/dickinson-0-mark-bocado-239-jpg", "/assets/areas/pasadena-1-pasadena-homes-01-1-e1683293754844-jpeg", "/assets/areas/pasadena-2-pasadena-homes-for-sale-02-e1689283409609-jpeg", "/assets/areas/pasadena-3-pasadena-03-e1752101717779-jpeg", "/assets/areas/pasadena-4-pasadena-homes-04-e1762540975374-jpeg",
+        "/assets/areas/dickinson-0-mark-bocado-239-jpg-hd", "/assets/areas/pasadena-1-pasadena-homes-01-1-e1683293754844-jpeg-hd", "/assets/areas/pasadena-2-pasadena-homes-for-sale-02-e1689283409609-jpeg-hd", "/assets/areas/pasadena-3-pasadena-03-e1752101717779-jpeg-hd", "/assets/areas/pasadena-4-pasadena-homes-04-e1762540975374-jpeg-hd",
       ],
   },
   "pearland": {
@@ -324,7 +324,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Pearland homes for rent . As residents of the Pearland area, we know the neighborhoods, schools and commutes that translates into the best location . We provide excellent customer service and have been rated 5-Star Professionals by Texas Monthly Magazine every year since 2010. In other words, we get it right the 1st time.", "1st Texas Realtors in Pearland , Texas, for expert Realtors and real time listings of homes for sale in Pearland, Texas.",
       ],
     images: [
-        "/assets/areas/el-lago-0-1st-texasrealtors-couple-jpg", "/assets/areas/pearland-1-3610-pine-stream-pearland-239-jpeg", "/assets/areas/pearland-2-pearland-homes-for-sale-02-e1689283374328-jpeg", "/assets/areas/pearland-3-realtors-in-pearland-e1709588138155-jpeg", "/assets/areas/pearland-4-realtors-in-pearland-02-e1709588168454-jpeg",
+        "/assets/areas/el-lago-0-1st-texasrealtors-couple-jpg-hd", "/assets/areas/pearland-1-3610-pine-stream-pearland-239-jpeg-hd", "/assets/areas/pearland-2-pearland-homes-for-sale-02-e1689283374328-jpeg-hd", "/assets/areas/pearland-3-realtors-in-pearland-e1709588138155-jpeg-hd", "/assets/areas/pearland-4-realtors-in-pearland-02-e1709588168454-jpeg-hd",
       ],
   },
   "san-leon": {
@@ -347,7 +347,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view San Leon homes for rent . As long-time residents of the San Leon area, we know the neighborhoods, schools, grocery stores, commutes and many of the people. We will get the right home on the 1st time for the best price.", "I cannot express how thoroughly impressed and pleased I am to have gotten the chance to meet and work with Matt Bradley through my home purchase process. From our first interaction, all the way through (and even after) closing he has been professional, knowledgeable, punctual in his responses, and has made the purchase of my first property very easy. Never once did I feel rushed or pressured, and I always knew that Matt had my best interests at heart. Matt truly displays a passion for finding the right home for people. I cannot recommend Matt and his team (namely Drake ) highly enough!", "— Trey Kincade", "1st Texas Realtors in San Leon for expert Realtors and real-time listings of homes for sale in San Leon, Texas.",
       ],
     images: [
-        "/assets/areas/san-leon-0-matt-bradley-e1570476561519-jpg", "/assets/areas/san-leon-1-santa-fe-homes-01-e1682175459671-jpeg", "/assets/areas/san-leon-2-san-leon-homes-for-sale-02-e1689283330665-jpeg", "/assets/areas/san-leon-3-realtors-in-san-leon-02-e1709587640915-jpeg", "/assets/areas/san-leon-4-realtors-in-san-leon-e1709587605487-jpeg",
+        "/assets/areas/san-leon-0-matt-bradley-e1570476561519-jpg-hd", "/assets/areas/san-leon-1-santa-fe-homes-01-e1682175459671-jpeg-hd", "/assets/areas/san-leon-2-san-leon-homes-for-sale-02-e1689283330665-jpeg-hd", "/assets/areas/san-leon-3-realtors-in-san-leon-02-e1709587640915-jpeg-hd", "/assets/areas/san-leon-4-realtors-in-san-leon-e1709587605487-jpeg-hd",
       ],
   },
   "seabrook": {
@@ -370,7 +370,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Seabrook homes for rent . Our Realtors average 20-years real estate experience, Top 3% Realtors in Seabrook and 5-star rated by Texas Monthly Magazine. The 1st Texas Realtors in Seabrook total 100-years combined real estate experience, when you hire one, you get the experience and knowledge of all. Our team of talented Realtors in Seabrook provide you the three critical elements of success; local experience, dedication to customer service and real-time property listings. Every year since 2010, we have been recognized by Texas Monthly as top 3% Realtors in Seabrook.", "I cannot express how thoroughly impressed and pleased I am to have gotten the chance to meet and work with Matt Bradley through my home purchase process. From our first interaction, all the way through (and even after) closing he has been professional, knowledgeable, punctual in his responses, and has made the purchase of my first property very easy. Never once did I feel rushed or pressured, and I always knew that Matt had my best interests at heart. Matt truly displays a passion for finding the right home for people. I cannot recommend Matt and his team (namely Drake ) highly enough!", "— Trey Kincade", "1st Texas Realtors in Seabrook for expert Realtors and real-time listings of homes for sale in Seabrook, Texas.",
       ],
     images: [
-        "/assets/areas/seabrook-0-matt-239-jpg", "/assets/areas/seabrook-1-realtors-in-seabrook-01-e1716222024225-jpeg", "/assets/areas/seabrook-2-realtors-in-seabrook-02-e1716221946311-jpeg", "/assets/areas/seabrook-1-seabrook-homes-01-e1682175503186-jpeg", "/assets/areas/seabrook-2-seabrook-homes-02-e1683221147669-jpeg",
+        "/assets/areas/seabrook-0-matt-239-jpg-hd", "/assets/areas/seabrook-1-realtors-in-seabrook-01-e1716222024225-jpeg-hd", "/assets/areas/seabrook-2-realtors-in-seabrook-02-e1716221946311-jpeg-hd", "/assets/areas/seabrook-1-seabrook-homes-01-e1682175503186-jpeg-hd", "/assets/areas/seabrook-2-seabrook-homes-02-e1683221147669-jpeg-hd",
       ],
   },
   "shoreacres": {
@@ -393,7 +393,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Shoreacres homes for rent . As residents of the Shoreacres area, we know the neighborhood, schools and commutes that translates into the best location . We provide excellent customer service and have been rated 5-Star Professionals by Texas Monthly Magazine every year since 2010. In other words, we get it right the first time.", "1st Texas Realtors in Shoreacres for expert Realtors and real-time listings of homes for sale in Shoreacres, Texas.",
       ],
     images: [
-        "/assets/areas/shoreacres-0-william-machupa-jr-e1570559177587-jpg", "/assets/areas/shoreacres-1-shoreacres-homes-01-e1683294137774-jpeg", "/assets/areas/shoreacres-2-shoreacres-homes-for-sale-02-e1689282350674-jpeg", "/assets/areas/shoreacres-3-shoreacres-homes-02-e1691676206423-jpeg", "/assets/areas/shoreacres-4-realtors-in-shoreacres-e1709580741952-jpeg",
+        "/assets/areas/shoreacres-0-william-machupa-jr-e1570559177587-jpg-hd", "/assets/areas/shoreacres-1-shoreacres-homes-01-e1683294137774-jpeg-hd", "/assets/areas/shoreacres-2-shoreacres-homes-for-sale-02-e1689282350674-jpeg-hd", "/assets/areas/shoreacres-3-shoreacres-homes-02-e1691676206423-jpeg-hd", "/assets/areas/shoreacres-4-realtors-in-shoreacres-e1709580741952-jpeg-hd",
       ],
   },
   "taylor-lake-village": {
@@ -416,7 +416,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Taylor lake Village homes for rent . As residents of Taylor Lake Village, we know the neighborhood, schools and commutes that translate into the best location . In other words, we get it right the first time.", "David and Simone at 1st Texas Realtors are an absolute dream team! From the moment we enlisted their help, they provided us with top-notch service and guidance every step of the way. As second-time homebuyers and first-time sellers, we were navigating uncharted waters, but David and Simone made the entire experience incredibly smooth and stress-free (as much as it can be). Their knowledge of the market was unparalleled, and they were ALWAYS available and willing to answer our questions and address any concerns we had. Communication with them was constant, which helped us stay informed and confident throughout the process. What truly stood out to us was their genuine patience and understanding. They took the time to listen to our needs, concerns, and preferences, ensuring that we felt comfortable and supported every step of the way. Most importantly, David and Simone went above and beyond to guide and counsel us, ensuring that we were making smart financial decisions. This personalized approach was exactly what we wanted, and their expertise helped us navigate the complexities of buying and selling with ease and allowed us to feel comfortable. We can confidently say that we will never work with anyone else in the future. David and Simone have earned our trust and loyalty , and we will happily recommend them to anyone looking to buy or sell a home. Even our buyers’ realtor expressed admiration for their professionalism and kindness, highlighting just how exceptional this team truly is. Thank you, David and Simone, for exceeding our expectations and making our real estate journey a memorable and enjoyable one. You are truly the best in the business!", "— Krista Trippel", "Excellent experience! Could not be more pleased! David and Simone helped make purchasing a home stress free and fun. They were always happy to take time to answer questions, give advice, and really guide my husband and I through this process. They helped us get into houses quickly and were extremely knowledgeable about homes, neighborhoods, and the area. We are incredibly thankful for everything they did for us and would highly recommend them to anyone who is looking to purchase a home.", "–Ruth Cooper", "1st Texas Realtors in Taylor Lake Village for expert Realtors and real-time listings of homes for sale in Taylor Lake Village, Texas.",
       ],
     images: [
-        "/assets/areas/el-lago-0-1st-texasrealtors-couple-jpg", "/assets/areas/clear-lake-sale-1-clear-lake-homes-for-sale-jpeg", "/assets/areas/taylor-lake-village-1-taylor-lake-village-homes-01-e1682266651294-jpeg", "/assets/areas/taylor-lake-village-2-taylor-lake-village-homes-02-e1683234372976-jpeg",
+        "/assets/areas/el-lago-0-1st-texasrealtors-couple-jpg-hd", "/assets/areas/clear-lake-sale-1-clear-lake-homes-for-sale-jpeg-hd", "/assets/areas/taylor-lake-village-1-taylor-lake-village-homes-01-e1682266651294-jpeg-hd", "/assets/areas/taylor-lake-village-2-taylor-lake-village-homes-02-e1683234372976-jpeg-hd",
       ],
   },
   "texas-city": {
@@ -437,7 +437,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Texas City homes for rent . As residents of the Texas City area, we know the neighborhood, schools and commutes that translate into the best location . In other words, we get it right the first time.", "1st Texas Realtors in Texas City for expert Realtors and real-time listings of homes for sale in Texas City, Texas.",
       ],
     images: [
-        "/assets/areas/san-leon-0-matt-bradley-e1570476561519-jpg", "/assets/areas/texas-city-1-texas-city-homes-01-e1683294486810-jpeg", "/assets/areas/texas-city-2-texas-city-home-for-sale-02-e1689282230355-jpeg", "/assets/areas/texas-city-3-realtors-in-texas-city-e1709580187570-jpeg",
+        "/assets/areas/san-leon-0-matt-bradley-e1570476561519-jpg-hd", "/assets/areas/texas-city-1-texas-city-homes-01-e1683294486810-jpeg-hd", "/assets/areas/texas-city-2-texas-city-home-for-sale-02-e1689282230355-jpeg-hd", "/assets/areas/texas-city-3-realtors-in-texas-city-e1709580187570-jpeg-hd",
       ],
   },
   "tiki-island": {
@@ -460,7 +460,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Tiki Island homes for rent . As residents of the Tiki Island area, we know the neighborhood, schools and commutes that translates into the best location . In other words, we get it right the first time.", "1st Texas Realtors in Tiki Island for expert Realtors and real-time listings of homes for sale in Tiki Island, Texas.",
       ],
     images: [
-        "/assets/areas/shoreacres-0-william-machupa-jr-e1570559177587-jpg", "/assets/areas/tiki-island-1-tiki-island-homes-01-e1683294821560-jpeg", "/assets/areas/tiki-island-2-tiki-island-home-for-sale-02-e1689282183855-jpeg", "/assets/areas/tiki-island-3-tiki-island-realtors-e1709579220654-jpeg",
+        "/assets/areas/shoreacres-0-william-machupa-jr-e1570559177587-jpg-hd", "/assets/areas/tiki-island-1-tiki-island-homes-01-e1683294821560-jpeg-hd", "/assets/areas/tiki-island-2-tiki-island-home-for-sale-02-e1689282183855-jpeg-hd", "/assets/areas/tiki-island-3-tiki-island-realtors-e1709579220654-jpeg-hd",
       ],
   },
   "webster": {
@@ -481,7 +481,7 @@ export const areaInfo: Record<string, AreaInfo> = {
         "Click here to view Webster homes for rent . As a resident in Webster, I can find the best home, neighborhood, schools and commutes that translate into the best location . In other words, we get it right the first time.", "1st Texas Realtors in Webster for expert Realtors and real-time listings of homes for sale in Webster, Texas.",
       ],
     images: [
-        "/assets/areas/dickinson-0-mark-bocado-239-jpg", "/assets/areas/clear-lake-shores-1-el-lago-239-jpeg", "/assets/areas/baytown-1-1522-san-sebastian-lane-jpeg", "/assets/areas/webster-1-webster-homes-01-e1682175544468-jpeg", "/assets/areas/webster-4-webster-home-for-sale-04-e1689282130576-jpeg",
+        "/assets/areas/dickinson-0-mark-bocado-239-jpg-hd", "/assets/areas/clear-lake-shores-1-el-lago-239-jpeg-hd", "/assets/areas/baytown-1-1522-san-sebastian-lane-jpeg-hd", "/assets/areas/webster-1-webster-homes-01-e1682175544468-jpeg-hd", "/assets/areas/webster-4-webster-home-for-sale-04-e1689282130576-jpeg-hd",
       ],
   },
 }

@@ -23,7 +23,9 @@ function AreaPage({ area, rent }: { area: string; rent: boolean }) {
   const slug = areaSlug(area)
   const listing = areaListings.find(item => item.slug === slug) || areaListings.find(item => item.kind === (rent ? 'rent' : 'sale') && item.slug === 'clear-lake-sale')
   const title = rent ? `${area} Homes for Rent` : `${area} Realtors & Homes for Sale`
-  const heroImg = (areaInfo[slug] && areaInfo[slug].images[1]) || (listing && listing.images[0]) || '/assets/reference/clearlaketxhomesforsale.jpg'
+  // FIRST image = the Realtor representing this area (their face leads the
+  // hero AND the sticky slider); the slider cycles through all photos
+  const heroImg = (areaInfo[slug] && areaInfo[slug].images[0]) || (listing && listing.images[0]) || '/assets/reference/clearlaketxhomesforsale.jpg'
   const intro = listing ? listing.intro : rent ? `Find homes for rent in ${area} with local guidance on neighborhoods, schools, commutes, and leasing.` : `Work with 1st Texas Realtors for homes for sale and expert local service in ${area}.`
   return <div className="site-shell"><SiteHeader /><main className="page-main" id="main-content">
     {/* NWS-style dark hero — area photo behind a navy gradient, badge + title + CTAs */}
@@ -47,7 +49,7 @@ function AreaPage({ area, rent }: { area: string; rent: boolean }) {
     <section className="page-content reveal">
     {!rent && areaInfo[slug] && <AreaInfoSection area={slug} />}
 
-    {listing && listing.images.length > 0 && <div className="listing-gallery">{listing.images.map(src => <img key={src} src={src} alt={`${listing.title} in ${area}`} loading="lazy" />)}</div>}
+    {rent && listing && listing.images.length > 0 && <div className="listing-gallery">{listing.images.map(src => <img key={src} src={src} alt={`${listing.title} in ${area}`} loading="lazy" />)}</div>}
     {!rent && listingsByArea[slug] && listingsByArea[slug].length > 0 && <><h2 id="homes-for-sale" className="subheading">Homes for sale in {area}</h2><AreaSearch area={slug} rent={false} count={listingsByArea[slug].length} /></>}
     {rent && rentalsByArea[slug] && rentalsByArea[slug].length > 0 && <><h2 id="homes-for-rent" className="subheading">Homes for rent in {area}</h2><AreaSearch area={slug} rent={true} count={rentalsByArea[slug].length} /></>}
     {listing && listing.paragraphs.length > 0 && <div className="rich-sections">{listing.paragraphs.map((text, i) => <article key={i}><p>{text}</p></article>)}</div>}
