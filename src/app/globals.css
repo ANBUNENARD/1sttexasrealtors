@@ -623,29 +623,53 @@ blockquote cite {
   letter-spacing: .08em; text-transform: uppercase; color: var(--navy); margin-top: 4px;
 }
 /* ============================================================
-   REVIEWS PAGE — drop-cap letter drops down, then text reveals.
-   6 shown initially, "Show more" reveals the rest (same animation).
+   REVIEWS PAGE — TWO sticky columns (NOT the About single panel).
+   The first card of each column stays pinned; scroll transitions it
+   to another review. Photo cards flip on hover. 6 + Show more.
    ============================================================ */
 .reviews-page-wrap { display: grid; gap: 18px; }
 .drop-card { position: relative; overflow: hidden; display: flex; flex-direction: column; }
-/* normal-font review text — no big drop-cap letter, clean readable body text */
+/* normal-font review text — clean readable body text, VISIBLE by default
+   (never hidden unless an animation class is applied) */
 .drop-cap-text {
   margin: 0; font-size: 16px; line-height: 1.75; color: var(--ink);
   font-family: var(--font-sans), 'Geist', sans-serif;
 }
 .quote-close { color: var(--ink); }
 .drop-card blockquote { display: flex; flex-direction: column; flex: 1; }
-/* two-way drop animation: enter viewport -> drop down; leave -> rise back up */
+/* text is visible by default; the drop reveal only ADDS motion */
 .drop-card .drop-cap-text, .drop-card .drop-stars, .drop-card cite {
-  opacity: 0; transform: translateY(26px);
+  opacity: 1; transform: none;
   transition: opacity .7s ease, transform .7s var(--ease-expo);
 }
-.drop-card.is-on .drop-cap-text { transition-delay: .35s; opacity: 1; transform: translateY(0); }
-.drop-card.is-on .drop-stars { transition-delay: .2s; opacity: 1; transform: translateY(0); }
-.drop-card.is-on cite { transition-delay: .5s; opacity: 1; transform: translateY(0); }
+.drop-card.is-on .drop-cap-text { transition-delay: .35s; }
+.drop-card.is-on .drop-stars { transition-delay: .2s; }
+.drop-card.is-on cite { transition-delay: .5s; }
 /* when scrolled out of view, everything rises back up (reverse) */
 .drop-card cite { margin-top: auto; padding-top: 12px; font-style: italic; font-weight: 400; color: var(--ink); letter-spacing: .01em; text-transform: none; }
-/* --- photo review cards on this page: click -> photo drops + flips (3D) -> review --- */
+
+/* --- TWO sticky columns: left + right, each with its own pinned card --- */
+.reviews-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; align-items: start; }
+.review-col { display: grid; gap: 16px; align-content: start; }
+/* the pinned card — sticky in place; content transitions on scroll */
+.review-col-sticky { position: sticky; top: 110px; z-index: 1; }
+.review-col-sticky .testimonial-block { box-shadow: 0 22px 48px rgba(0, 26, 51, 0.3); border-color: var(--red); }
+.review-col-sticky .testimonial-block::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 2px rgba(30, 95, 214, 0.35);
+}
+/* the pinned card transitions (crossfade+zoom) when it changes review */
+.review-col-sticky .testimonial-block { animation: pinSwap .8s var(--ease-expo); }
+@keyframes pinSwap { from { opacity: .35; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: none; } }
+/* the original cards flow below the pinned one */
+.review-flow-card { scroll-margin-top: 130px; }
+.review-flow-card .testimonial-block { box-shadow: var(--shadow-card); }
+/* PHOTO cards FLIP ON HOVER — no click needed */
+.hover-flip .photo-front { transition: opacity .5s ease, transform .7s var(--ease-expo); }
+.hover-flip .photo-back { transition: transform .7s var(--ease-expo), opacity .3s ease; }
+.hover-flip:hover .photo-front { opacity: 0; transform: translateY(-8px); }
+.hover-flip:hover .photo-back { opacity: 1; transform: rotateX(0deg); }
+/* --- photo review cards on this page: photo drops + flips (3D) -> review --- */
 .photo-card { padding: 16px; gap: 10px; position: relative; }
 .photo-front {
   border: 0; padding: 0; margin: 0; background: none; cursor: pointer; text-align: left;
@@ -688,94 +712,6 @@ blockquote cite {
   .photo-front, .photo-back, .drop-card .drop-cap-text, .drop-card cite { opacity: 1; transform: none; transition: none; }
   .photo-card.is-open .photo-back { opacity: 1; }
 }
-/* --- STICKY REVIEWS (About-page pattern): stationary panel + scroll sections --- */
-.sticky-reviews-layout {
-  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px;
-  max-width: 1360px; margin: 0 auto;
-}
-.sticky-reviews-media { position: relative; height: 100%; min-height: 480px; }
-.sticky-reviews-panel {
-  position: sticky; top: 110px;
-  aspect-ratio: 4/4.8; border-radius: 24px; overflow: hidden;
-  background: var(--navy-deep); box-shadow: var(--shadow-lift);
-}
-.sticky-rev-slide {
-  position: absolute; inset: 0;
-  opacity: 0; transform: scale(1.06);
-  transition: opacity .9s var(--ease-expo), transform 1.2s var(--ease-expo);
-}
-.sticky-rev-slide.is-active { opacity: 1; transform: scale(1); }
-.sticky-rev-photo { object-fit: cover; }
-/* text reviews show as a quote card in the panel */
-.sticky-rev-quote {
-  position: absolute; inset: 0; display: flex; flex-direction: column;
-  justify-content: center; gap: 16px; padding: 40px 36px;
-  color: #fff; background: linear-gradient(160deg, var(--navy-deep), #123a70);
-}
-.sticky-rev-mark { font-family: Georgia, serif; font-size: 64px; line-height: .6; color: #6f9bd8; }
-.sticky-rev-quote blockquote { margin: 0; font-size: 18px; line-height: 1.7; color: #eef3f9; }
-.sticky-rev-quote cite { font-style: italic; color: #b9cbe0; font-size: 14.5px; }
-.sticky-rev-label {
-  position: absolute; left: 18px; bottom: 18px; z-index: 2; max-width: calc(100% - 36px);
-  padding: 10px 18px; border-radius: 99px;
-  background: rgba(7, 26, 47, 0.72); backdrop-filter: blur(10px);
-  color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .14em;
-  font-family: var(--font-mono), monospace; text-transform: uppercase;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-/* right side — one section per review, ascending; each drives the panel */
-.sticky-reviews-content { display: grid; gap: 26px; padding-top: 12px; }
-.sticky-rev-section {
-  scroll-margin-top: 120px; padding: 26px 28px;
-  background: #fff; border: 1px solid var(--line); border-radius: 18px;
-  box-shadow: var(--shadow-card); display: grid; gap: 10px;
-}
-.sticky-rev-index {
-  font-family: var(--font-mono), monospace; font-size: 13px; font-weight: 700;
-  letter-spacing: .14em; color: var(--red);
-}
-.sticky-rev-section blockquote { margin: 0; font-size: 16.5px; line-height: 1.75; color: var(--ink); font-family: var(--font-sans), 'Geist', sans-serif; }
-.sticky-rev-section cite { font-style: italic; font-weight: 400; color: var(--navy); }
-.sticky-reviews-content .page-cta { margin-top: 30px; }
-/* AUTO-FLIP photo card inside the panel — flips photo <-> review text on a
-   timer, NO click needed. The card is always visible by default; the flip
-   animation only enhances when motion is allowed. */
-.srf-card {
-  position: absolute; inset: 0; border-radius: 24px;
-  transform-style: preserve-3d;
-}
-.srf-front, .srf-back {
-  position: absolute; inset: 0; border-radius: 24px; overflow: hidden;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden;
-}
-.srf-front { transform: rotateY(0deg); }
-.srf-front img, .srf-front .sticky-rev-photo { object-fit: cover; }
-.srf-back {
-  display: flex; flex-direction: column; justify-content: center; gap: 14px;
-  padding: 36px 32px; color: #fff;
-  background: linear-gradient(160deg, var(--navy-deep), #123a70);
-  transform: rotateY(180deg);
-}
-.srf-mark { font-family: Georgia, serif; font-size: 60px; line-height: .6; color: #6f9bd8; }
-.srf-back blockquote { margin: 0; font-size: 17px; line-height: 1.7; color: #eef3f9; }
-.srf-back cite { font-style: italic; color: #b9cbe0; font-size: 14.5px; }
-.sticky-rev-slide.srf-flip .srf-card { transition: transform 1s var(--ease-expo); }
-.sticky-rev-slide.srf-flip.is-flipped .srf-card { transform: rotateY(180deg); }
-.srf-hint {
-  position: absolute; left: 0; right: 0; bottom: -34px; margin: 0;
-  text-align: center; font-size: 12.5px; color: var(--muted); letter-spacing: .03em;
-}
-@media (max-width: 900px) {
-  .sticky-reviews-layout { grid-template-columns: 1fr; gap: 28px; }
-  .sticky-reviews-panel { position: relative; top: 0; aspect-ratio: 4/3; }
-  .sticky-reviews-content { gap: 20px; }
-  .srf-hint { position: static; margin-top: -14px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .sticky-rev-slide { opacity: 0; transform: none; transition: none; }
-  .sticky-rev-slide.is-active { opacity: 1; }
-  .sticky-rev-slide.srf-flip .srf-card, .sticky-rev-slide.srf-flip.is-flipped .srf-card { transform: none; }
-}
 /* "Show more" button */
 .reviews-more-wrap { display: grid; gap: 10px; justify-items: center; padding: 18px 0 6px; }
 .reviews-more {
@@ -788,6 +724,9 @@ blockquote cite {
 .reviews-more span { font-size: 18px; transition: transform .3s var(--ease-spring); }
 .reviews-more:hover span { transform: translateY(3px); }
 .reviews-more-note { margin: 0; font-size: 13.5px; color: var(--muted); letter-spacing: .02em; }
+/* Show More appears when you scroll down past the cards */
+.reviews-more-wrap { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s var(--ease-expo); }
+.reviews-more-wrap.is-visible { opacity: 1; transform: translateY(0); }
 /* cards revealed by "Show more" play the same drop animation on scroll */
 .reviews-page-wrap .testimonial-block { transition: transform .3s var(--ease-spring), box-shadow .3s ease; }
 .reviews-page-wrap .testimonial-block.is-active { border-color: rgba(30, 95, 214, 0.35); }
@@ -1688,6 +1627,8 @@ blockquote cite {
 }
 
 @media (max-width: 900px) {
+  .reviews-cols { grid-template-columns: 1fr; gap: 28px; }
+  .review-col-sticky { position: relative; top: 0; }
   .about-sticky-layout { grid-template-columns: 1fr; gap: 28px; }
   .about-sticky-panel { position: relative; top: 0; aspect-ratio: 4/3; }
   .about-sticky-content { gap: 56px; }
