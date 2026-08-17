@@ -60,6 +60,6 @@ export function SiteFooter() {
     <div className="footer-areas-row"><p className="eyebrow">Service Areas</p><div className="footer-areas">{serviceAreas.map(area => <Link key={area} href={`/realtors-in-${areaSlug(area)}/`}>{area}</Link>)}</div></div>
 
     <div className="footer-badges"><img src="/assets/client/Texas-Monthly-5-Star-Real-Estate-Agent.png" alt="Texas Monthly Five-Star Real Estate Agent" className="badge-logo" /><img src="/assets/client/Equal-Housing-Opportunity-Realtors.gif" alt="Equal Housing Opportunity" /><img src="/assets/client/Multiple-Listing-Service-Realtors.gif" alt="Member of the Multiple Listing Service" /><img src="/assets/client/Realtor-Association.gif" alt="Realtor Association Member" /></div>
-    <div className="footer-bottom"><span>© {new Date().getFullYear()} 1st Texas Realtors. All rights reserved.</span><div className="footer-legal"><Link href="/privacy-policy/">Privacy</Link><Link href="/privacy-policy/">Terms</Link></div></div>
+    <div className="footer-bottom"><span>© {new Date().getFullYear()} 1st Texas Realtors. All rights reserved.</span><div className="footer-legal"><Link href="/privacy-policy/">Privacy</Link><Link href="/privacy-policy/">Terms</Link><a href="/assets/docs/TREC-CN-1-4-1.pdf" target="_blank" rel="noopener noreferrer">TREC Consumer Protection Notice</a><a href="/assets/docs/David-Karstedt-IABS.pdf" target="_blank" rel="noopener noreferrer">TREC Information About Brokerage Services</a></div></div>
   </footer>
 }

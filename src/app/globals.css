@@ -1553,6 +1553,20 @@ blockquote cite {
   padding: 14px 4px; border-bottom: 1px solid var(--line);
 }
 .agent-contact strong { color: var(--navy); font-size: 15px; }
+.agent-iabs { margin-top: 22px; }
+.agent-iabs a { color: var(--red); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+.agent-iabs a:hover { color: var(--red-warm); text-decoration-thickness: 2.5px; }
+.agent-reviews { margin-top: 70px; }
+.agent-reviews-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+.agent-review-card {
+  margin: 0; padding: 26px 26px 22px;
+  border: 1px solid var(--line); border-radius: 18px; background: #fff;
+  box-shadow: var(--shadow-card);
+  display: flex; flex-direction: column; gap: 14px;
+}
+.agent-review-card blockquote { margin: 0; color: var(--ink); font-size: 16.5px; line-height: 1.7; }
+.agent-review-card blockquote::before { content: "“"; display: block; font-family: Georgia, serif; font-size: 42px; line-height: .6; color: var(--red); margin-bottom: 8px; }
+.agent-review-card figcaption { color: var(--navy); font-weight: 700; font-size: 14.5px; margin-top: auto; }
 .agent-contact a { color: var(--red); font-size: 14px; font-weight: 700; }
 .agent-contact a:hover { color: var(--red-warm); }
 .contact-form { display: grid; gap: 18px; padding: 30px; border-radius: 22px; background: #edf3f6; }
@@ -1737,6 +1751,7 @@ blockquote cite {
   .area-info-content { gap: 56px; }
   .area-info-section .display-section { font-size: clamp(28px, 6vw, 38px); }
   .area-info-ctas { grid-template-columns: 1fr; }
+  .agent-reviews-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 700px) {
