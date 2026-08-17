@@ -661,9 +661,15 @@ blockquote cite {
 /* the pinned card transitions (crossfade+zoom) when it changes review */
 .review-col-sticky .testimonial-block { animation: pinSwap .8s var(--ease-expo); }
 @keyframes pinSwap { from { opacity: .35; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: none; } }
-/* the original cards flow below the pinned one */
+/* the original cards flow below the pinned one — HIDDEN until the pinned
+   card switches to them; they keep their layout space so scrolling works */
 .review-flow-card { scroll-margin-top: 130px; }
 .review-flow-card .testimonial-block { box-shadow: var(--shadow-card); }
+.review-flow-card:not(.is-revealed) { opacity: 0; pointer-events: none; }
+.review-flow-card.is-revealed { opacity: 1; transition: opacity .6s ease .15s; }
+/* photo cards in this layout are VISIBLE by default (override the old
+   is-on drop-in rule that hid them) */
+.review-col .photo-front { opacity: 1; transform: none; transition: opacity .5s ease, transform .7s var(--ease-expo); }
 /* PHOTO cards FLIP ON HOVER — no click needed */
 .hover-flip .photo-front { transition: opacity .5s ease, transform .7s var(--ease-expo); }
 .hover-flip .photo-back { transition: transform .7s var(--ease-expo), opacity .3s ease; }

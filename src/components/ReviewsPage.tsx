@@ -88,9 +88,11 @@ function ReviewColumn({ reviews, column }: { reviews: Review[]; column: string }
     <div className="review-col-sticky">
       <DropCard review={pinned} key={active} pinned />
     </div>
-    {/* the ORIGINAL cards flow below */}
+    {/* the ORIGINAL cards flow below — HIDDEN until the pinned card has
+        switched PAST them (only already-passed reviews are visible, so
+        nothing shows before its turn) */}
     {reviews.map((review, i) => (
-      <div className="review-flow-card" data-idx={i} key={`${review.author}-${i}`}>
+      <div className={`review-flow-card${i < active ? ' is-revealed' : ''}`} data-idx={i} key={`${review.author}-${i}`}>
         <DropCard review={review} />
       </div>
     ))}
