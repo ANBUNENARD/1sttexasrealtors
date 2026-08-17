@@ -67,19 +67,19 @@ export function VideoHero({ started = true }: { started?: boolean }) {
     <div className="video-hero-overlay" aria-hidden="true" />
     <div className="video-hero-glow" aria-hidden="true" />
     <div className="video-hero-content">
-      <h1 className="display-hero" style={{ opacity: 0, transform: 'translateY(32px)', animation: 'heroUp 1s var(--ease-expo) forwards .15s' }}>
+      <h1 className="display-hero hero-enter">
         <span className="hero-line">Real estate guidance</span>
         <span className="hero-line hero-line-accent">that feels personal.</span>
       </h1>
       {/* area cycler — text changes every 2.5s, synced with the motion clip */}
-      <p className="video-hero-cycler" style={{ opacity: 0, transform: 'translateY(24px)', animation: 'heroUp 1s var(--ease-expo) forwards .3s' }}>
+      <p className="video-hero-cycler hero-enter">
         <span className="mono-label">Serving</span>
         <span className="cycler-line" aria-live="polite"><span key={active} className="cycler-word">{AREAS[active].name}</span></span>
         <span className="mono-label">and nearby</span>
       </p>
-      <p className="video-hero-sub" style={{ opacity: 0, transform: 'translateY(24px)', animation: 'heroUp 1s var(--ease-expo) forwards .45s' }}>Top 3% Realtors in Clear Lake, great reviews, and real-time listings for the next move in your story.</p>
-      <form className="hero-search" action="/home-search/" method="get" style={{ opacity: 0, transform: 'translateY(24px)', animation: 'heroUp 1s var(--ease-expo) forwards .6s' }}><input name="q" placeholder="Search homes in Clear Lake" aria-label="Search homes" /><button type="submit" aria-label="Search"><span>↗</span></button></form>
-      <div className="hero-actions" style={{ opacity: 0, transform: 'translateY(24px)', animation: 'heroUp 1s var(--ease-expo) forwards .75s' }}><Link className="button button-red" href="/contact/">Contact a Realtor <span className="btn-arrow" aria-hidden="true">→</span></Link><Link className="button button-glass" href="/home-search/">Browse listings <span className="btn-arrow" aria-hidden="true">→</span></Link></div>
+      <p className="video-hero-sub hero-enter">Top 3% Realtors in Clear Lake, great reviews, and real-time listings for the next move in your story.</p>
+      <form className="hero-search hero-enter" action="/home-search/" method="get"><input name="q" placeholder="Search homes in Clear Lake" aria-label="Search homes" /><button type="submit" aria-label="Search"><span>↗</span></button></form>
+      <div className="hero-actions hero-enter"><Link className="button button-red" href="/contact/">Contact a Realtor <span className="btn-arrow" aria-hidden="true">→</span></Link><Link className="button button-glass" href="/home-search/">Browse listings <span className="btn-arrow" aria-hidden="true">→</span></Link></div>
     </div>
     <div className="video-hero-proof"><div className="hero-trust"><div className="avatar-stack"><img src="/assets/reference/agents/David-Karstedt.jpg" alt="David Karstedt" /><img src="/assets/reference/agents/Mark-Bocado.jpg" alt="Mark Bocado" /><img src="/assets/reference/agents/Nancy-Estes.jpg" alt="Nancy Estes" /><img src="/assets/reference/agents/Matt-Bradley.jpg" alt="Matt Bradley" /></div><div><span className="stars" aria-label="Rated 5 out of 5 stars">★★★★★</span><small>Trusted by families across Clear Lake NASA</small></div></div><div className="hero-features"><div><strong>Family owned</strong><small>Since 2004 in Clear Lake</small></div><div><strong>Top 3% Realtors</strong><small>Clear Lake NASA expertise</small></div><div><strong>Real-time listings</strong><small>Homes for sale &amp; rent</small></div></div></div>
   </section>
