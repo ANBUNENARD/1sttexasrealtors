@@ -1,67 +1,73 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { areaInfo } from '@/content/area-info'
 
 // Area info landing section — the About landing-page pattern applied to a
-// service area: ALL of the area's photos on the LEFT, pinned/sticky
-// (stationary), and the text scrolls on the RIGHT.
+// service area: ONE photo pinned/sticky on the LEFT (stationary). As you
+// scroll through the text on the RIGHT, the photo CHANGES — cycling through
+// ALL of the area's photos (crossfade), finishing exactly when the text
+// finishes. The FIRST photo is the Realtor assigned to that area.
 // The text is 100% the original site's content for that area.
 
 export function AreaInfoSection({ area }: { area: string }) {
   const info = areaInfo[area]
   const [active, setActive] = useState(0)
+  const contentRef = useRef<HTMLDivElement>(null)
 
-  // sections: intro (hero copy) → strategy → buyer services + closing
+  const images = info.images.length ? info.images : ['/assets/reference/clearlaketxhomesforsale.jpg']
+
+  // scroll progress through the right-hand text drives the photo: 0 → first
+  // photo (the Realtor), scrolling down advances through EVERY photo, and the
+  // last photo shows exactly when the text reaches its end
+  useEffect(() => {
+    const el = contentRef.current
+    if (!el) return
+    let raf = 0
+    const update = () => {
+      raf = 0
+      const rect = el.getBoundingClientRect()
+      const vh = window.innerHeight || 1
+      // progress 0 when the text starts entering, 1 when it has fully scrolled
+      const total = rect.height + vh
+      const scrolled = vh - rect.top
+      const progress = Math.min(1, Math.max(0, scrolled / total))
+      const idx = Math.min(images.length - 1, Math.floor(progress * images.length))
+      setActive(idx)
+    }
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [images.length])
+
   const sections = [
     { id: `${area}-intro`, label: `01 · Realtors in ${info.name}` },
     { id: `${area}-strategy`, label: '02 · Strategy of our Realtors' },
     { id: `${area}-services`, label: '03 · Home Buyer Services' },
   ]
 
-  // scroll-spy: the active section drives which photo is highlighted in the
-  // pinned collage (soft zoom on the matching photo)
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        const visible = entries.filter(e => e.isIntersecting)
-        if (visible.length) {
-          const top = visible.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
-          const idx = sections.findIndex(s => s.id === top.target.id)
-          if (idx >= 0) setActive(idx)
-        }
-      },
-      { rootMargin: '-30% 0px -55% 0px', threshold: 0 }
-    )
-    sections.forEach(s => {
-      const el = document.getElementById(s.id)
-      if (el) observer.observe(el)
-    })
-    return () => observer.disconnect()
-  }, [area])
-
-  const images = info.images.length ? info.images : ['/assets/reference/clearlaketxhomesforsale.jpg']
-  // every photo gets a slot in the collage; the section's photo is highlighted
-  const activeIdx = Math.min(active, images.length - 1)
-
   return <div className="area-info-layout">
-    {/* LEFT — ALL the area's photos, stationary (sticky) collage */}
+    {/* LEFT — ONE stationary (sticky) photo; changes as you scroll through the text */}
     <div className="area-info-media">
       <div className="area-info-panel">
-        <div className="area-info-collage">
-          {images.map((src, i) => (
-            <div key={src} className={`area-info-tile${i === activeIdx ? ' is-active' : ''}${i === 0 ? ' area-info-tile-featured' : ''}`} aria-hidden={i === activeIdx ? undefined : true}>
-              <Image src={src} alt={i === activeIdx ? `${info.name} — 1st Texas Realtors` : ''} fill sizes="(max-width: 900px) 100vw, 42vw" className="area-info-photo" priority={i === 0} />
-            </div>
-          ))}
-        </div>
-        <span className="area-info-label">{sections[active].label}</span>
+        {images.map((src, i) => (
+          <div key={src} className={`area-info-img${active === i ? ' is-active' : ''}`} aria-hidden={active === i || undefined}>
+            <Image src={src} alt={active === i ? `${info.name} — 1st Texas Realtors` : ''} fill sizes="(max-width: 900px) 100vw, 42vw" className="area-info-photo" priority={i === 0} />
+          </div>
+        ))}
+        <span className="area-info-label">{String(active + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')} · {info.name}</span>
       </div>
     </div>
 
-    {/* RIGHT — the text scrolls; the collage highlights the section's photo */}
-    <div className="area-info-content">
+    {/* RIGHT — the text scrolls; when each section's text finishes, the photo changes */}
+    <div className="area-info-content" ref={contentRef}>
       <section id={`${area}-intro`} className="area-info-section">
         <p className="eyebrow">Local service area</p>
         <h2 className="display-section">{info.heroTitle}</h2>
