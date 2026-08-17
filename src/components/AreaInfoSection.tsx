@@ -84,9 +84,10 @@ export function AreaInfoSection({ area }: { area: string }) {
       <section id={`${area}-services`} className="area-info-section">
         <p className="eyebrow">Buying guidance</p>
         <h2 className="display-section">{info.name} Home Buyer Services</h2>
-        <ul className="about-bullets">
-          {info.services.map((s, i) => <li key={i}>{s}</li>)}
-        </ul>
+        {/* NWS-style service cards: arrow + text in rounded list rows */}
+        <div className="nws-svc-cards">
+          {info.services.map((s, i) => <div className="nws-svc-card" key={i}><span className="nws-svc-arrow" aria-hidden="true">→</span><span>{s}</span></div>)}
+        </div>
         {info.closing.map((p, i) => <p key={`c${i}`}>{p}</p>)}
       </section>
 

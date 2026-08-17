@@ -23,15 +23,62 @@ function AreaPage({ area, rent }: { area: string; rent: boolean }) {
   const slug = areaSlug(area)
   const listing = areaListings.find(item => item.slug === slug) || areaListings.find(item => item.kind === (rent ? 'rent' : 'sale') && item.slug === 'clear-lake-sale')
   const title = rent ? `${area} Homes for Rent` : `${area} Realtors & Homes for Sale`
-  return <PageFrame eyebrow="Local service area" title={title} intro={listing ? listing.intro : rent ? `Find homes for rent in ${area} with local guidance on neighborhoods, schools, commutes, and leasing.` : `Work with 1st Texas Realtors for homes for sale and expert local service in ${area}.`}>
+  const heroImg = (areaInfo[slug] && areaInfo[slug].images[1]) || (listing && listing.images[0]) || '/assets/reference/clearlaketxhomesforsale.jpg'
+  const intro = listing ? listing.intro : rent ? `Find homes for rent in ${area} with local guidance on neighborhoods, schools, commutes, and leasing.` : `Work with 1st Texas Realtors for homes for sale and expert local service in ${area}.`
+  return <div className="site-shell"><SiteHeader /><main className="page-main" id="main-content">
+    {/* NWS-style dark hero — area photo behind a navy gradient, badge + title + CTAs */}
+    <section className="area-landing-hero">
+      <div className="area-landing-hero-bg" style={{ backgroundImage: `url(${heroImg})` }} aria-hidden="true" />
+      <div className="area-landing-hero-overlay" aria-hidden="true" />
+      <div className="area-landing-hero-inner">
+        <span className="area-landing-badge"><span className="area-landing-badge-chip">Areas We Serve</span>{area}, TX</span>
+        <h1>{title}</h1>
+        <p>{intro}</p>
+        <div className="area-landing-actions">
+          <Link className="button button-red" href="/contact/">Contact a Realtor <span>↗</span></Link>
+          {!rent && <a className="button button-outline-light" href="#homes-for-sale">View homes for sale <span>↓</span></a>}
+          {rent && <a className="button button-outline-light" href="#homes-for-rent">View homes for rent <span>↓</span></a>}
+        </div>
+      </div>
+    </section>
+
+    {/* NWS long-form: sticky photo gallery LEFT (crossfades through ALL the
+        area's photos as you scroll), text scrolls RIGHT */}
+    <section className="page-content reveal">
     {!rent && areaInfo[slug] && <AreaInfoSection area={slug} />}
+
     {listing && listing.images.length > 0 && <div className="listing-gallery">{listing.images.map(src => <img key={src} src={src} alt={`${listing.title} in ${area}`} loading="lazy" />)}</div>}
-    {!rent && listingsByArea[slug] && listingsByArea[slug].length > 0 && <><h2 className="subheading">Homes for sale in {area}</h2><AreaSearch area={slug} rent={false} count={listingsByArea[slug].length} /></>}
-    {rent && rentalsByArea[slug] && rentalsByArea[slug].length > 0 && <><h2 className="subheading">Homes for rent in {area}</h2><AreaSearch area={slug} rent={true} count={rentalsByArea[slug].length} /></>}
-    <div className="area-hero-card"><h2>{rent ? 'View homes for rent' : 'View homes for sale'}</h2><p>Use our real-time Home Search or contact a Realtor for current listings, market guidance, and a plan tailored to your move.</p><div className="hero-actions"><Link className="button button-dark" href="/home-search/">Search listings <span>↗</span></Link><Link className="button button-red" href="/contact/">Contact a Realtor <span>↗</span></Link></div></div>
+    {!rent && listingsByArea[slug] && listingsByArea[slug].length > 0 && <><h2 id="homes-for-sale" className="subheading">Homes for sale in {area}</h2><AreaSearch area={slug} rent={false} count={listingsByArea[slug].length} /></>}
+    {rent && rentalsByArea[slug] && rentalsByArea[slug].length > 0 && <><h2 id="homes-for-rent" className="subheading">Homes for rent in {area}</h2><AreaSearch area={slug} rent={true} count={rentalsByArea[slug].length} /></>}
     {listing && listing.paragraphs.length > 0 && <div className="rich-sections">{listing.paragraphs.map((text, i) => <article key={i}><p>{text}</p></article>)}</div>}
+
+    {/* NWS-style LOCAL PRESENCE band — dark, centered call-to-action */}
+    <section className="area-presence">
+      <p className="eyebrow">Local presence</p>
+      <h2>Team Up With Us in {area}!</h2>
+      <p>Reach out to us for an in-depth conversation about buying, selling, or renting in {area}. Entrust us with the responsibility of translating your vision into reality — we know the neighborhoods, schools, and commutes.</p>
+      <div className="hero-actions"><a className="button button-red" href="tel:+12812413121">Call (281) 241-3121 <span>↗</span></a><Link className="button button-outline-light" href="/contact/">Request a consult <span>↗</span></Link></div>
+    </section>
+
+    {/* NWS-style FINAL CTA — area photo behind dark overlay, checkmark perks + actions */}
+    <section className="area-final-cta">
+      <div className="area-final-cta-bg" style={{ backgroundImage: `url(${heroImg})` }} aria-hidden="true" />
+      <div className="area-final-cta-overlay" aria-hidden="true" />
+      <div className="area-final-cta-inner">
+        <p className="eyebrow">Free home search</p>
+        <h2>Ready to find your home in {area}?</h2>
+        <div className="area-final-checks">
+          <span>✓ Real-time home listings</span>
+          <span>✓ Free MLS Home Search</span>
+          <span>✓ Local Realtors since 2004</span>
+        </div>
+        <div className="hero-actions"><a className="button button-red" href="tel:+12812413121">Call (281) 241-3121 <span>↗</span></a><Link className="button button-outline-light" href="/home-search/">Home Search <span>↗</span></Link></div>
+      </div>
+    </section>
+
     <h2 className="subheading">Nearby service areas</h2><div className="area-grid">{serviceAreas.filter(item => item !== area).slice(0, 10).map(item => <Link key={item} href={rentPath(item)}>{item}<span>↗</span></Link>)}</div>
-  </PageFrame>
+    </section>
+  </main><SiteFooter /><ScrollReveals /></div>
 }
 
 function PageFrame({ eyebrow, title, intro, children }: { eyebrow: string; title: string; intro: string; children: React.ReactNode }) {

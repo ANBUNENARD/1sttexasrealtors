@@ -468,6 +468,9 @@ html.menu-locked, html.menu-locked body { overflow: hidden; }
 .button-red:hover { background: var(--red-warm); transform: translateY(-2px); box-shadow: 0 0 24px rgba(239,64,53,.5), 0 16px 40px rgba(0,0,0,.3); }
 .button-outline { border-color: rgba(255,255,255,.3); color: #fff; background: rgba(255,255,255,.06); backdrop-filter: blur(16px); }
 .button-outline:hover { border-color: rgba(255,90,60,.6); background: rgba(239,64,53,.14); }
+/* outline button for DARK sections — blue theme (no red) */
+.button-outline-light { border-color: rgba(255,255,255,.35); color: #fff; background: rgba(255,255,255,.08); backdrop-filter: blur(16px); }
+.button-outline-light:hover { border-color: rgba(123, 176, 255, .7); background: rgba(59, 130, 246, .18); transform: translateY(-2px); }
 .button-glass { background: rgba(255,255,255,.10); color: #fff; border-color: rgba(255,255,255,.25); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
 .button-glass:hover { border-color: rgba(255,90,60,.6); background: rgba(239,64,53,.15); }
 .button-dark { background: var(--navy); color: white; }
@@ -1092,6 +1095,51 @@ blockquote cite {
 .area-info-ctas > div { display: grid; gap: 10px; justify-items: start; }
 .area-info-ctas p { font-size: 14.5px; color: var(--muted); margin: 0; line-height: 1.6; }
 .area-info-ctas .button { min-height: 50px; font-size: 16px; }
+/* NWS-style service cards: arrow + text in rounded bordered rows (blue theme) */
+.nws-svc-cards { display: grid; gap: 10px; margin: 6px 0 22px; }
+.nws-svc-card {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 13px 16px;
+  border: 1px solid var(--line); border-radius: 14px;
+  background: rgba(247, 250, 252, 0.6);
+  color: var(--ink); font-size: 16.5px; line-height: 1.6;
+  transition: border-color .25s ease, background .25s ease, transform .25s ease;
+}
+.nws-svc-card:hover { border-color: rgba(30, 95, 214, 0.35); background: #fff; transform: translateX(3px); }
+.nws-svc-arrow { color: var(--red); font-weight: 700; flex-shrink: 0; line-height: 1.5; }
+/* NWS-style FINAL CTA — area photo behind a dark navy overlay, checkmarks + actions */
+.area-final-cta {
+  position: relative; overflow: hidden;
+  margin: 0 0 70px; border-radius: 28px;
+  background: #0a1a2e; color: #fff;
+}
+.area-final-cta-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+}
+.area-final-cta-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(6, 18, 34, 0.94) 0%, rgba(6, 18, 34, 0.82) 45%, rgba(6, 18, 34, 0.55) 100%),
+    linear-gradient(90deg, rgba(30, 95, 214, 0.16) 0%, transparent 60%);
+}
+.area-final-cta-inner {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;
+  padding: 72px 7vw 76px;
+}
+.area-final-cta-inner .eyebrow { color: #9cc4ff; }
+.area-final-cta-inner h2 { color: #fff; font-size: clamp(32px, 4.2vw, 50px); line-height: 1.08; letter-spacing: -0.03em; margin: 0; max-width: 700px; text-wrap: balance; }
+.area-final-checks { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 26px; margin: 6px 0 10px; }
+.area-final-checks span { display: inline-flex; align-items: center; gap: 9px; color: #e8f1f6; font-size: 16px; font-weight: 600; }
+.area-final-checks span::before { content: "✓"; color: var(--red-warm); font-weight: 800; font-size: 17px; }
+.area-final-cta-inner .hero-actions { position: relative; }
+@media (max-width: 900px) {
+  .area-final-cta { margin: 0 0 56px; border-radius: 20px; }
+  .area-final-cta-inner { padding: 56px 20px 60px; }
+  .area-final-checks { flex-direction: column; align-items: center; gap: 8px; }
+  .area-final-cta-inner .hero-actions { flex-direction: column; align-items: stretch; width: 100%; max-width: 420px; }
+}
 /* ============================================================
    SERVICE PAGES — same sticky pattern as About: one pinned image
    (left), sections scroll (right), image transitions per section
@@ -1177,6 +1225,71 @@ blockquote cite {
 .page-main { padding-top: 88px; }
 .page-hero { padding: 110px 7vw 90px; background: radial-gradient(ellipse 60% 50% at 85% 0%, rgba(30, 95, 214, 0.08) 0%, transparent 60%), #edf3f6; }
 .page-hero p:last-child { max-width: 760px; }
+/* ============================================================
+   AREA LANDING HERO — NWS-style dark hero: area photo behind a
+   navy gradient, badge pill + title + CTAs (blue theme)
+   ============================================================ */
+.area-landing-hero {
+  position: relative; overflow: hidden;
+  background: #0a1a2e;
+  color: #fff;
+  min-height: min(72vh, 620px);
+  display: flex; align-items: center;
+}
+.area-landing-hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+}
+.area-landing-hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(6, 18, 34, 0.92) 0%, rgba(6, 18, 34, 0.72) 42%, rgba(6, 18, 34, 0.35) 100%),
+    linear-gradient(90deg, rgba(30, 95, 214, 0.14) 0%, transparent 55%);
+}
+.area-landing-hero-inner {
+  position: relative; z-index: 2;
+  max-width: 1360px; margin: 0 auto; padding: 150px 7vw 90px;
+  width: 100%; min-width: 0;
+}
+.area-landing-hero-inner h1 {
+  max-width: 720px; margin: 22px 0 20px;
+  color: #fff; font-size: clamp(40px, 5.2vw, 66px); line-height: 1.02;
+  letter-spacing: -0.03em; font-weight: 800; text-wrap: balance;
+  text-shadow: 0 2px 18px rgba(4, 12, 30, 0.5);
+}
+.area-landing-hero-inner p { max-width: 640px; margin: 0 0 30px; color: #dbe6eb; font-size: 17.5px; line-height: 1.7; }
+.area-landing-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 6px 16px 6px 6px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.08);
+  backdrop-filter: blur(12px);
+  font-size: 13.5px; font-weight: 600; letter-spacing: .02em; color: #fff;
+}
+.area-landing-badge-chip {
+  padding: 5px 12px; border-radius: 999px;
+  background: var(--red); color: #fff;
+  font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+}
+.area-landing-actions { display: flex; flex-wrap: wrap; gap: 14px; margin: 0; }
+.area-landing-actions .button { min-height: 52px; padding: 14px 30px; font-size: 16px; }
+/* NWS-style LOCAL PRESENCE band — dark navy, centered */
+.area-presence {
+  position: relative; overflow: hidden;
+  margin: 30px 0 70px; padding: 70px 7vw 78px;
+  background: linear-gradient(160deg, #0a1a2e 0%, var(--navy-deep) 55%, #0d2240 100%);
+  border-radius: 28px;
+  color: #fff; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+}
+.area-presence::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(123, 176, 255, 0.10) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.area-presence .eyebrow { color: #9cc4ff; position: relative; }
+.area-presence h2 { color: #fff; font-size: clamp(34px, 4.4vw, 52px); line-height: 1.08; letter-spacing: -0.03em; margin: 0; position: relative; }
+.area-presence p { max-width: 680px; color: #c6d6e2; font-size: 17px; line-height: 1.75; margin: 0 0 8px; position: relative; }
+.area-presence .hero-actions { position: relative; }
 .page-content { padding: 80px 7vw 120px; max-width: 1400px; margin: auto; }
 .rich-layout, .agent-profile, .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
 .feature-image, .profile-image { width: 100%; max-height: 560px; border-radius: 22px; object-fit: cover; box-shadow: 0 24px 48px rgba(9, 52, 83, 0.15); }
@@ -1761,6 +1874,14 @@ blockquote cite {
   .area-info-section .display-section { font-size: clamp(28px, 6vw, 38px); }
   .area-info-ctas { grid-template-columns: 1fr; }
   .agent-reviews-grid { grid-template-columns: 1fr; }
+  .area-landing-hero { min-height: 56vh; }
+  .area-landing-hero-inner { padding: 120px 7vw 64px; }
+  .area-landing-hero-inner h1 { font-size: clamp(34px, 8.5vw, 44px); }
+  .area-landing-actions { flex-direction: column; align-items: stretch; }
+  .area-landing-actions .button { width: 100%; }
+  .area-presence { padding: 56px 7vw 60px; border-radius: 20px; margin: 10px 0 56px; }
+  .area-presence h2 { font-size: clamp(30px, 7vw, 38px); }
+  .area-presence .hero-actions { flex-direction: column; align-items: stretch; width: 100%; max-width: 420px; }
 }
 
 @media (max-width: 700px) {
