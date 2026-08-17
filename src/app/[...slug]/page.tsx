@@ -6,6 +6,7 @@ import { SiteHeader } from '@/components/SiteHeader'
 import { ScrollReveals } from '@/components/Motion'
 import { agents, allStaticPaths, areaSlug, email, faqs, phone, rentPath, serviceAreas, servicePages, testimonials } from '@/content/site'
 import { testimonialsExact } from '@/content/testimonials-exact'
+import { areaInfo } from '@/content/area-info'
 import { areaListings } from '@/content/area-listings'
 import { listingsByArea } from '@/content/listings-index'
 import { rentalsByArea } from '@/content/rentals-index'
@@ -14,6 +15,7 @@ import { AreaSearch } from '@/components/AreaSearch'
 import { StickyAbout } from '@/components/StickyAbout'
 import { StickyServicePage } from '@/components/StickyServicePage'
 import { ReviewsPage } from '@/components/ReviewsPage'
+import { AreaInfoSection } from '@/components/AreaInfoSection'
 
 export function generateStaticParams() { return allStaticPaths.map(path => ({ slug: path.split('/') })) }
 
@@ -22,6 +24,7 @@ function AreaPage({ area, rent }: { area: string; rent: boolean }) {
   const listing = areaListings.find(item => item.slug === slug) || areaListings.find(item => item.kind === (rent ? 'rent' : 'sale') && item.slug === 'clear-lake-sale')
   const title = rent ? `${area} Homes for Rent` : `${area} Realtors & Homes for Sale`
   return <PageFrame eyebrow="Local service area" title={title} intro={listing ? listing.intro : rent ? `Find homes for rent in ${area} with local guidance on neighborhoods, schools, commutes, and leasing.` : `Work with 1st Texas Realtors for homes for sale and expert local service in ${area}.`}>
+    {!rent && areaInfo[slug] && <AreaInfoSection area={slug} />}
     {listing && listing.images.length > 0 && <div className="listing-gallery">{listing.images.map(src => <img key={src} src={src} alt={`${listing.title} in ${area}`} loading="lazy" />)}</div>}
     {!rent && listingsByArea[slug] && listingsByArea[slug].length > 0 && <><h2 className="subheading">Homes for sale in {area}</h2><AreaSearch area={slug} rent={false} count={listingsByArea[slug].length} /></>}
     {rent && rentalsByArea[slug] && rentalsByArea[slug].length > 0 && <><h2 className="subheading">Homes for rent in {area}</h2><AreaSearch area={slug} rent={true} count={rentalsByArea[slug].length} /></>}
