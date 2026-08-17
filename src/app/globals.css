@@ -670,6 +670,29 @@ blockquote cite {
 /* photo cards in this layout are VISIBLE by default (override the old
    is-on drop-in rule that hid them) */
 .review-col .photo-front { opacity: 1; transform: none; transition: opacity .5s ease, transform .7s var(--ease-expo); }
+/* PINNED card — photo BLENDED into the background, paired with the text:
+   the picture fills the card behind a soft gradient so the review text sits
+   on top, fully readable, without the photo overpowering it */
+.blend-card { position: relative; overflow: hidden; min-height: 420px; justify-content: flex-end; border: 0; }
+.blend-bg { position: absolute; inset: 0; }
+.blend-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.blend-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(7, 16, 48, 0.12) 0%, rgba(7, 16, 48, 0.42) 45%, rgba(247, 250, 252, 0.92) 78%, #f7fafc 100%);
+}
+.blend-content {
+  position: relative; z-index: 1; padding: 22px 22px 18px;
+  background: linear-gradient(180deg, rgba(247, 250, 252, 0.35), rgba(247, 250, 252, 0.96) 60%);
+  border-radius: 0 0 16px 16px;
+}
+.blend-content .drop-cap-text { color: var(--ink); }
+.blend-content cite { color: var(--navy); }
+.blend-name {
+  position: absolute; top: 18px; left: 22px; z-index: 2;
+  padding: 8px 16px; border-radius: 99px;
+  background: rgba(7, 26, 47, 0.68); backdrop-filter: blur(8px);
+  color: #fff; font-size: 13.5px; font-weight: 700; letter-spacing: .04em;
+}
 /* PHOTO cards FLIP ON HOVER — no click needed */
 .hover-flip .photo-front { transition: opacity .5s ease, transform .7s var(--ease-expo); }
 .hover-flip .photo-back { transition: transform .7s var(--ease-expo), opacity .3s ease; }
@@ -1635,6 +1658,7 @@ blockquote cite {
 @media (max-width: 900px) {
   .reviews-cols { grid-template-columns: 1fr; gap: 28px; }
   .review-col-sticky { position: relative; top: 0; }
+  .blend-card { min-height: 340px; }
   .about-sticky-layout { grid-template-columns: 1fr; gap: 28px; }
   .about-sticky-panel { position: relative; top: 0; aspect-ratio: 4/3; }
   .about-sticky-content { gap: 56px; }
