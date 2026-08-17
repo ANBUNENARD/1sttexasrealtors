@@ -107,21 +107,8 @@ function DropCard({ review, pinned = false }: { review: Review; pinned?: boolean
   const name = review.author.replace(/^—\s*|^–\s*/, '')
 
   if (hasPhoto && img) {
-    // pinned card: the photo is BLENDED into the card's background (soft
-    // gradient overlay) so it pairs with the text — text stays fully readable
-    if (pinned) {
-      return <div className={`testimonial-block drop-card photo-card blend-card${pinned ? ' is-pinned' : ''}`}>
-        <div className="blend-bg" aria-hidden="true"><img src={img} alt="" loading="eager" /></div>
-        <div className="blend-overlay" aria-hidden="true" />
-        <div className="blend-content">
-          <blockquote>
-            <p className="drop-cap-text">“{cleaned}”</p>
-            {review.author && <cite>{review.author}</cite>}
-          </blockquote>
-        </div>
-        <span className="blend-name">{name}</span>
-      </div>
-    }
+    // photo cards FLIP ON HOVER (image on top of the text) — the same for the
+    // pinned card: hover the photo -> it flips to the review text; leave -> flips back
     return <div className={`testimonial-block drop-card photo-card hover-flip${pinned ? ' is-pinned' : ''}`}>
       <div className="photo-front">
         <span className="photo-frame"><img src={img} alt={`${name} — 1st Texas Realtors in Clear Lake`} loading={pinned ? 'eager' : 'lazy'} /></span>

@@ -688,29 +688,6 @@ blockquote cite {
 /* photo cards in this layout are VISIBLE by default (override the old
    is-on drop-in rule that hid them) */
 .review-col .photo-front { opacity: 1; transform: none; transition: opacity .5s ease, transform .7s var(--ease-expo); }
-/* PINNED card — photo BLENDED into the background, paired with the text:
-   the picture fills the card behind a soft gradient so the review text sits
-   on top, fully readable, without the photo overpowering it */
-.blend-card { position: relative; overflow: hidden; min-height: 420px; justify-content: flex-end; border: 0; }
-.blend-bg { position: absolute; inset: 0; }
-.blend-bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.blend-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(7, 16, 48, 0.12) 0%, rgba(7, 16, 48, 0.42) 45%, rgba(247, 250, 252, 0.92) 78%, #f7fafc 100%);
-}
-.blend-content {
-  position: relative; z-index: 1; padding: 22px 22px 18px;
-  background: linear-gradient(180deg, rgba(247, 250, 252, 0.35), rgba(247, 250, 252, 0.96) 60%);
-  border-radius: 0 0 16px 16px;
-}
-.blend-content .drop-cap-text { color: var(--ink); }
-.blend-content cite { color: var(--navy); }
-.blend-name {
-  position: absolute; top: 18px; left: 22px; z-index: 2;
-  padding: 8px 16px; border-radius: 99px;
-  background: rgba(7, 26, 47, 0.68); backdrop-filter: blur(8px);
-  color: #fff; font-size: 13.5px; font-weight: 700; letter-spacing: .04em;
-}
 /* PHOTO cards FLIP ON HOVER — no click needed */
 .hover-flip .photo-front { transition: opacity .5s ease, transform .7s var(--ease-expo); }
 .hover-flip .photo-back { transition: transform .7s var(--ease-expo), opacity .3s ease; }
@@ -1037,6 +1014,45 @@ blockquote cite {
 .about-side-ctas p { font-size: 14.5px !important; color: var(--muted); margin: 0 !important; line-height: 1.6; }
 .about-side-ctas .button { min-height: 50px; font-size: 16px; }
 .about-area-note { color: var(--red) !important; font-weight: 600; }
+/* ============================================================
+   AREA INFO — the same sticky pattern as About applied to each
+   service area: ONE photo pinned/sticky on the LEFT (stationary),
+   the area's text scrolls on the RIGHT; the photo transitions to
+   the next one as each section's text finishes
+   ============================================================ */
+.area-info-layout {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px;
+  max-width: 1360px; margin: 0 auto; padding: 64px 0 20px;
+}
+.area-info-media { position: relative; height: 100%; min-height: 480px; }
+.area-info-panel {
+  position: sticky; top: 110px;
+  aspect-ratio: 4/4.8; border-radius: 24px; overflow: hidden;
+  background: var(--navy-deep); box-shadow: var(--shadow-lift);
+}
+.area-info-img {
+  position: absolute; inset: 0;
+  opacity: 0; transform: scale(1.08);
+  transition: opacity .9s var(--ease-expo), transform 1.2s var(--ease-expo);
+}
+.area-info-img.is-active { opacity: 1; transform: scale(1); }
+.area-info-photo { object-fit: cover; }
+.area-info-label {
+  position: absolute; left: 18px; bottom: 18px; z-index: 2;
+  padding: 10px 18px; border-radius: 99px;
+  background: rgba(7, 26, 47, 0.72); backdrop-filter: blur(10px);
+  color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .14em;
+  font-family: var(--font-mono), monospace; text-transform: uppercase;
+}
+.area-info-content { display: grid; gap: 72px; padding-top: 12px; }
+.area-info-section { scroll-margin-top: 120px; }
+.area-info-section .display-section { font-size: clamp(30px, 3.8vw, 46px); margin: 10px 0 24px; line-height: 1.15; color: var(--navy); }
+.area-info-section p { color: var(--muted); font-size: 17px; line-height: 1.8; margin: 0 0 18px; }
+.area-info-section p strong { color: var(--navy); font-weight: 700; }
+.area-info-ctas { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 8px; }
+.area-info-ctas > div { display: grid; gap: 10px; justify-items: start; }
+.area-info-ctas p { font-size: 14.5px; color: var(--muted); margin: 0; line-height: 1.6; }
+.area-info-ctas .button { min-height: 50px; font-size: 16px; }
 /* ============================================================
    SERVICE PAGES — same sticky pattern as About: one pinned image
    (left), sections scroll (right), image transitions per section
@@ -1679,13 +1695,18 @@ blockquote cite {
   .team-blend-content { max-width: none; }
   .reviews-cols { grid-template-columns: 1fr; gap: 28px; }
   .review-col-sticky { position: relative; top: 0; }
-  .blend-card { min-height: 340px; }
   .about-sticky-layout { grid-template-columns: 1fr; gap: 28px; }
   .about-sticky-panel { position: relative; top: 0; aspect-ratio: 4/3; }
   .about-sticky-content { gap: 56px; }
   .about-section .display-section { font-size: clamp(28px, 6vw, 38px); }
   .about-section p { font-size: 17px; line-height: 1.75; }
   .about-side-ctas { grid-template-columns: 1fr; }
+  .area-info-layout { grid-template-columns: 1fr; gap: 28px; padding: 36px 0 10px; }
+  .area-info-media { min-height: 0; }
+  .area-info-panel { position: relative; top: 0; aspect-ratio: 4/3; }
+  .area-info-content { gap: 56px; }
+  .area-info-section .display-section { font-size: clamp(28px, 6vw, 38px); }
+  .area-info-ctas { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 700px) {
